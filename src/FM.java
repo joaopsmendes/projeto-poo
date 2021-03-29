@@ -6,7 +6,7 @@
  * @author Ricardo Silva
  */
 
-public class Main {
+public class FM{
     public static void main(String[] args) {
 
     }
