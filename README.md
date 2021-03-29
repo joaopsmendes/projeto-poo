@@ -6,4 +6,4 @@ Football Manager feito em java
 
 * Francisco Paiva
 * João Mendes a93256
-* Ricardo Silva
+* Ricardo Silva a93195
