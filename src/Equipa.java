@@ -97,7 +97,7 @@ public class Equipa {
     }
 
     @Override
-    protected Equipa clone() {
+    public Equipa clone() {
         return new Equipa(this);
     }
 }

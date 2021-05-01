@@ -72,9 +72,13 @@ public class Jogador {
         MEDIO
     }
 
+    /**
+     * @brief Função que verifica se é golo ou nao
+     * @return
+     */
     public boolean remata(){
         for(Habilidades habilidades : this.skills.keySet()){
-            if(habilidades.equals(Habilidades.REMATE)){
+            if(habilidades.equals(Habilidades.REMATE) || habilidades.equals(Habilidades.CABECEAMENTO) ){
                 Random random = new Random();
                 int sorte = random.nextInt(20);
                 if(this.skills.get(habilidades) < sorte){
@@ -85,7 +89,39 @@ public class Jogador {
         return false;
     }
 
+    //verificar isto
+    /**
+     * @brief funçao que vereifica se o guarda redes defende ou nao
+     * @return
+     */
+    public boolean defende(){
+            if(posicao.equals(Posicao.GUARDA_REDES)){
+                for(Habilidades habilidades : this.skills.keySet()){
+                    if(habilidades.equals(Habilidades.FLEXIBILIDADE) || habilidades.equals(Habilidades.DESTREZA)){
+                        Random random = new Random();
+                        int sorte = random.nextInt(20);
+                        if(this.skills.get(habilidades) < sorte ){
+                            return true;
+                        }
+                    }
+                }
+            }
+         return false;
+    }
 
+    //verificar isto
+    /**
+     * @brief verifica se é golo ou nao
+     * @return
+     */
+    public boolean golo(){
+        return remata() && !defende();
+    }
+
+    /**
+     * @brief
+     * @return
+     */
     public int calculaOverall(){
         if(this.getSkills() == null || this.getSkills().size() == 0) return 0;
         int overall = 0;
@@ -202,7 +238,7 @@ public class Jogador {
     }
 
     @Override
-    protected Jogador clone() {
+    public Jogador clone() {
         return new Jogador(this);
     }
 }
