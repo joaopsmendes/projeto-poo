@@ -8,6 +8,6 @@
 
 public class FM{
     public static void main(String[] args) {
-
+        new MenuInicial();
     }
 }

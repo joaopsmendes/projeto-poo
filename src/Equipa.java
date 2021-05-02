@@ -44,23 +44,23 @@ public class Equipa {
 
     public void setFundacaoEquipa(LocalDate fundacaoEquipa) {
         this.fundacaoEquipa = LocalDate.of(
-                this.fundacaoEquipa.getYear(),
-                this.fundacaoEquipa.getMonth(),
-                this.fundacaoEquipa.getDayOfMonth()
+                fundacaoEquipa.getYear(),
+                fundacaoEquipa.getMonth(),
+                fundacaoEquipa.getDayOfMonth()
         );
     }
 
     public List<Jogador> getJogadores() {
         List<Jogador> newArray = new ArrayList<>();
-        for(Jogador jogador : this.getJogadores()){
+        for(Jogador jogador : this.jogadores){
             newArray.add(jogador.clone());
         }
         return newArray;
     }
 
-    public void setJogadores(List<Jogador> joagadores) {
+    public void setJogadores(List<Jogador> jogadores) {
         List<Jogador> newArray = new ArrayList<>();
-        for(Jogador jogador : this.getJogadores()){
+        for(Jogador jogador : jogadores){
             newArray.add(jogador.clone());
         }
         this.jogadores = newArray;
@@ -69,10 +69,10 @@ public class Equipa {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Equipa{");
-        sb.append("nome='").append(nome).append('\'');
-        sb.append(", fundacaoEquipa=").append(fundacaoEquipa);
-        sb.append(", jogadores=").append(jogadores);
-        sb.append('}');
+        sb.append("nome='").append(nome).append('\'').append('\n');
+        sb.append(", fundacaoEquipa=").append(fundacaoEquipa).append('\n');
+        sb.append(", jogadores=").append(jogadores).append('\n');
+        sb.append('}').append('\n');
         return sb.toString();
     }
 
@@ -86,14 +86,6 @@ public class Equipa {
         if (!Objects.equals(nome, equipa.nome)) return false;
         if (!Objects.equals(fundacaoEquipa, equipa.fundacaoEquipa)) return false;
         return Objects.equals(jogadores, equipa.jogadores);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = nome != null ? nome.hashCode() : 0;
-        result = 31 * result + (fundacaoEquipa != null ? fundacaoEquipa.hashCode() : 0);
-        result = 31 * result + (jogadores != null ? jogadores.hashCode() : 0);
-        return result;
     }
 
     @Override

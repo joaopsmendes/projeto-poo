@@ -11,6 +11,7 @@ import java.util.*;
 public class Jogador {
     private String nome;
     private int idade;
+    private int nCamisola;
     private int nivelFisico; // 0 (perna partida) - 50 (saudavel)
     private String nacionalidade;
     private String equipaAtual;
@@ -21,6 +22,7 @@ public class Jogador {
     public Jogador(){
         this.nome = null;
         this.idade = 0;
+        this.nCamisola = 0;
         this.nivelFisico = 0;
         this.nacionalidade = null;
         this.equipaAtual = null;
@@ -29,11 +31,12 @@ public class Jogador {
         this.skills = null;
     }
 
-    public Jogador(String nome, int idade, int nivelFisico, String nacionalidade,
+    public Jogador(String nome, int idade, int nCamisola, int nivelFisico, String nacionalidade,
                    String equipaAtual, Posicao posicao, List<String> historicoEquipas,
                    Map<Habilidades,Integer> skills) {
         this.nome = nome;
         this.idade = idade;
+        this.nCamisola = nCamisola;
         this.nivelFisico = nivelFisico;
         this.nacionalidade = nacionalidade;
         this.equipaAtual = equipaAtual;
@@ -45,6 +48,7 @@ public class Jogador {
     public Jogador(Jogador jogador){
         this.nome = jogador.getNome();
         this.idade = jogador.getIdade();
+        this.nCamisola = jogador.getnCamisola();
         this.nivelFisico = jogador.getNivelFisico();
         this.nacionalidade = jogador.getNacionalidade();
         this.equipaAtual = jogador.getEquipaAtual();
@@ -77,16 +81,16 @@ public class Jogador {
      * @return
      */
     public boolean remata(){
+        int power = 0, n = 0;
         for(Habilidades habilidades : this.skills.keySet()){
-            if(habilidades.equals(Habilidades.REMATE) || habilidades.equals(Habilidades.CABECEAMENTO) ){
-                Random random = new Random();
-                int sorte = random.nextInt(20);
-                if(this.skills.get(habilidades) < sorte){
-                    return true;
-                }
+            if(habilidades.equals(Habilidades.REMATE) || habilidades.equals(Habilidades.CABECEAMENTO)){
+                power += this.skills.get(habilidades);
+                n++;
             }
         }
-        return false;
+        Random random = new Random();
+        int sorte = random.nextInt(20);
+        return (power / n) < sorte;
     }
 
     //verificar isto
@@ -95,23 +99,25 @@ public class Jogador {
      * @return
      */
     public boolean defende(){
-            if(posicao.equals(Posicao.GUARDA_REDES)){
-                for(Habilidades habilidades : this.skills.keySet()){
-                    if(habilidades.equals(Habilidades.FLEXIBILIDADE) || habilidades.equals(Habilidades.DESTREZA)){
-                        Random random = new Random();
-                        int sorte = random.nextInt(20);
-                        if(this.skills.get(habilidades) < sorte ){
-                            return true;
-                        }
-                    }
+        if(posicao.equals(Posicao.GUARDA_REDES)){
+            int power = 0, n = 0;
+            for(Habilidades habilidades : this.skills.keySet()){
+                if(habilidades.equals(Habilidades.FLEXIBILIDADE) || habilidades.equals(Habilidades.DESTREZA)){
+                    power += this.skills.get(habilidades);
+                    n++;
                 }
             }
-         return false;
+
+            Random random = new Random();
+            int sorte = random.nextInt(20);
+            return (power / n) < sorte;
+        }
+        return false;
     }
 
     //verificar isto
     /**
-     * @brief verifica se é golo ou nao
+     * @brief função que verifica se é golo ou nao
      * @return
      */
     public boolean golo(){
@@ -145,6 +151,14 @@ public class Jogador {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public int getnCamisola() {
+        return this.nCamisola;
+    }
+
+    public void setnCamisola(int nCamisola) {
+        this.nCamisola = nCamisola;
     }
 
     public int getNivelFisico() {
@@ -184,28 +198,30 @@ public class Jogador {
     }
 
     public void setHistoricoEquipas(List<String> historicoEquipas) {
-        this.historicoEquipas = new ArrayList<>(this.historicoEquipas);
+        this.historicoEquipas = new ArrayList<>(historicoEquipas);
     }
 
+    // TODO: 03/05/21
     public Map<Habilidades, Integer> getSkills() {
-        return new HashMap<>(this.getSkills());
+        return this.skills;
     }
 
+    // TODO: 03/05/21  
     public void setSkills(Map<Habilidades, Integer> skills) {
-        this.skills = new HashMap<>(this.getSkills());;
+        this.skills = skills;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Jogador{");
-        sb.append("nome='").append(nome).append('\'');
-        sb.append(", idade=").append(idade);
-        sb.append(", nivelFisico=").append(nivelFisico);
-        sb.append(", nacionalidade='").append(nacionalidade).append('\'');
-        sb.append(", equipaAtual='").append(equipaAtual).append('\'');
-        sb.append(", historicoEquipas=").append(historicoEquipas);
-        sb.append(", skills=").append(skills);
-        sb.append('}');
+        sb.append("nome='").append(nome).append('\'').append('\n');
+        sb.append(", idade=").append(idade).append('\n');
+        sb.append(", nivelFisico=").append(nivelFisico).append('\n');
+        sb.append(", nacionalidade='").append(nacionalidade).append('\'').append('\n');
+        sb.append(", equipaAtual='").append(equipaAtual).append('\'').append('\n');
+        sb.append(", historicoEquipas=").append(historicoEquipas).append('\n');
+        sb.append(", skills=").append(skills).append('\n');
+        sb.append('}').append('\n');
         return sb.toString();
     }
 
@@ -223,18 +239,6 @@ public class Jogador {
         if (!Objects.equals(equipaAtual, jogador.equipaAtual)) return false;
         if (!Objects.equals(historicoEquipas, jogador.historicoEquipas)) return false;
         return Objects.equals(skills, jogador.skills);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = nome != null ? nome.hashCode() : 0;
-        result = 31 * result + idade;
-        result = 31 * result + nivelFisico;
-        result = 31 * result + (nacionalidade != null ? nacionalidade.hashCode() : 0);
-        result = 31 * result + (equipaAtual != null ? equipaAtual.hashCode() : 0);
-        result = 31 * result + (historicoEquipas != null ? historicoEquipas.hashCode() : 0);
-        result = 31 * result + (skills != null ? skills.hashCode() : 0);
-        return result;
     }
 
     @Override

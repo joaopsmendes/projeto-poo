@@ -111,7 +111,7 @@ public class Jogo {
 
     public void setFormacaoEquipa1(List<Jogador> formacaoEquipa1) {
         List<Jogador> newArr = new ArrayList<>();
-        for(Jogador jogador:this.formacaoEquipa1){
+        for(Jogador jogador:formacaoEquipa1){
             newArr.add(jogador.clone());
         }
         this.formacaoEquipa1 = newArr;
@@ -127,9 +127,47 @@ public class Jogo {
 
     public void setFormacaoEquipa2(List<Jogador> formacaoEquipa2) {
         List<Jogador> newArr = new ArrayList<>();
-        for(Jogador jogador:this.formacaoEquipa2){
+        for(Jogador jogador:formacaoEquipa2){
             newArr.add(jogador.clone());
         }
         this.formacaoEquipa2 = newArr;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Jogo{");
+        sb.append("tempo=").append(tempo).append('\n');
+        sb.append(", estado=").append(estado).append('\n');
+        sb.append(", equipa1=").append(equipa1).append('\n');
+        sb.append(", equipa2=").append(equipa2).append('\n');
+        sb.append(", golosVisitado=").append(golosVisitado).append('\n');
+        sb.append(", golosVisitante=").append(golosVisitante).append('\n');
+        sb.append(", formacaoEquipa1=").append(formacaoEquipa1).append('\n');
+        sb.append(", formacaoEquipa2=").append(formacaoEquipa2).append('\n');
+        sb.append('}').append('\n');
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Jogo jogo = (Jogo) o;
+
+        if (tempo != jogo.tempo) return false;
+        if (golosVisitado != jogo.golosVisitado) return false;
+        if (golosVisitante != jogo.golosVisitante) return false;
+        if (estado != jogo.estado) return false;
+        if (equipa1 != null ? !equipa1.equals(jogo.equipa1) : jogo.equipa1 != null) return false;
+        if (equipa2 != null ? !equipa2.equals(jogo.equipa2) : jogo.equipa2 != null) return false;
+        if (formacaoEquipa1 != null ? !formacaoEquipa1.equals(jogo.formacaoEquipa1) : jogo.formacaoEquipa1 != null)
+            return false;
+        return formacaoEquipa2 != null ? formacaoEquipa2.equals(jogo.formacaoEquipa2) : jogo.formacaoEquipa2 == null;
+    }
+
+    @Override
+    public Jogo clone(){
+        return new Jogo(this);
     }
 }
