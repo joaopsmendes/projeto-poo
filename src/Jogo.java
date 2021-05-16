@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Jogo {
     private int tempo; // segundos (120 = 2:00) / (110 = 1:50)
@@ -10,6 +12,8 @@ public class Jogo {
     private int golosVisitante;
     private List<Jogador> formacaoEquipa1;
     private List<Jogador> formacaoEquipa2;
+    private Map<Integer, Integer> substituicoesEquipa1;
+    private Map<Integer, Integer> substituicoesEquipa2;
 
     public Jogo(){
         this.tempo = 0;
@@ -20,10 +24,13 @@ public class Jogo {
         this.golosVisitante = 0;
         this.formacaoEquipa1 = null;
         this.formacaoEquipa2 = null;
+        this.substituicoesEquipa1 = null;
+        this.substituicoesEquipa2 = null;
     }
 
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
-                int golosVisitante, List<Jogador> formacaoEquipa1, List<Jogador> formacaoEquipa2) {
+                int golosVisitante, List<Jogador> formacaoEquipa1, List<Jogador> formacaoEquipa2,
+                Map<Integer, Integer> substituicoesEquipa1, Map<Integer, Integer> substituicoesEquipa2) {
         this.tempo = tempo;
         this.estado = estado;
         setEquipa1(equipa1);
@@ -32,6 +39,8 @@ public class Jogo {
         this.golosVisitante = golosVisitante;
         setFormacaoEquipa1(formacaoEquipa1);
         setFormacaoEquipa2(formacaoEquipa2);
+        setSubstituicoesEquipa1(substituicoesEquipa1);
+        setSubstituicoesEquipa2(substituicoesEquipa2);
     }
 
     public Jogo(Jogo jogo){
@@ -43,6 +52,8 @@ public class Jogo {
         this.golosVisitante = jogo.getGolosVisitante();
         setFormacaoEquipa1(jogo.getFormacaoEquipa1());
         setFormacaoEquipa2(jogo.getFormacaoEquipa2());
+        setSubstituicoesEquipa1(jogo.getSubstituicoesEquipa1());
+        setSubstituicoesEquipa2(jogo.getSubstituicoesEquipa2());
     }
 
     public enum Estado{
@@ -51,6 +62,43 @@ public class Jogo {
         INTERVALO,
         SEGUNDA_PARTE,
         TERMINADO
+    }
+
+    public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
+//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47,35,2,36,39,14,43,5,32,50,14->0,4->30,36->21,43,30,1,22,33,11,38,31,39,6,12,43->3,31->34,12->20
+        String[] campos = input.split(",");
+        Equipa equipa1 = equipas.get(campos[0]);
+        Equipa equipa2 = equipas.get(campos[1]);
+        if(equipa1 == null || equipa2 == null) return new Jogo();
+        List<Jogador> jogadoresEquipa1 = new ArrayList<>();
+        List<Jogador> jogadoresEquipa2 = new ArrayList<>();
+        for(int i = 5; i < 16; i++){
+            jogadoresEquipa1.add(equipa1.obterJogadorPeloNumero(i));
+        }
+        for(int i = 19; i < 30; i++){
+            jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(i));
+        }
+        Map<Integer,Integer> substituicoesEquipa1 = new HashMap<>();
+        substituicoesEquipa1.put(Integer.parseInt(campos[16].split("->")[0]), Integer.parseInt(campos[16].split("->")[1]));
+        substituicoesEquipa1.put(Integer.parseInt(campos[17].split("->")[0]), Integer.parseInt(campos[17].split("->")[1]));
+        substituicoesEquipa1.put(Integer.parseInt(campos[18].split("->")[0]), Integer.parseInt(campos[18].split("->")[1]));
+        Map<Integer,Integer> substituicoesEquipa2 = new HashMap<>();
+        substituicoesEquipa2.put(Integer.parseInt(campos[30].split("->")[0]), Integer.parseInt(campos[30].split("->")[1]));
+        substituicoesEquipa2.put(Integer.parseInt(campos[31].split("->")[0]), Integer.parseInt(campos[31].split("->")[1]));
+        substituicoesEquipa2.put(Integer.parseInt(campos[32].split("->")[0]), Integer.parseInt(campos[32].split("->")[1]));
+
+        return new Jogo(
+                90,
+                Estado.TERMINADO,
+                equipa1,
+                equipa2,
+                Integer.parseInt(campos[2]),
+                Integer.parseInt(campos[3]),
+                jogadoresEquipa1,
+                jogadoresEquipa2,
+                substituicoesEquipa1,
+                substituicoesEquipa2
+        );
     }
 
     public int getTempo() {
@@ -131,6 +179,22 @@ public class Jogo {
             newArr.add(jogador.clone());
         }
         this.formacaoEquipa2 = newArr;
+    }
+
+    public Map<Integer, Integer> getSubstituicoesEquipa1() {
+        return new HashMap<>(this.substituicoesEquipa1);
+    }
+
+    public void setSubstituicoesEquipa1(Map<Integer, Integer> substituicoesEquipa1) {
+        this.substituicoesEquipa1 = new HashMap<>(this.substituicoesEquipa1);
+    }
+
+    public Map<Integer, Integer> getSubstituicoesEquipa2() {
+        return new HashMap<>(this.substituicoesEquipa2);
+    }
+
+    public void setSubstituicoesEquipa2(Map<Integer, Integer> substituicoesEquipa2) {
+        this.substituicoesEquipa2 = new HashMap<>(this.substituicoesEquipa2);
     }
 
     @Override

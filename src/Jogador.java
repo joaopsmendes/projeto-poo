@@ -1,5 +1,5 @@
 /**
- * Criação do metodo do Jogador
+ * Criação do objeto Jogador
  *
  * @author João Mendes
  * @author Francisco Paiva
@@ -8,53 +8,35 @@
 
 import java.util.*;
 
-public class Jogador {
+public class Jogador{
     private String nome;
-    private int idade;
     private int nCamisola;
-    private int nivelFisico; // 0 (perna partida) - 50 (saudavel)
-    private String nacionalidade;
-    private String equipaAtual;
     private Posicao posicao;
-    private List<String> historicoEquipas;
     private Map<Habilidades,Integer> skills;
+    private List<String> historial;
 
     public Jogador(){
         this.nome = null;
-        this.idade = 0;
         this.nCamisola = 0;
-        this.nivelFisico = 0;
-        this.nacionalidade = null;
-        this.equipaAtual = null;
         this.posicao = null;
-        this.historicoEquipas = null;
         this.skills = null;
+        this.historial = null;
     }
 
-    public Jogador(String nome, int idade, int nCamisola, int nivelFisico, String nacionalidade,
-                   String equipaAtual, Posicao posicao, List<String> historicoEquipas,
-                   Map<Habilidades,Integer> skills) {
+    public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills, List<String> historial) {
         this.nome = nome;
-        this.idade = idade;
         this.nCamisola = nCamisola;
-        this.nivelFisico = nivelFisico;
-        this.nacionalidade = nacionalidade;
-        this.equipaAtual = equipaAtual;
         this.posicao = posicao;
-        setHistoricoEquipas(historicoEquipas);
         setSkills(skills);
+        setHistorial(historial);
     }
 
     public Jogador(Jogador jogador){
         this.nome = jogador.getNome();
-        this.idade = jogador.getIdade();
         this.nCamisola = jogador.getnCamisola();
-        this.nivelFisico = jogador.getNivelFisico();
-        this.nacionalidade = jogador.getNacionalidade();
-        this.equipaAtual = jogador.getEquipaAtual();
         this.posicao = jogador.getPosicao();
-        setHistoricoEquipas(jogador.getHistoricoEquipas());
         setSkills(jogador.getSkills());
+        setHistorial(jogador.getHistorial());
     }
 
     public enum Habilidades {
@@ -65,7 +47,9 @@ public class Jogador {
         CABECEAMENTO,
         REMATE,
         PASSE,
-        FLEXIBILIDADE
+        FLEXIBILIDADE,
+        CRUZAMENTO,
+        RECUPERACAO
     }
 
     public enum Posicao {
@@ -124,10 +108,6 @@ public class Jogador {
         return remata() && !defende();
     }
 
-    /**
-     * @brief
-     * @return
-     */
     public int calculaOverall(){
         if(this.getSkills() == null || this.getSkills().size() == 0) return 0;
         int overall = 0;
@@ -135,6 +115,35 @@ public class Jogador {
             overall += atual;
         }
         return overall/this.getSkills().size();
+    }
+
+    public static Jogador parse(String input, Posicao pos){
+        String[] campos = input.split(",");
+        Map<Habilidades,Integer> habilidades = new HashMap<>();
+        habilidades.put(Habilidades.VELOCIDADE, Integer.parseInt(campos[2]));
+        habilidades.put(Habilidades.RESISTENCIA, Integer.parseInt(campos[3]));
+        habilidades.put(Habilidades.DESTREZA, Integer.parseInt(campos[4]));
+        habilidades.put(Habilidades.IMPULSAO, Integer.parseInt(campos[5]));
+        habilidades.put(Habilidades.CABECEAMENTO, Integer.parseInt(campos[6]));
+        habilidades.put(Habilidades.REMATE, Integer.parseInt(campos[7]));
+        habilidades.put(Habilidades.PASSE, Integer.parseInt(campos[8]));
+
+        if(pos.equals(Posicao.GUARDA_REDES))
+            habilidades.put(Habilidades.FLEXIBILIDADE, Integer.parseInt(campos[9]));
+
+        if(pos.equals(Posicao.LATERAL))
+            habilidades.put(Habilidades.CRUZAMENTO, Integer.parseInt(campos[9]));
+
+        if(pos.equals(Posicao.MEDIO))
+            habilidades.put(Habilidades.RECUPERACAO, Integer.parseInt(campos[9]));
+
+        return new Jogador(
+                campos[0],
+                Integer.parseInt(campos[1]),
+                pos,
+                habilidades,
+                new ArrayList<>()
+        );
     }
 
     public String getNome() {
@@ -145,44 +154,12 @@ public class Jogador {
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
     public int getnCamisola() {
         return this.nCamisola;
     }
 
     public void setnCamisola(int nCamisola) {
         this.nCamisola = nCamisola;
-    }
-
-    public int getNivelFisico() {
-        return nivelFisico;
-    }
-
-    public void setNivelFisico(int nivelFisico) {
-        this.nivelFisico = nivelFisico;
-    }
-
-    public String getNacionalidade() {
-        return nacionalidade;
-    }
-
-    public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
-    }
-
-    public String getEquipaAtual() {
-        return equipaAtual;
-    }
-
-    public void setEquipaAtual(String equipaAtual) {
-        this.equipaAtual = equipaAtual;
     }
 
     public Posicao getPosicao() {
@@ -193,52 +170,46 @@ public class Jogador {
         this.posicao = posicao;
     }
 
-    public List<String> getHistoricoEquipas() {
-        return new ArrayList<>(this.historicoEquipas);
-    }
-
-    public void setHistoricoEquipas(List<String> historicoEquipas) {
-        this.historicoEquipas = new ArrayList<>(historicoEquipas);
-    }
-
-    // TODO: 03/05/21
     public Map<Habilidades, Integer> getSkills() {
-        return this.skills;
+        Map<Habilidades, Integer> newMap = new HashMap<>();
+        for(Map.Entry<Habilidades, Integer> skill : this.skills.entrySet()){
+            newMap.put(skill.getKey(), skill.getValue());
+        }
+        return newMap;
     }
 
-    // TODO: 03/05/21  
     public void setSkills(Map<Habilidades, Integer> skills) {
-        this.skills = skills;
+        Map<Habilidades, Integer> newMap = new HashMap<>();
+        for(Map.Entry<Habilidades, Integer> skill : skills.entrySet()){
+            newMap.put(skill.getKey(), skill.getValue());
+        }
+        this.skills = newMap;
+    }
+
+    public List<String> getHistorial() {
+        return new ArrayList<>(this.historial);
+    }
+
+    public void setHistorial(List<String> historial) {
+        this.historial = new ArrayList<>(this.historial);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Jogador{");
-        sb.append("nome='").append(nome).append('\'').append('\n');
-        sb.append(", idade=").append(idade).append('\n');
-        sb.append(", nivelFisico=").append(nivelFisico).append('\n');
-        sb.append(", nacionalidade='").append(nacionalidade).append('\'').append('\n');
-        sb.append(", equipaAtual='").append(equipaAtual).append('\'').append('\n');
-        sb.append(", historicoEquipas=").append(historicoEquipas).append('\n');
-        sb.append(", skills=").append(skills).append('\n');
-        sb.append('}').append('\n');
-        return sb.toString();
+        return "Jogador{" +
+                "nome='" + nome + '\'' +
+                ", nCamisola=" + nCamisola +
+                ", posicao=" + posicao +
+                ", skills=" + skills +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Jogador jogador = (Jogador) o;
-
-        if (idade != jogador.idade) return false;
-        if (nivelFisico != jogador.nivelFisico) return false;
-        if (!Objects.equals(nome, jogador.nome)) return false;
-        if (!Objects.equals(nacionalidade, jogador.nacionalidade)) return false;
-        if (!Objects.equals(equipaAtual, jogador.equipaAtual)) return false;
-        if (!Objects.equals(historicoEquipas, jogador.historicoEquipas)) return false;
-        return Objects.equals(skills, jogador.skills);
+        return nCamisola == jogador.nCamisola && Objects.equals(nome, jogador.nome) && posicao == jogador.posicao && Objects.equals(skills, jogador.skills);
     }
 
     @Override

@@ -26,6 +26,37 @@ public class Equipa {
         setJogadores(equipa.getJogadores());
     }
 
+    public Jogador obterJogadorPeloNumero(int numero){
+        for(Jogador jg : this.jogadores){
+            if (jg.getnCamisola() == numero)
+                return jg;
+        }
+        return null;
+    }
+
+    public int calculaOverall(){
+        int overall = 0, size = 0;
+        for(Jogador jogador : this.jogadores){
+            for(Integer atual : jogador.getSkills().values()){
+                overall += atual;
+                size++;
+            }
+        }
+        return overall/size;
+    }
+
+    public void insereJogador(Jogador jogador){
+        this.jogadores.add(jogador.clone());
+    }
+
+    public void removeJogador(Jogador jogador){
+        for(Jogador atual : this.jogadores){
+            if(atual.getNome().equals(jogador.getNome()))
+                this.jogadores.remove(atual);
+        }
+    }
+
+
     public String getNome() {
         return this.nome;
     }
