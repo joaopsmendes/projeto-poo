@@ -1,25 +1,43 @@
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuInicial {
-    public MenuInicial(){
-        initMenuInicial();
-    }
-
     public void initMenuInicial(){
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
-
         try {
             Informacoes informacoes = Parser.parse();
-            printMenuInicial();
 
             while(!quit){
+                printMenuInicial();
                 try{
                     int selecao = scanner.nextInt();
-                    if(selecao == 1){
-//                    Jogo jogo = new Jogo(0, Jogo.Estado.POR_INICIAR, Tester.getTrofense(), Tester.getBraga(), 1, 0, Tester.getTrofense().getJogadores().subList(0, 11), Tester.getBraga().getJogadores().subList(0, 11));
-//                    System.out.println(jogo.toSt22ring());
-                    }else if(selecao == 2){
+                    if(selecao == 1) {
+                        // TODO
+                    }else if(selecao == 2) {
+                        printEquipas(informacoes.getEquipas());
+                    }else if(selecao == 3) {
+                        printJogadores(informacoes.getJogadores());
+                    }else if(selecao == 4){
+                        System.out.println("Introduza o id do jogador: ");
+                        int jogId = scanner.nextInt();
+                        Jogador jogador = informacoes.getJogadores().get(jogId);
+                        if(jogador == null){
+                            System.out.println("Id the jogador invalido");
+                            continue;
+                        }
+
+                        System.out.println("Introduza o nome da equipa: ");
+                        String nomeEquipa = scanner.nextLine();
+                        Equipa equipa = informacoes.getEquipas().get(nomeEquipa);
+                        if(equipa == null){
+                            System.out.println("Nome de equipa invalido: ");
+                            continue;
+                        }
+
+                        informacoes.transfereJogador(jogador, equipa.getNome());
+                        System.out.println(jogador.getNome() + " foi transferido para " + equipa.getNome());
+                    }else if(selecao == 0){
                         quit = true;
                     }else{
                         System.out.println("Opçao invalida.");
@@ -35,10 +53,32 @@ public class MenuInicial {
     }
 
     public void printMenuInicial(){
-        System.out.println("+------------------------------+");
-        System.out.println("|        Football Manager      |");
-        System.out.println("+------------------------------+\n");
+
+        System.out.println(" ______          _   _           _ _    __  __                                           ");
+        System.out.println("|  ____|        | | | |         | | |  |  \\/  |                                         ");
+        System.out.println("| |__ ___   ___ | |_| |__   __ _| | |  | \\  / | __ _ _ __   __ _  __ _  ___ _ __        ");
+        System.out.println("|  __/ _ \\ / _ \\| __| '_ \\ / _` | | |  | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '__|  ");
+        System.out.println("| | | (_) | (_) | |_| |_) | (_| | | |  | |   | | (_| | | | | (_| | (_| |  __/ |           ");
+        System.out.println("|_|  \\___/ \\___/ \\__|_.__/ \\__,_|_|_|  |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   ");
+        System.out.println("                                                                  __/ |                  ");
+        System.out.println("                                                                 |___/                 \n");
         System.out.println("        (1) - Novo Jogo");
-        System.out.println("        (2) - Sair\n");
+        System.out.println("        (2) - Ver Equipas");
+        System.out.println("        (3) - Ver Jogadores");
+        System.out.println("        (4) - Mudar Jogador de Equipa");
+        System.out.println("        (0) - Sair\n");
+    }
+
+    private void printEquipas(Map<String,Equipa> equipas){
+        for(Equipa equipa : equipas.values()){
+            System.out.println(equipa.getNome() + " - " + equipa.getFundacaoEquipa() + " - " + equipa.calculaOverall());
+        }
+    }
+
+    private void printJogadores(Map<Integer, Jogador> jogadores){
+        for(Map.Entry<Integer, Jogador> entry : jogadores.entrySet()){
+            Jogador jogador = entry.getValue();
+            System.out.println("[" + entry.getKey() + "] " + jogador.getNome() + " - " + jogador.getnCamisola() + " - " + jogador.getPosicao() + " - " + jogador.getHistorial().get(jogador.getHistorial().size()-1) + " - " + jogador.calculaOverall());
+        }
     }
 }

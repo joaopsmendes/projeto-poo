@@ -8,6 +8,7 @@
 
 public class FM{
     public static void main(String[] args) {
-        new MenuInicial();
+        MenuInicial menuInicial = new MenuInicial();
+        menuInicial.initMenuInicial();
     }
 }

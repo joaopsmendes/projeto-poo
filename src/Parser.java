@@ -10,13 +10,14 @@ import java.util.Map;
 
 public class Parser {
     public static Informacoes parse() throws LinhaIncorretaException {
-        List<String> linhas = lerFicheiro("output.txt");
+        List<String> linhas = lerFicheiro("src/log.txt");
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         List<Jogo> jogos = new ArrayList<>();
-        Equipa ultima = null; Jogador j = null;
+        Equipa ultima = null; Jogador j;
         String[] linhaPartida;
         List<String> historial;
+        int jogadorId = 0;
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
             switch(linhaPartida[0]){
@@ -27,7 +28,7 @@ public class Parser {
                     break;
                 case "Guarda-Redes":
                     j = Jogador.parse(linhaPartida[1], Jogador.Posicao.GUARDA_REDES);
-                    jogadores.put(j.getnCamisola(), j);
+                    jogadores.put(jogadorId++, j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     historial = j.getHistorial();
                     historial.add(ultima.getNome());
@@ -36,7 +37,7 @@ public class Parser {
                     break;
                 case "Defesa":
                     j = Jogador.parse(linhaPartida[1], Jogador.Posicao.DEFESA);
-                    jogadores.put(j.getnCamisola(), j);
+                    jogadores.put(jogadorId++, j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     historial = j.getHistorial();
                     historial.add(ultima.getNome());
@@ -45,7 +46,7 @@ public class Parser {
                     break;
                 case "Medio":
                     j = Jogador.parse(linhaPartida[1], Jogador.Posicao.MEDIO);
-                    jogadores.put(j.getnCamisola(), j);
+                    jogadores.put(jogadorId++, j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     historial = j.getHistorial();
                     historial.add(ultima.getNome());
@@ -54,7 +55,7 @@ public class Parser {
                     break;
                 case "Lateral":
                     j = Jogador.parse(linhaPartida[1], Jogador.Posicao.LATERAL);
-                    jogadores.put(j.getnCamisola(), j);
+                    jogadores.put(jogadorId++, j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     historial = j.getHistorial();
                     historial.add(ultima.getNome());
@@ -63,7 +64,7 @@ public class Parser {
                     break;
                 case "Avancado":
                     j = Jogador.parse(linhaPartida[1], Jogador.Posicao.AVANCADO);
-                    jogadores.put(j.getnCamisola(), j);
+                    jogadores.put(jogadorId++, j);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     historial = j.getHistorial();
                     historial.add(ultima.getNome());
