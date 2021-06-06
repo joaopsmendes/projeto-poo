@@ -28,14 +28,15 @@ public class MenuInicial {
                         }
 
                         System.out.println("Introduza o nome da equipa: ");
+                        String dummy = scanner.nextLine();
                         String nomeEquipa = scanner.nextLine();
                         Equipa equipa = informacoes.getEquipas().get(nomeEquipa);
                         if(equipa == null){
-                            System.out.println("Nome de equipa invalido: ");
+                            System.out.println("Nome de equipa invalido");
                             continue;
                         }
 
-                        informacoes.transfereJogador(jogador, equipa.getNome());
+                        informacoes.transfereJogador(jogId, jogador, equipa.getNome());
                         System.out.println(jogador.getNome() + " foi transferido para " + equipa.getNome());
                     }else if(selecao == 0){
                         quit = true;
@@ -58,7 +59,7 @@ public class MenuInicial {
         System.out.println("|  ____|        | | | |         | | |  |  \\/  |                                         ");
         System.out.println("| |__ ___   ___ | |_| |__   __ _| | |  | \\  / | __ _ _ __   __ _  __ _  ___ _ __        ");
         System.out.println("|  __/ _ \\ / _ \\| __| '_ \\ / _` | | |  | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '__|  ");
-        System.out.println("| | | (_) | (_) | |_| |_) | (_| | | |  | |   | | (_| | | | | (_| | (_| |  __/ |           ");
+        System.out.println("| | | (_) | (_) | |_| |_) | (_| | | |  | |  | | (_| | | | | (_| | (_| |  __/ |           ");
         System.out.println("|_|  \\___/ \\___/ \\__|_.__/ \\__,_|_|_|  |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   ");
         System.out.println("                                                                  __/ |                  ");
         System.out.println("                                                                 |___/                 \n");

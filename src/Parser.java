@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Parser {
     public static Informacoes parse() throws LinhaIncorretaException {
-        List<String> linhas = lerFicheiro("src/log.txt");
+        List<String> linhas = lerFicheiro("src/logs.txt");
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         List<Jogo> jogos = new ArrayList<>();

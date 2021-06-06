@@ -17,15 +17,15 @@ public class Jogo {
 
     public Jogo(){
         this.tempo = 0;
-        this.estado = null;
-        this.equipa1 = null;
-        this.equipa2 = null;
+        this.estado = Estado.POR_INICIAR;
+        this.equipa1 = new Equipa();
+        this.equipa2 = new Equipa();
         this.golosVisitado = 0;
         this.golosVisitante = 0;
-        this.formacaoEquipa1 = null;
-        this.formacaoEquipa2 = null;
-        this.substituicoesEquipa1 = null;
-        this.substituicoesEquipa2 = null;
+        this.formacaoEquipa1 = new ArrayList<>();
+        this.formacaoEquipa2 = new ArrayList<>();
+        this.substituicoesEquipa1 = new HashMap<>();
+        this.substituicoesEquipa2 = new HashMap<>();
     }
 
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
@@ -46,8 +46,8 @@ public class Jogo {
     public Jogo(Jogo jogo){
         this.tempo = jogo.getTempo();
         this.estado = jogo.getEstado();
-        setEquipa1(equipa1);
-        setEquipa2(equipa2);
+        setEquipa1(jogo.getEquipa1());
+        setEquipa2(jogo.getEquipa2());
         this.golosVisitado = jogo.getGolosVisitado();
         this.golosVisitante = jogo.getGolosVisitante();
         setFormacaoEquipa1(jogo.getFormacaoEquipa1());
@@ -73,9 +73,11 @@ public class Jogo {
         List<Jogador> jogadoresEquipa1 = new ArrayList<>();
         List<Jogador> jogadoresEquipa2 = new ArrayList<>();
         for(int i = 5; i < 16; i++){
+            if(equipa1.obterJogadorPeloNumero(i)!=null)
             jogadoresEquipa1.add(equipa1.obterJogadorPeloNumero(i));
         }
         for(int i = 19; i < 30; i++){
+            if(equipa2.obterJogadorPeloNumero(i)!=null)
             jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(i));
         }
         Map<Integer,Integer> substituicoesEquipa1 = new HashMap<>();
@@ -186,7 +188,7 @@ public class Jogo {
     }
 
     public void setSubstituicoesEquipa1(Map<Integer, Integer> substituicoesEquipa1) {
-        this.substituicoesEquipa1 = new HashMap<>(this.substituicoesEquipa1);
+        this.substituicoesEquipa1 = new HashMap<>(substituicoesEquipa1);
     }
 
     public Map<Integer, Integer> getSubstituicoesEquipa2() {
@@ -194,7 +196,7 @@ public class Jogo {
     }
 
     public void setSubstituicoesEquipa2(Map<Integer, Integer> substituicoesEquipa2) {
-        this.substituicoesEquipa2 = new HashMap<>(this.substituicoesEquipa2);
+        this.substituicoesEquipa2 = new HashMap<>(substituicoesEquipa2);
     }
 
     @Override

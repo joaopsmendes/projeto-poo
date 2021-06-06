@@ -9,9 +9,9 @@ public class Equipa {
     private List<Jogador> jogadores;
 
     public Equipa(){
-        this.nome = null;
+        this.nome = "";
         this.fundacaoEquipa = null;
-        this.jogadores = null;
+        this.jogadores = new ArrayList<>();
     }
 
     public Equipa(String nome, LocalDate fundacaoEquipa, List<Jogador> jogadores) {
@@ -50,10 +50,7 @@ public class Equipa {
     }
 
     public void removeJogador(Jogador jogador){
-        for(Jogador atual : this.jogadores){
-            if(atual.getNome().equals(jogador.getNome()))
-                this.jogadores.remove(atual);
-        }
+        this.jogadores.remove(jogador);
     }
 
 

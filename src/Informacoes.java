@@ -9,9 +9,9 @@ public class Informacoes {
     private List<Jogo> jogos;
 
     public Informacoes(){
-        this.equipas = null;
-        this.jogadores = null;
-        this.jogos = null;
+        this.equipas = new HashMap<>();
+        this.jogadores = new HashMap<>();
+        this.jogos = new ArrayList<>();
     }
 
     public Informacoes(Map<String, Equipa> equipas, Map<Integer, Jogador> jogadores, List<Jogo> jogos) {
@@ -26,7 +26,7 @@ public class Informacoes {
         setJogos(informacoes.getJogos());
     }
 
-    public void transfereJogador(Jogador jogador, String nomeEquipaFinal){
+    public void transfereJogador(int id, Jogador jogador, String nomeEquipaFinal){
         Equipa equipaFinal = this.equipas.get(nomeEquipaFinal);
         if(equipaFinal == null) return;
 
@@ -40,6 +40,7 @@ public class Informacoes {
         novoJogador.setHistorial(historial);
         equipaFinal.insereJogador(jogador);
         this.equipas.put(nomeEquipaFinal, equipaFinal.clone());
+        this.jogadores.put(id, novoJogador.clone());
     }
 
     public Map<String, Equipa> getEquipas() {

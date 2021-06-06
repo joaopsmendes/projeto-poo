@@ -16,11 +16,11 @@ public class Jogador{
     private List<String> historial;
 
     public Jogador(){
-        this.nome = null;
+        this.nome = "";
         this.nCamisola = 0;
         this.posicao = null;
-        this.skills = null;
-        this.historial = null;
+        this.skills = new HashMap<>();
+        this.historial = new ArrayList<>();
     }
 
     public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills, List<String> historial) {
@@ -191,7 +191,7 @@ public class Jogador{
     }
 
     public void setHistorial(List<String> historial) {
-        this.historial = new ArrayList<>(this.historial);
+        this.historial = new ArrayList<>(historial);
     }
 
     @Override
