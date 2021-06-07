@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Jogo {
@@ -267,6 +264,89 @@ public class Jogo {
                 + this.getEquipa1().getNome() + " : "
                 + this.getGolosVisitado() + " vs " + this.getGolosVisitante() + " : "
                 + this.getEquipa2().getNome());
+    }
+
+    public int overallTits(List<Jogador> jogs){
+        int overall = 0, size = 0;
+        for(Jogador jogador : jogs){
+            //mudar para ter os atacantes melhor pelo remate
+            for(Integer atual : jogador.getSkills().values()){
+                overall += atual;
+                size++;
+            }
+        }
+        return overall/size;
+    }
+
+    public void simulacao(){
+        int i=18;
+        int over1=overallTits(this.jogadoresEquipa1);
+        int over2=overallTits(this.jogadoresEquipa1);
+        while(i>0){
+            Random ran=new Random();
+            int ranN= ran.nextInt(10);
+            if(over1>over2){
+                //0 1 2 3 para e1
+                //9 para e2
+                //4 5 6 7 8
+                float ratio=over2/over1;
+                int superi=numOps(ratio);
+                //nada  para 2->1,2,3,4,5,6
+                if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
+                    this.golosVisitado++;
+                }
+                else if(superi==2 && ranN<=1){//0
+                    this.golosVisitante++;
+                }
+                else if(superi>2 && ranN<=0){//0
+                    this.golosVisitante++;
+                }
+            }
+            else if(over1<over2){
+                //0 para a e1
+                //9
+                //1 2 3 4 5 6
+                float ratio=over1/over2;
+                int superi=numOps(ratio);
+                //nada  para 2->1,2,3,4,5,6
+                if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
+                    this.golosVisitante++;
+                }
+                else if(superi==2 && ranN<=1){//0
+                    this.golosVisitado++;
+                }
+                else if(superi>2 && ranN<=0){//0
+                    this.golosVisitado++;
+                }
+
+            }
+            else{
+                //0 e 1 e 2 para a e1
+                //9 e 8 e 7 para a e2
+                //3 4 5 6  para nada
+                if(ranN<=1){
+                    this.golosVisitado++;
+                }
+                else if(ranN>=8){
+                    this.golosVisitante++;
+                }
+            }
+
+
+            --i;
+        }
+
+    }
+
+    private int numOps(float ratio){
+        float ya=ratio*10;
+        if(ya<1.25){
+            return 3;
+        }
+        else if(ya<2.5){
+            return 4;
+        }
+        return 2;
     }
 
     @Override

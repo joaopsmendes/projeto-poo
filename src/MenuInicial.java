@@ -83,7 +83,7 @@ public class MenuInicial {
                         }
 
                         Jogo jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2);
-
+                        jogo.simulacao();
                         jogo.printJogo();
                     }else if(selecao == 2) {
                         printEquipas(informacoes.getEquipas());
