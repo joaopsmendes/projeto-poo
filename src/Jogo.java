@@ -265,9 +265,7 @@ public class Jogo {
     public void printJogo(){
         System.out.println("[Jogo] "
                 + this.getEquipa1().getNome() + " : "
-                + this.getJogadoresEquipa1().stream().map(Jogador::getNome).collect(Collectors.toList()) + " : "
                 + this.getGolosVisitado() + " vs " + this.getGolosVisitante() + " : "
-                + this.getJogadoresEquipa1().stream().map(Jogador::getNome).collect(Collectors.toList()) + " : "
                 + this.getEquipa2().getNome());
     }
 
