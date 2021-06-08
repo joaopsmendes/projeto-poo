@@ -268,22 +268,20 @@ public class Jogo {
                 + this.getEquipa2().getNome());
     }
 
-    public int overallTits(List<Jogador> jogs){
-        int overall = 0, size = 0;
+    public float overallTits(List<Jogador> jogs){
+        float overall = 0;
+        int size = 0;
         for(Jogador jogador : jogs){
-            //mudar para ter os atacantes melhor pelo remate
-            for(Integer atual : jogador.getSkills().values()){
-                overall += atual;
-                size++;
-            }
+            overall+=jogador.calculaOverall();
+            ++size;
         }
         return overall/size;
     }
 
     public void simulacao(){
         int i=18;
-        int over1=overallTits(this.jogadoresEquipa1);
-        int over2=overallTits(this.jogadoresEquipa1);
+        float over1=overallTits(this.jogadoresEquipa1);
+        float over2=overallTits(this.jogadoresEquipa1);
         while(i>0){
             Random ran=new Random();
             int ranN= ran.nextInt(10);

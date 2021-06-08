@@ -108,13 +108,111 @@ public class Jogador{
         return remata() && !defende();
     }
 
-    public int calculaOverall(){
+    public float calculaOverall(){
         if(this.getSkills() == null || this.getSkills().size() == 0) return 0;
-        int overall = 0;
-        for (Integer atual : this.getSkills().values()) {
-            overall += atual;
+        float over_jogador=0;
+        if(this.getPosicao()==Posicao.AVANCADO){
+            float total_jogador=0;
+            Map<Jogador.Habilidades,Integer> map_crtJog= this.getSkills();
+            int cabeca=map_crtJog.get(Jogador.Habilidades.CABECEAMENTO);
+            total_jogador+=cabeca*4;
+            int remate=map_crtJog.get(Jogador.Habilidades.REMATE);
+            total_jogador+=remate*4;
+            int velo= map_crtJog.get(Jogador.Habilidades.VELOCIDADE);
+            total_jogador+=velo;
+            int passe= map_crtJog.get(Jogador.Habilidades.PASSE);
+            total_jogador+=passe;
+            int imp= map_crtJog.get(Jogador.Habilidades.IMPULSAO);
+            total_jogador+=imp;
+            int resis= map_crtJog.get(Jogador.Habilidades.RESISTENCIA);
+            total_jogador+=resis*0.5;
+            int destr= map_crtJog.get(Jogador.Habilidades.DESTREZA);
+            total_jogador+=destr*0.5;
+            over_jogador=total_jogador/7;
         }
-        return overall/this.getSkills().size();
+        else if(this.getPosicao()== Posicao.MEDIO){
+            float total_jogador=0;
+            Map<Jogador.Habilidades,Integer> map_crtJog= this.getSkills();
+            int cabeca=map_crtJog.get(Jogador.Habilidades.CABECEAMENTO);
+            total_jogador+=cabeca*0.5;
+            int remate=map_crtJog.get(Jogador.Habilidades.REMATE);
+            total_jogador+=remate;
+            int velo= map_crtJog.get(Jogador.Habilidades.VELOCIDADE);
+            total_jogador+=velo;
+            int passe= map_crtJog.get(Jogador.Habilidades.PASSE);
+            total_jogador+=passe*4;
+            int imp= map_crtJog.get(Jogador.Habilidades.IMPULSAO);
+            total_jogador+=imp*0.5;
+            int resis= map_crtJog.get(Jogador.Habilidades.RESISTENCIA);
+            total_jogador+=resis;
+            int destr= map_crtJog.get(Jogador.Habilidades.DESTREZA);
+            total_jogador+=destr;
+            int recup=map_crtJog.get(Jogador.Habilidades.RECUPERACAO);
+            total_jogador+=recup*4;
+            over_jogador=total_jogador/8;
+        }
+        else if(this.getPosicao()== Posicao.DEFESA){
+            float total_jogador=0;
+            Map<Jogador.Habilidades,Integer> map_crtJog= this.getSkills();
+            int cabeca=map_crtJog.get(Jogador.Habilidades.CABECEAMENTO);
+            total_jogador+=cabeca;
+            int remate=map_crtJog.get(Jogador.Habilidades.REMATE);
+            total_jogador+=remate*0.5;
+            int velo= map_crtJog.get(Jogador.Habilidades.VELOCIDADE);
+            total_jogador+=velo*0.5;
+            int passe= map_crtJog.get(Jogador.Habilidades.PASSE);
+            total_jogador+=passe;
+            int imp= map_crtJog.get(Jogador.Habilidades.IMPULSAO);
+            total_jogador+=imp*4;
+            int resis= map_crtJog.get(Jogador.Habilidades.RESISTENCIA);
+            total_jogador+=resis;
+            int destr= map_crtJog.get(Jogador.Habilidades.DESTREZA);
+            total_jogador+=destr*4;
+            over_jogador=total_jogador/7;
+        }
+        else if(this.getPosicao()== Posicao.LATERAL){
+            float total_jogador=0;
+            Map<Jogador.Habilidades,Integer> map_crtJog= this.getSkills();
+            int cabeca=map_crtJog.get(Jogador.Habilidades.CABECEAMENTO);
+            total_jogador+=cabeca;
+            int remate=map_crtJog.get(Jogador.Habilidades.REMATE);
+            total_jogador+=remate*0.5;
+            int velo= map_crtJog.get(Jogador.Habilidades.VELOCIDADE);
+            total_jogador+=velo;
+            int passe= map_crtJog.get(Jogador.Habilidades.PASSE);
+            total_jogador+=passe;
+            int imp= map_crtJog.get(Jogador.Habilidades.IMPULSAO);
+            total_jogador+=imp*0.5;
+            int resis= map_crtJog.get(Jogador.Habilidades.RESISTENCIA);
+            total_jogador+=resis*4;
+            int destr= map_crtJog.get(Jogador.Habilidades.DESTREZA);
+            total_jogador+=destr;
+            int cruz=map_crtJog.get(Jogador.Habilidades.CRUZAMENTO);
+            total_jogador+=cruz*4;
+            over_jogador=total_jogador/8;
+        }
+        else if(this.getPosicao()== Posicao.GUARDA_REDES){
+            float total_jogador=0;
+            Map<Jogador.Habilidades,Integer> map_crtJog= this.getSkills();
+            int cabeca=map_crtJog.get(Jogador.Habilidades.CABECEAMENTO);
+            total_jogador+=cabeca*0.5;
+            int remate=map_crtJog.get(Jogador.Habilidades.REMATE);
+            total_jogador+=remate*0.5;
+            int velo= map_crtJog.get(Jogador.Habilidades.VELOCIDADE);
+            total_jogador+=velo;
+            int passe= map_crtJog.get(Jogador.Habilidades.PASSE);
+            total_jogador+=passe*4;
+            int imp= map_crtJog.get(Jogador.Habilidades.IMPULSAO);
+            total_jogador+=imp;
+            int resis= map_crtJog.get(Jogador.Habilidades.RESISTENCIA);
+            total_jogador+=resis;
+            int destr= map_crtJog.get(Jogador.Habilidades.DESTREZA);
+            total_jogador+=destr;
+            int flex=map_crtJog.get(Jogador.Habilidades.FLEXIBILIDADE);
+            total_jogador+=flex*4;
+            over_jogador=total_jogador/8;
+        }
+        return over_jogador;
     }
 
     public static Jogador parse(String input, Posicao pos){
