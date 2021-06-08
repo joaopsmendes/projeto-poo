@@ -281,7 +281,7 @@ public class Jogo {
     public void simulacao(){
         int i=18;
         float over1=overallTits(this.jogadoresEquipa1);
-        float over2=overallTits(this.jogadoresEquipa1);
+        float over2=overallTits(this.jogadoresEquipa2);
         while(i>0){
             Random ran=new Random();
             int ranN= ran.nextInt(10);

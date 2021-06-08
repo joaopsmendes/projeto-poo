@@ -181,6 +181,8 @@ public class MenuInicial {
     }
 
 
+    //4-2-4 MARCA MAIS GOLOS
+    //4-3-3 melhor defesa
 
     //TODO : ver o algoritmo dos golos, ver o algoritmo das taticas, ver o algortimo do overall e influenciar no golos
 }
