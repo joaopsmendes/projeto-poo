@@ -34,13 +34,12 @@ public class Equipa {
         return null;
     }
 
-    public int calculaOverall(){
-        int overall = 0, size = 0;
+    public float calculaOverall(){
+        float overall = 0;
+        int size = 0;
         for(Jogador jogador : this.jogadores){
-            for(Integer atual : jogador.getSkills().values()){
-                overall += atual;
-                size++;
-            }
+            overall+=jogador.calculaOverall();
+            ++size;
         }
         return overall/size;
     }
