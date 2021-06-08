@@ -32,8 +32,10 @@ public class MenuInicial {
                             }
                         }
                         System.out.println("Indica uma tática para a equipa escolhida: \n");
-                        System.out.println("1 - 4-3-3");
-                        System.out.println("2 - 4-4-2");
+                        System.out.println("[1] - 4-3-3");
+                        System.out.println("[2] - 4-4-2");
+                        System.out.println("[3] - 4-2-4");
+                        System.out.println("[4] - 4-2-3-1");
                         Jogo.TaticaEquipa taticaEquipa1 = null;
                         while(taticaEquipa1 == null){
                             try{
@@ -42,6 +44,10 @@ public class MenuInicial {
                                     taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
                                 }else if(tatica == 2){
                                     taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
+                                }else if(tatica == 3){
+                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
+                                }else if(tatica == 4){
+                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
                                 }else{
                                     System.out.println("Tatica invalida.");
                                 }
@@ -63,8 +69,10 @@ public class MenuInicial {
                             }
                         }
                         System.out.println("Indica uma tática para a equipa escolhida: \n");
-                        System.out.println("1 - 4-3-3");
-                        System.out.println("2 - 4-4-2");
+                        System.out.println("[1] - 4-3-3");
+                        System.out.println("[2] - 4-4-2");
+                        System.out.println("[3] - 4-2-4");
+                        System.out.println("[4] - 4-2-3-1");
                         Jogo.TaticaEquipa taticaEquipa2 = null;
                         while(taticaEquipa2 == null){
                             try{
@@ -73,6 +81,10 @@ public class MenuInicial {
                                     taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
                                 }else if(tatica == 2){
                                     taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
+                                }else if(tatica == 3){
+                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
+                                }else if(tatica == 4){
+                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
                                 }else{
                                     System.out.println("Tatica invalida.");
                                 }
@@ -167,4 +179,8 @@ public class MenuInicial {
             jogo.printJogo();
         }
     }
+
+
+
+    //TODO : ver o algoritmo dos golos, ver o algoritmo das taticas, ver o algortimo do overall e influenciar no golos
 }

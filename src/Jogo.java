@@ -105,7 +105,9 @@ public class Jogo {
 
     public enum TaticaEquipa{
         QUATRO_QUATRO_DOIS,
-        QUATRO_TRES_TRES
+        QUATRO_TRES_TRES,
+        QUATRO_DOIS_QUATRO,
+        QUATRO_DOIS_TRES_UM
     }
 
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
