@@ -2,6 +2,11 @@ import java.util.List;
 import java.util.Map;
 
 public class View {
+    private int i;
+
+    public View(){
+        this.i=1;
+    }
 
     /**
      * Funçao que indica o que imprimir no terminal para incializar o Football Manager

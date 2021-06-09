@@ -17,16 +17,14 @@ public class MenuInicial {
      * Funçao que inicializa o Menu para começar a jogar
      */
 
-    private View jan;
-
     public void initMenuInicial(){
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         try {
             Informacoes informacoes = Parser.parse();
-
+            View jan=new View();
             while(!quit){
-                this.jan.printMenuInicial();
+                jan.printMenuInicial();
                 try{
                     int selecao = scanner.nextInt();
                     if(selecao == 1) {
