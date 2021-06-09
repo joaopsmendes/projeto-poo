@@ -1,3 +1,11 @@
+/**
+ * Criação do objeto MenuInicial
+ *
+ * @author João Mendes
+ * @author Francisco Paiva
+ * @author Ricardo Silva
+ */
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -5,6 +13,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class MenuInicial {
+    /**
+     * Funçao que inicializa o Menu para começar a jogar
+     */
     public void initMenuInicial(){
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
@@ -138,6 +149,9 @@ public class MenuInicial {
         scanner.close();
     }
 
+    /**
+     * Funçao que indica o que imprimir no terminal para incializar o Football Manager
+     */
     public void printMenuInicial(){
 
         System.out.println(" ______          _   _           _ _    __  __                                           ");
@@ -156,12 +170,20 @@ public class MenuInicial {
         System.out.println("        (0) - Sair\n");
     }
 
+    /**
+     * Funçao que indica quais os dados para imprimir em relação às equipas
+     * @param equipas
+     */
     private void printEquipas(Map<String,Equipa> equipas){
         for(Equipa equipa : equipas.values()){
             System.out.println(equipa.getNome() + " - " + equipa.getFundacaoEquipa() + " - " + equipa.calculaOverall());
         }
     }
 
+    /**
+     * Funçao que indica quais os dados em imprimir em relação aos jogadores
+     * @param jogadores
+     */
     private void printJogadores(Map<Integer, Jogador> jogadores){
         for(Map.Entry<Integer, Jogador> entry : jogadores.entrySet()){
             Jogador jogador = entry.getValue();
@@ -174,6 +196,10 @@ public class MenuInicial {
         }
     }
 
+    /**
+     *
+     * @param jogos
+     */
     private void printJogos(List<Jogo> jogos){
         for(Jogo jogo: jogos){
             jogo.printJogo();

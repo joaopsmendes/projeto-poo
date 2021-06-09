@@ -1,3 +1,11 @@
+/**
+ * Criação do objeto Jogo
+ *
+ * @author João Mendes
+ * @author Francisco Paiva
+ * @author Ricardo Silva
+ */
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,6 +23,9 @@ public class Jogo {
     private Map<Integer, Integer> substituicoesEquipa1;
     private Map<Integer, Integer> substituicoesEquipa2;
 
+    /**
+     * Criação do construtor vazio
+     */
     public Jogo(){
         this.tempo = 0;
         this.estado = Estado.POR_INICIAR;
@@ -30,6 +41,14 @@ public class Jogo {
         this.substituicoesEquipa2 = new HashMap<>();
     }
 
+    /**
+     *
+     *
+     * @param equipa1
+     * @param equipa2
+     * @param taticaEquipa1
+     * @param taticaEquipa2
+     */
     public Jogo(Equipa equipa1, Equipa equipa2, TaticaEquipa taticaEquipa1, TaticaEquipa taticaEquipa2){
         this.tempo = 0;
         this.estado = Estado.POR_INICIAR;
@@ -45,6 +64,20 @@ public class Jogo {
         this.substituicoesEquipa2 = new HashMap<>();
     }
 
+    /**
+     * Criação do construtor parametrizado
+     *
+     * @param tempo
+     * @param estado
+     * @param equipa1
+     * @param equipa2
+     * @param golosVisitado
+     * @param golosVisitante
+     * @param jogadoresEquipa1
+     * @param jogadoresEquipa2
+     * @param substituicoesEquipa1
+     * @param substituicoesEquipa2
+     */
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
                 int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2,
                 Map<Integer, Integer> substituicoesEquipa1, Map<Integer, Integer> substituicoesEquipa2) {
@@ -80,6 +113,11 @@ public class Jogo {
         setSubstituicoesEquipa2(substituicoesEquipa2);
     }
 
+    /**
+     * Crição do construtor cópia
+     *
+     * @param jogo
+     */
     public Jogo(Jogo jogo){
         this.tempo = jogo.getTempo();
         this.estado = jogo.getEstado();
@@ -95,6 +133,9 @@ public class Jogo {
         setSubstituicoesEquipa2(jogo.getSubstituicoesEquipa2());
     }
 
+    /**
+     * Indica os diferentes estado em que o jogo pode se encontrar
+     */
     public enum Estado{
         POR_INICIAR,
         PRIMEIRA_PARTE,
@@ -103,6 +144,9 @@ public class Jogo {
         TERMINADO
     }
 
+    /**
+     * Indica o os diferentes esquemas táticos que as equipas podem adotar
+     */
     public enum TaticaEquipa{
         QUATRO_QUATRO_DOIS,
         QUATRO_TRES_TRES,
@@ -110,6 +154,13 @@ public class Jogo {
         QUATRO_DOIS_TRES_UM
     }
 
+    /**
+     *
+     * @param input
+     * @param equipas
+     * @return
+     * @throws NumberFormatException
+     */
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
 //        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47,35,2,36,39,14,43,5,32,50,14->0,4->30,36->21,43,30,1,22,33,11,38,31,39,6,12,43->3,31->34,12->20
         String[] campos = input.split(",");
@@ -261,6 +312,9 @@ public class Jogo {
         this.substituicoesEquipa2 = new HashMap<>(substituicoesEquipa2);
     }
 
+    /**
+     * Funçao que indica quais os dados a imprimir em relação ao jogo
+     */
     public void printJogo(){
         System.out.println("[Jogo] "
                 + this.getEquipa1().getNome() + " : "
@@ -268,6 +322,11 @@ public class Jogo {
                 + this.getEquipa2().getNome());
     }
 
+    /**
+     * Funçao que devolve o overall da equipa incial
+     * @param jogs lista de jogadores que vao jogar de inicio
+     * @return
+     */
     public float overallTits(List<Jogador> jogs){
         float overall = 0;
         int size = 0;
@@ -278,6 +337,9 @@ public class Jogo {
         return overall/size;
     }
 
+    /**
+     * Funçao que permite calcular o resultado de umm jogo
+     */
     public void simulacao(){
         int i=18;
         float over1=overallTits(this.jogadoresEquipa1);
@@ -338,6 +400,11 @@ public class Jogo {
 
     }
 
+    /**
+     * Funçao que indica o
+     * @param ratio
+     * @return
+     */
     private int numOps(float ratio){
         float ya=ratio*10;
         if(ya<1.25){
@@ -349,6 +416,11 @@ public class Jogo {
         return 2;
     }
 
+    /**
+     * Funçao que indica a informaçao que pretende ser impressa
+     *
+     * @return
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Jogo{");
@@ -364,6 +436,11 @@ public class Jogo {
         return sb.toString();
     }
 
+    /**
+     * Funçao que permite igualar
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -382,6 +459,10 @@ public class Jogo {
         return jogadoresEquipa2 != null ? jogadoresEquipa2.equals(jogo.jogadoresEquipa2) : jogo.jogadoresEquipa2 == null;
     }
 
+    /**
+     * Funçao que faz o clone
+     * @return o clone do Objeto Jogo
+     */
     @Override
     public Jogo clone(){
         return new Jogo(this);

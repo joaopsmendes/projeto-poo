@@ -1,3 +1,11 @@
+/**
+ * Criação do objeto Informaçoes
+ *
+ * @author João Mendes
+ * @author Francisco Paiva
+ * @author Ricardo Silva
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,24 +16,43 @@ public class Informacoes {
     private Map<Integer, Jogador> jogadores;
     private List<Jogo> jogos;
 
+    /**
+     * Criaçao do construtor vazio
+     */
     public Informacoes(){
         this.equipas = new HashMap<>();
         this.jogadores = new HashMap<>();
         this.jogos = new ArrayList<>();
     }
 
+    /**
+     * Criaçao do construtor parametrizado
+     * @param equipas
+     * @param jogadores
+     * @param jogos
+     */
     public Informacoes(Map<String, Equipa> equipas, Map<Integer, Jogador> jogadores, List<Jogo> jogos) {
         setEquipas(equipas);
         setJogadores(jogadores);
         setJogos(jogos);
     }
 
+    /**
+     * Criaçao do construtor cópia
+     * @param informacoes
+     */
     public Informacoes(Informacoes informacoes){
         setEquipas(informacoes.getEquipas());
         setJogadores(informacoes.getJogadores());
         setJogos(informacoes.getJogos());
     }
 
+    /**
+     *Funçao que permite trasnferencia dos jogadores entre equipa
+     * @param id
+     * @param jogador
+     * @param nomeEquipaFinal
+     */
     public void transfereJogador(int id, Jogador jogador, String nomeEquipaFinal){
         Equipa equipaFinal = this.equipas.get(nomeEquipaFinal);
         if(equipaFinal == null) return;
@@ -91,6 +118,10 @@ public class Informacoes {
         this.jogos = jogos;
     }
 
+    /**
+     * Funçao que indica a informaçao que pretende ser impressa
+     * @return
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Informacoes{");
@@ -101,6 +132,11 @@ public class Informacoes {
         return sb.toString();
     }
 
+    /**
+     * Funçao que permite igualar
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,6 +149,11 @@ public class Informacoes {
         return jogos != null ? jogos.equals(that.jogos) : that.jogos == null;
     }
 
+    /**
+     * Funçao que faz o clone
+     * @return o clone do Objeto Informacoes
+     */
+    @Override
     public Informacoes clone(){
         return new Informacoes(this);
     }

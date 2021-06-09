@@ -15,6 +15,9 @@ public class Jogador{
     private Map<Habilidades,Integer> skills;
     private List<String> historial;
 
+    /**
+     * Criação do construtor vazio
+     */
     public Jogador(){
         this.nome = "";
         this.nCamisola = 0;
@@ -23,6 +26,14 @@ public class Jogador{
         this.historial = new ArrayList<>();
     }
 
+    /**
+     * Criação do construtor parametrizado
+     * @param nome
+     * @param nCamisola
+     * @param posicao
+     * @param skills
+     * @param historial
+     */
     public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills, List<String> historial) {
         this.nome = nome;
         this.nCamisola = nCamisola;
@@ -31,6 +42,10 @@ public class Jogador{
         setHistorial(historial);
     }
 
+    /**
+     * Criação do construtor cópia
+     * @param jogador
+     */
     public Jogador(Jogador jogador){
         this.nome = jogador.getNome();
         this.nCamisola = jogador.getnCamisola();
@@ -39,6 +54,9 @@ public class Jogador{
         setHistorial(jogador.getHistorial());
     }
 
+    /**
+     * Indica as habilidades que cada jogador pode obter
+     */
     public enum Habilidades {
         DESTREZA,
         VELOCIDADE,
@@ -52,6 +70,9 @@ public class Jogador{
         RECUPERACAO
     }
 
+    /**
+     * Indica a  posiçao que o jogador joga
+     */
     public enum Posicao {
         AVANCADO,
         DEFESA,
@@ -108,6 +129,10 @@ public class Jogador{
         return remata() && !defende();
     }
 
+    /**
+     * Função que calcula o overall consoante a posiçao dos jogadores
+     * @return
+     */
     public float calculaOverall(){
         if(this.getSkills() == null || this.getSkills().size() == 0) return 0;
         float over_jogador=0;
@@ -215,6 +240,12 @@ public class Jogador{
         return over_jogador;
     }
 
+    /**
+     *
+     * @param input
+     * @param pos
+     * @return
+     */
     public static Jogador parse(String input, Posicao pos){
         String[] campos = input.split(",");
         Map<Habilidades,Integer> habilidades = new HashMap<>();
@@ -292,6 +323,11 @@ public class Jogador{
         this.historial = new ArrayList<>(historial);
     }
 
+    /**
+     * Funçao que indica a informaçao que pretende ser impressa
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Jogador{" +
@@ -302,6 +338,11 @@ public class Jogador{
                 '}';
     }
 
+    /**
+     * Funçao que permite igualar
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -310,6 +351,10 @@ public class Jogador{
         return nCamisola == jogador.nCamisola && Objects.equals(nome, jogador.nome) && posicao == jogador.posicao && Objects.equals(skills, jogador.skills);
     }
 
+    /**
+     * Funçao que faz o clone
+     * @return o clone do Objeto Jogador
+     */
     @Override
     public Jogador clone() {
         return new Jogador(this);

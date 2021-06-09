@@ -1,3 +1,11 @@
+/**
+ * Criação do objeto Parser
+ *
+ * @author João Mendes
+ * @author Francisco Paiva
+ * @author Ricardo Silva
+ */
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -87,6 +95,11 @@ public class Parser {
         return new Informacoes(equipas, jogadores, jogos);
     }
 
+    /**
+     * Funçao que permite ler os ficheiros
+     * @param nomeFicheiro
+     * @return do ficheiro
+     */
     public static List<String> lerFicheiro(String nomeFicheiro) {
         List<String> lines;
         try { lines = Files.readAllLines(Paths.get(nomeFicheiro), StandardCharsets.UTF_8); }
