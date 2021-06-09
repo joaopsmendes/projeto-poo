@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class MenuInicial {
+public class Controller {
     /**
      * Funçao que inicializa o Menu para começar a jogar
      */
@@ -127,7 +127,25 @@ public class MenuInicial {
                         jan.printTransfer(jogador.getNome(),equipa.getNome());
                     }else if(selecao==5){
                         jan.printJogos(informacoes.getJogos());
-                    }else if(selecao == 0){
+                    }else if(selecao==6){
+                        Jogador jogador=jan.printJogador();
+                        List<String> histo=jogador.getHistorial();
+                        String ult_equi=histo.get(histo.size()-1);
+                        System.out.println(ult_equi);
+                        if(informacoes.getEquipas().containsKey(ult_equi)){
+                            Map<String,Equipa> newMAPEqui=null;
+                            Equipa newEqui=informacoes.getEquipas().get(ult_equi);
+                            newEqui.insereJogador(jogador);
+                            for(Equipa e:informacoes.getEquipas().values()){
+                                newMAPEqui.put(e.getNome(),e.clone());
+                            }
+                            informacoes.setEquipas(newMAPEqui);
+                        }
+                        else{
+                            jan.printEquipInval();
+                        }
+                    }
+                    else if(selecao == 0){
                         quit = true;
                     }else{
                         jan.printOPIN();

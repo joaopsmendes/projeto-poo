@@ -8,7 +8,7 @@
 
 public class FM{
     public static void main(String[] args) {
-        MenuInicial menuInicial = new MenuInicial();
-        menuInicial.initMenuInicial();
+        Controller controller = new Controller();
+        controller.initMenuInicial();
     }
 }
