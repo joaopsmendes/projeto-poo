@@ -16,6 +16,9 @@ public class MenuInicial {
     /**
      * Funçao que inicializa o Menu para começar a jogar
      */
+
+    private View jan;
+
     public void initMenuInicial(){
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
@@ -23,7 +26,7 @@ public class MenuInicial {
             Informacoes informacoes = Parser.parse();
 
             while(!quit){
-                printMenuInicial();
+                this.jan.printMenuInicial();
                 try{
                     int selecao = scanner.nextInt();
                     if(selecao == 1) {
@@ -42,11 +45,7 @@ public class MenuInicial {
                                 System.out.println("Nome de equipa invalido");
                             }
                         }
-                        System.out.println("Indica uma tática para a equipa escolhida: \n");
-                        System.out.println("[1] - 4-3-3");
-                        System.out.println("[2] - 4-4-2");
-                        System.out.println("[3] - 4-2-4");
-                        System.out.println("[4] - 4-2-3-1");
+                        jan.printTatics();
                         Jogo.TaticaEquipa taticaEquipa1 = null;
                         while(taticaEquipa1 == null){
                             try{
@@ -79,11 +78,7 @@ public class MenuInicial {
                                 System.out.println("Nome de equipa invalido");
                             }
                         }
-                        System.out.println("Indica uma tática para a equipa escolhida: \n");
-                        System.out.println("[1] - 4-3-3");
-                        System.out.println("[2] - 4-4-2");
-                        System.out.println("[3] - 4-2-4");
-                        System.out.println("[4] - 4-2-3-1");
+                        jan.printTatics();
                         Jogo.TaticaEquipa taticaEquipa2 = null;
                         while(taticaEquipa2 == null){
                             try{
@@ -109,9 +104,9 @@ public class MenuInicial {
                         jogo.simulacao();
                         jogo.printJogo();
                     }else if(selecao == 2) {
-                        printEquipas(informacoes.getEquipas());
+                        jan.printEquipas(informacoes.getEquipas());
                     }else if(selecao == 3) {
-                        printJogadores(informacoes.getJogadores());
+                        jan.printJogadores(informacoes.getJogadores());
                     }else if(selecao == 4) {
                         System.out.println("Introduza o id do jogador: ");
                         int jogId = scanner.nextInt();
@@ -133,7 +128,7 @@ public class MenuInicial {
                         informacoes.transfereJogador(jogId, jogador, equipa.getNome());
                         System.out.println(jogador.getNome() + " foi transferido para " + equipa.getNome());
                     }else if(selecao==5){
-                        printJogos(informacoes.getJogos());
+                        jan.printJogos(informacoes.getJogos());
                     }else if(selecao == 0){
                         quit = true;
                     }else{
@@ -149,62 +144,7 @@ public class MenuInicial {
         scanner.close();
     }
 
-    /**
-     * Funçao que indica o que imprimir no terminal para incializar o Football Manager
-     */
-    public void printMenuInicial(){
 
-        System.out.println(" ______          _   _           _ _    __  __                                           ");
-        System.out.println("|  ____|        | | | |         | | |  |  \\/  |                                         ");
-        System.out.println("| |__ ___   ___ | |_| |__   __ _| | |  | \\  / | __ _ _ __   __ _  __ _  ___ _ __        ");
-        System.out.println("|  __/ _ \\ / _ \\| __| '_ \\ / _` | | |  | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '__|  ");
-        System.out.println("| | | (_) | (_) | |_| |_) | (_| | | |  | |  | | (_| | | | | (_| | (_| |  __/ |           ");
-        System.out.println("|_|  \\___/ \\___/ \\__|_.__/ \\__,_|_|_|  |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   ");
-        System.out.println("                                                                  __/ |                  ");
-        System.out.println("                                                                 |___/                 \n");
-        System.out.println("        (1) - Novo Jogo");
-        System.out.println("        (2) - Ver Equipas");
-        System.out.println("        (3) - Ver Jogadores");
-        System.out.println("        (4) - Mudar Jogador de Equipa");
-        System.out.println("        (5) - Ver resultados de jogos realizados");
-        System.out.println("        (0) - Sair\n");
-    }
-
-    /**
-     * Função que indica quais os dados para imprimir em relação às equipas
-     * @param equipas Equipas a ser imprimidas
-     */
-    private void printEquipas(Map<String,Equipa> equipas){
-        for(Equipa equipa : equipas.values()){
-            System.out.println(equipa.getNome() + " - " + equipa.getFundacaoEquipa() + " - " + equipa.calculaOverall());
-        }
-    }
-
-    /**
-     * Funçao que indica quais os dados em imprimir em relação aos jogadores
-     * @param jogadores Jogadores a ser imprimidos
-     */
-    private void printJogadores(Map<Integer, Jogador> jogadores){
-        for(Map.Entry<Integer, Jogador> entry : jogadores.entrySet()){
-            Jogador jogador = entry.getValue();
-            System.out.println("[" + entry.getKey() + "] " +
-                    jogador.getNome() + " - " +
-                    jogador.getnCamisola() + " - " +
-                    jogador.getPosicao() + " - " +
-                    jogador.getHistorial().get(jogador.getHistorial().size()-1) + " - " +
-                    jogador.calculaOverall());
-        }
-    }
-
-    /**
-     *
-     * @param jogos Jogos a ser imprimidos
-     */
-    private void printJogos(List<Jogo> jogos){
-        for(Jogo jogo: jogos){
-            jogo.printJogo();
-        }
-    }
 
 
     //4-2-4 MARCA MAIS GOLOS
