@@ -171,8 +171,8 @@ public class MenuInicial {
     }
 
     /**
-     * Funçao que indica quais os dados para imprimir em relação às equipas
-     * @param equipas
+     * Função que indica quais os dados para imprimir em relação às equipas
+     * @param equipas Equipas a ser imprimidas
      */
     private void printEquipas(Map<String,Equipa> equipas){
         for(Equipa equipa : equipas.values()){
@@ -182,7 +182,7 @@ public class MenuInicial {
 
     /**
      * Funçao que indica quais os dados em imprimir em relação aos jogadores
-     * @param jogadores
+     * @param jogadores Jogadores a ser imprimidos
      */
     private void printJogadores(Map<Integer, Jogador> jogadores){
         for(Map.Entry<Integer, Jogador> entry : jogadores.entrySet()){
@@ -198,7 +198,7 @@ public class MenuInicial {
 
     /**
      *
-     * @param jogos
+     * @param jogos Jogos a ser imprimidos
      */
     private void printJogos(List<Jogo> jogos){
         for(Jogo jogo: jogos){

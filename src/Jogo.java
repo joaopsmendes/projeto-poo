@@ -42,12 +42,10 @@ public class Jogo {
     }
 
     /**
-     *
-     *
-     * @param equipa1
-     * @param equipa2
-     * @param taticaEquipa1
-     * @param taticaEquipa2
+     * @param equipa1 Primeira equipa
+     * @param equipa2 Segunda equipa
+     * @param taticaEquipa1 Tática da primeira equipa
+     * @param taticaEquipa2 Tática da segunda equipa
      */
     public Jogo(Equipa equipa1, Equipa equipa2, TaticaEquipa taticaEquipa1, TaticaEquipa taticaEquipa2){
         this.tempo = 0;
@@ -67,16 +65,16 @@ public class Jogo {
     /**
      * Criação do construtor parametrizado
      *
-     * @param tempo
-     * @param estado
-     * @param equipa1
-     * @param equipa2
-     * @param golosVisitado
-     * @param golosVisitante
-     * @param jogadoresEquipa1
-     * @param jogadoresEquipa2
-     * @param substituicoesEquipa1
-     * @param substituicoesEquipa2
+     * @param tempo Tempo do jogo
+     * @param estado Estado do jogo
+     * @param equipa1 Primeira equipa
+     * @param equipa2 Segunda equipa
+     * @param golosVisitado Golos da equipa da casa
+     * @param golosVisitante Golos da equipa visitante
+     * @param jogadoresEquipa1 Jogadores da equipa da casa
+     * @param jogadoresEquipa2 Jogadores da equipa visitante
+     * @param substituicoesEquipa1 Substituições da primeira equipa
+     * @param substituicoesEquipa2 Substituições da segunda equipa
      */
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
                 int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2,
@@ -95,6 +93,21 @@ public class Jogo {
         setSubstituicoesEquipa2(substituicoesEquipa2);
     }
 
+    /**
+     *
+     * @param tempo Tempo do jogo
+     * @param estado Estado do jogo
+     * @param equipa1 Primeira equipa
+     * @param equipa2 Segunda equipa
+     * @param golosVisitado Golos da equipa da casa
+     * @param golosVisitante Golos da equipa visitante
+     * @param jogadoresEquipa1 Jogadores da equipa da casa
+     * @param jogadoresEquipa2 Jogadores da equipa visitante
+     * @param taticaEquipa1 Tática da primeira equipa
+     * @param taticaEquipa2 Tática da segunda equipa
+     * @param substituicoesEquipa1 Substituições da primeira equipa
+     * @param substituicoesEquipa2 Substituições da segunda equipa
+     */
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
                 int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2, TaticaEquipa taticaEquipa1,
                 TaticaEquipa taticaEquipa2, Map<Integer, Integer> substituicoesEquipa1,
@@ -114,9 +127,9 @@ public class Jogo {
     }
 
     /**
-     * Crição do construtor cópia
+     * Craição do construtor cópia
      *
-     * @param jogo
+     * @param jogo Objeto Jogo
      */
     public Jogo(Jogo jogo){
         this.tempo = jogo.getTempo();
@@ -313,7 +326,7 @@ public class Jogo {
     }
 
     /**
-     * Funçao que indica quais os dados a imprimir em relação ao jogo
+     * Função que indica quais os dados a imprimir em relação ao jogo
      */
     public void printJogo(){
         System.out.println("[Jogo] "
@@ -324,8 +337,8 @@ public class Jogo {
 
     /**
      * Funçao que devolve o overall da equipa incial
-     * @param jogs lista de jogadores que vao jogar de inicio
-     * @return
+     * @param jogs lista de jogadores que vão jogar de inicio
+     * @return Overall da equipa titular
      */
     public float overallTits(List<Jogador> jogs){
         float overall = 0;
@@ -338,7 +351,7 @@ public class Jogo {
     }
 
     /**
-     * Funçao que permite calcular o resultado de umm jogo
+     * Função que permite calcular o resultado de um jogo
      */
     public void simulacao(){
         int i=18;
@@ -401,9 +414,9 @@ public class Jogo {
     }
 
     /**
-     * Funçao que indica o
-     * @param ratio
-     * @return
+     * Função que indica o número de oportunidades da equipa
+     * @param ratio Valor que compara as duas equipas
+     * @return Retorna o número de oportunidades da equipa
      */
     private int numOps(float ratio){
         float ya=ratio*10;
@@ -417,9 +430,8 @@ public class Jogo {
     }
 
     /**
-     * Funçao que indica a informaçao que pretende ser impressa
-     *
-     * @return
+     * Função que indica a informação que pretende ser impressa
+     * @return Informação imprimida
      */
     @Override
     public String toString() {
@@ -437,9 +449,9 @@ public class Jogo {
     }
 
     /**
-     * Funçao que permite igualar
-     * @param o
-     * @return
+     * Função que verifca a igualdade dos objetos
+     * @param o Objeto da classe
+     * @return Boleano que indica se é igual
      */
     @Override
     public boolean equals(Object o) {

@@ -28,11 +28,11 @@ public class Jogador{
 
     /**
      * Criação do construtor parametrizado
-     * @param nome
-     * @param nCamisola
-     * @param posicao
-     * @param skills
-     * @param historial
+     * @param nome Nome do jogador
+     * @param nCamisola Número da camisola
+     * @param posicao Posição do jogador
+     * @param skills Habilidades do jogador
+     * @param historial Equipas por onde passou
      */
     public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills, List<String> historial) {
         this.nome = nome;
@@ -44,7 +44,7 @@ public class Jogador{
 
     /**
      * Criação do construtor cópia
-     * @param jogador
+     * @param jogador Objeto Jogador
      */
     public Jogador(Jogador jogador){
         this.nome = jogador.getNome();
@@ -82,8 +82,8 @@ public class Jogador{
     }
 
     /**
-     * @brief Função que verifica se é golo ou nao
-     * @return
+     * Função que verifica se o jogador remata
+     * @return Retorna um boleano que indica se o jogador rematou
      */
     public boolean remata(){
         int power = 0, n = 0;
@@ -100,8 +100,8 @@ public class Jogador{
 
     //verificar isto
     /**
-     * @brief funçao que vereifica se o guarda redes defende ou nao
-     * @return
+     * Função que verifica se o guarda redes defende
+     * @return Retorna um boleano que indica se o guarda-redes defendeu
      */
     public boolean defende(){
         if(posicao.equals(Posicao.GUARDA_REDES)){
@@ -122,16 +122,16 @@ public class Jogador{
 
     //verificar isto
     /**
-     * @brief função que verifica se é golo ou nao
-     * @return
+     * função que verifica se é golo comparando o boleano defende e o boleano remata
+     * @return Retorna um boleano que indica se foi golo
      */
     public boolean golo(){
         return remata() && !defende();
     }
 
     /**
-     * Função que calcula o overall consoante a posiçao dos jogadores
-     * @return
+     * Função que calcula o overall consoante a posição do jogador
+     * @return Retorna o overall do jogador
      */
     public float calculaOverall(){
         if(this.getSkills() == null || this.getSkills().size() == 0) return 0;
@@ -324,9 +324,9 @@ public class Jogador{
     }
 
     /**
-     * Funçao que indica a informaçao que pretende ser impressa
+     * Função que indica a informação que pretende ser impressa
      *
-     * @return
+     * @return Informação imprimida
      */
     @Override
     public String toString() {
@@ -339,9 +339,9 @@ public class Jogador{
     }
 
     /**
-     * Funçao que permite igualar
-     * @param o
-     * @return
+     * Função que verifca a igualdade dos objetos
+     * @param o Objeto da classe
+     * @return Boleano que indica se é igual
      */
     @Override
     public boolean equals(Object o) {

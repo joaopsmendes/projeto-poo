@@ -28,9 +28,9 @@ public class Equipa {
 
     /**
      * Crição do construtor parametrizado
-     * @param nome
-     * @param fundacaoEquipa
-     * @param jogadores
+     * @param nome Nome da equipa
+     * @param fundacaoEquipa Ano que a equipa foi fundada
+     * @param jogadores Jogadores dessa equipa
      */
     public Equipa(String nome, LocalDate fundacaoEquipa, List<Jogador> jogadores) {
         this.nome = nome;
@@ -40,7 +40,7 @@ public class Equipa {
 
     /**
      * Crição do construtor cópia
-     * @param equipa
+     * @param equipa Objeto Equipa
      */
     public Equipa(Equipa equipa){
         this.nome = equipa.getNome();
@@ -49,9 +49,9 @@ public class Equipa {
     }
 
     /**
-     * Funçao que permite obter o jogador a partir do numero de camisola
+     * Função que permite obter o jogador a partir do número de camisola
      *
-     * @param numero
+     * @param numero número da camisola
      * @return o jogador
      */
     public Jogador obterJogadorPeloNumero(int numero){
@@ -63,7 +63,7 @@ public class Equipa {
     }
 
     /**
-     * Funçao que permite calcular o overall da equipa
+     * Função que permite calcular o overall da equipa
      *
      * @return o overall da equipa
      */
@@ -78,8 +78,8 @@ public class Equipa {
     }
 
     /**
-     * Funçao que permite adicionar um jogador a uma equipa
-     * @param jogador
+     * Função que permite adicionar um jogador a uma equipa
+     * @param jogador Jogador a ser adicionado
      */
     public void insereJogador(Jogador jogador){
         this.jogadores.add(jogador.clone());
@@ -87,7 +87,7 @@ public class Equipa {
 
     /**
      * Função que permite remover um jogador de uma certa equipa
-     * @param jogador
+     * @param jogador Jogador a ser retirado da equipa
      */
     public void removeJogador(Jogador jogador){
         this.jogadores.remove(jogador);
@@ -135,9 +135,8 @@ public class Equipa {
     }
 
     /**
-     * Funçao que indica a informaçao que pretende ser impressa
-     *
-     * @return
+     * Função que indica a informação que pretende ser impressa
+     * @return Informação imprimida
      */
     @Override
     public String toString() {
@@ -150,9 +149,9 @@ public class Equipa {
     }
 
     /**
-     * Funçao que permite igualar
-     * @param o
-     * @return
+     * Função que verifca a igualdade dos objetos
+     * @param o Objeto da classe
+     * @return Boleano que indica se é igual
      */
     @Override
     public boolean equals(Object o) {

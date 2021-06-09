@@ -26,10 +26,10 @@ public class Informacoes {
     }
 
     /**
-     * Criaçao do construtor parametrizado
-     * @param equipas
-     * @param jogadores
-     * @param jogos
+     * Criação do construtor parametrizado
+     * @param equipas Todas as equipas
+     * @param jogadores Todos os jogadores
+     * @param jogos Todos os jogos realizados
      */
     public Informacoes(Map<String, Equipa> equipas, Map<Integer, Jogador> jogadores, List<Jogo> jogos) {
         setEquipas(equipas);
@@ -38,8 +38,8 @@ public class Informacoes {
     }
 
     /**
-     * Criaçao do construtor cópia
-     * @param informacoes
+     * Criação do construtor cópia
+     * @param informacoes Todas as informações
      */
     public Informacoes(Informacoes informacoes){
         setEquipas(informacoes.getEquipas());
@@ -48,10 +48,10 @@ public class Informacoes {
     }
 
     /**
-     *Funçao que permite trasnferencia dos jogadores entre equipa
-     * @param id
-     * @param jogador
-     * @param nomeEquipaFinal
+     * Função que permite trasnferencia dos jogadores entre equipa
+     * @param id Id do jogador
+     * @param jogador Jogador a ser transferido
+     * @param nomeEquipaFinal Equipa para o qual vai ser tranferido
      */
     public void transfereJogador(int id, Jogador jogador, String nomeEquipaFinal){
         Equipa equipaFinal = this.equipas.get(nomeEquipaFinal);
@@ -119,8 +119,8 @@ public class Informacoes {
     }
 
     /**
-     * Funçao que indica a informaçao que pretende ser impressa
-     * @return
+     * Função que indica a informação que pretende ser impressa
+     * @return Informação imprimida
      */
     @Override
     public String toString() {
@@ -133,9 +133,9 @@ public class Informacoes {
     }
 
     /**
-     * Funçao que permite igualar
-     * @param o
-     * @return
+     * Função que verifca a igualdade dos objetos
+     * @param o Objeto da classe
+     * @return Boleano que indica se é igual
      */
     @Override
     public boolean equals(Object o) {
