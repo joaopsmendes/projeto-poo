@@ -32,7 +32,7 @@ public class MenuInicial {
                         // fazer numero random que atribui o resultado
                         // escolher a equipa e o seu respetivo esquema tatico
 
-                        System.out.println("Indique uma equipa: \n");
+                        jan.printIndiquEquip();
                         Equipa equipa1=null;
                         String dummy = scanner.nextLine();
                         while(equipa1==null){
@@ -40,7 +40,7 @@ public class MenuInicial {
                             if(informacoes.getEquipas().containsKey(equipa1Nome))
                                 equipa1 = informacoes.getEquipas().get(equipa1Nome);
                             else{
-                                System.out.println("Nome de equipa invalido");
+                                jan.printEquipInval();
                             }
                         }
                         jan.printTatics();
@@ -57,15 +57,15 @@ public class MenuInicial {
                                 }else if(tatica == 4){
                                     taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
                                 }else{
-                                    System.out.println("Tatica invalida.");
+                                    jan.printTaticInv();
                                 }
                             }catch (InputMismatchException e){
-                                System.out.println("Introduza um numero.");
+                                jan.printIntroNum();
                                 scanner.next();
                             }
                         }
 
-                        System.out.println("Indique uma equipa adversaria: \n");
+                        jan.printIndiquEquip();
                         Equipa equipa2=null;
                         String dummy1 = scanner.nextLine();
                         while(equipa2==null){
@@ -73,7 +73,7 @@ public class MenuInicial {
                             if(!equipa2Nome.equalsIgnoreCase(equipa1.getNome()) && informacoes.getEquipas().containsKey(equipa2Nome))
                                 equipa2 = informacoes.getEquipas().get(equipa2Nome);
                             else{
-                                System.out.println("Nome de equipa invalido");
+                                jan.printEquipInval();
                             }
                         }
                         jan.printTatics();
@@ -90,10 +90,10 @@ public class MenuInicial {
                                 }else if(tatica == 4){
                                     taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
                                 }else{
-                                    System.out.println("Tatica invalida.");
+                                    jan.printTaticInv();
                                 }
                             }catch (InputMismatchException e){
-                                System.out.println("Introduza um numero.");
+                                jan.printIntroNum();
                                 scanner.next();
                             }
                         }
@@ -106,34 +106,34 @@ public class MenuInicial {
                     }else if(selecao == 3) {
                         jan.printJogadores(informacoes.getJogadores());
                     }else if(selecao == 4) {
-                        System.out.println("Introduza o id do jogador: ");
+                        jan.printIDJogador();
                         int jogId = scanner.nextInt();
                         Jogador jogador = informacoes.getJogadores().get(jogId);
                         if (jogador == null) {
-                            System.out.println("Id the jogador invalido");
+                            jan.printIdIn();
                             continue;
                         }
 
-                        System.out.println("Introduza o nome da equipa: ");
+                        jan.printNomeEquipa();
                         String dummy = scanner.nextLine();
                         String nomeEquipa = scanner.nextLine();
                         Equipa equipa = informacoes.getEquipas().get(nomeEquipa);
                         if (equipa == null) {
-                            System.out.println("Nome de equipa invalido");
+                            jan.printEquipInval();
                             continue;
                         }
 
                         informacoes.transfereJogador(jogId, jogador, equipa.getNome());
-                        System.out.println(jogador.getNome() + " foi transferido para " + equipa.getNome());
+                        jan.printTransfer(jogador.getNome(),equipa.getNome());
                     }else if(selecao==5){
                         jan.printJogos(informacoes.getJogos());
                     }else if(selecao == 0){
                         quit = true;
                     }else{
-                        System.out.println("Opçao invalida.");
+                        jan.printOPIN();
                     }
                 }catch (NumberFormatException e){
-                    System.out.println("Introduza um numero.");
+                    jan.printIntroNum();
                 }
             }
         } catch (LinhaIncorretaException e) {

@@ -2,10 +2,9 @@ import java.util.List;
 import java.util.Map;
 
 public class View {
-    private int i;
 
     public View(){
-        this.i=1;
+
     }
 
     /**
@@ -72,5 +71,43 @@ public class View {
         System.out.println("[3] - 4-2-4");
         System.out.println("[4] - 4-2-3-1");
     }
+
+    public void printEquipInval(){
+        System.out.println("Nome de equipa invalido");
+    }
+
+    public void printIndiquEquip(){
+        System.out.println("Indique uma equipa: \n");
+    }
+
+    public void printTaticInv(){
+        System.out.println("Tatica invalida.");
+    }
+
+    public void printIntroNum(){
+        System.out.println("Introduza um numero.");
+    }
+
+    public void printNomeEquipa(){
+        System.out.println("Introduza o nome da equipa: ");
+    }
+
+    public void printIDJogador(){
+        System.out.println("Introduza o id do jogador: ");
+    }
+
+    public void printIdIn(){
+        System.out.println("Id the jogador invalido");
+    }
+
+    public void printTransfer(String stJog,String stEqu){
+        System.out.println(stJog + " foi transferido para " + stEqu);
+    }
+
+    public void printOPIN(){
+        System.out.println("Opçao invalida.");
+    }
+
+
 
 }
