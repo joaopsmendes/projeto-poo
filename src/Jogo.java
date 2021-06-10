@@ -326,16 +326,6 @@ public class Jogo {
     }
 
     /**
-     * Função que indica quais os dados a imprimir em relação ao jogo
-     */
-    public void printJogo(){
-        System.out.println("[Jogo] "
-                + this.getEquipa1().getNome() + " : "
-                + this.getGolosVisitado() + " vs " + this.getGolosVisitante() + " : "
-                + this.getEquipa2().getNome());
-    }
-
-    /**
      * Funçao que devolve o overall da equipa incial
      * @param jogs lista de jogadores que vão jogar de inicio
      * @return Overall da equipa titular
@@ -353,14 +343,11 @@ public class Jogo {
     /**
      * Função que permite calcular o resultado de um jogo
      */
-    public void simulacao(){
-        int i=18;
+    public void simulacao_part1(){
+        int i=9;
         float over1=overallTits(this.jogadoresEquipa1);
         float over2=overallTits(this.jogadoresEquipa2);
         while(i>0){
-            if(i==9){
-
-            }
             Random ran=new Random();
             int ranN= ran.nextInt(10);
             if(over1>over2){
@@ -414,6 +401,126 @@ public class Jogo {
             --i;
         }
 
+    }
+
+    private Jogador getJogad_fromNum(List<Jogador> lista,int num){
+        for(Jogador jog:lista){
+            if(jog.getnCamisola()==num){
+                return jog;
+            }
+        }
+        return null;
+    }
+
+    public void simulacao_part2(Map<Integer,Integer> subs){
+        //mudar a lista de titulares de acordo com as sub
+        int equi=subs.get(0);
+        if(equi==1){
+            Map<Integer,Integer> newSubs=new HashMap<>();
+            List<Jogador> newJogadores=new ArrayList<>();
+            for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
+                if(entry.getKey()!=0){
+                    newSubs.put(entry.getKey(),entry.getValue());
+                }
+                else{
+                    continue;
+                }
+                for(Jogador jog:this.getJogadoresEquipa1()){
+                    if(jog.getnCamisola()!=entry.getKey()){
+                        newJogadores.add(jog);
+                    }
+                    else{
+                        Jogador xjogador=getJogad_fromNum(this.getEquipa1().getJogadores(), entry.getValue());
+                        if(xjogador!=null){
+                            newJogadores.add(xjogador);
+                        }
+                    }
+                }
+            }
+            setSubstituicoesEquipa1(newSubs);
+            setJogadoresEquipa1(newJogadores);
+        }
+        else if(equi==2){
+            Map<Integer,Integer> newSubs=new HashMap<>();
+            List<Jogador> newJogadores=new ArrayList<>();
+            for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
+                if(entry.getKey()!=0){
+                    newSubs.put(entry.getKey(),entry.getValue());
+                }
+                else{
+                    continue;
+                }
+                for(Jogador jog:this.getJogadoresEquipa2()){
+                    if(jog.getnCamisola()!=entry.getKey()){
+                        newJogadores.add(jog);
+                    }
+                    else{
+                        Jogador xjogador=getJogad_fromNum(this.getEquipa2().getJogadores(), entry.getValue());
+                        if(xjogador!=null){
+                            newJogadores.add(xjogador);
+                        }
+                    }
+                }
+            }
+            setSubstituicoesEquipa2(newSubs);
+            setJogadoresEquipa2(newJogadores);
+        }
+        int i=9;
+        float over1=overallTits(this.jogadoresEquipa1);
+        float over2=overallTits(this.jogadoresEquipa2);
+        while(i>0){
+            Random ran=new Random();
+            int ranN= ran.nextInt(10);
+            if(over1>over2){
+                //0 1 2 3 para e1
+                //9 para e2
+                //4 5 6 7 8
+                float ratio=over2/over1;
+                int superi=numOps(ratio);
+                //nada  para 2->1,2,3,4,5,6
+                if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
+                    this.golosVisitado++;
+                }
+                else if(superi==2 && ranN<=1){//0
+                    this.golosVisitante++;
+                }
+                else if(superi>2 && ranN<=0){//0
+                    this.golosVisitante++;
+                }
+            }
+            else if(over1<over2){
+                //0 para a e1
+                //9
+                //1 2 3 4 5 6
+                float ratio=over1/over2;
+                int superi=numOps(ratio);
+                //nada  para 2->1,2,3,4,5,6
+                if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
+                    this.golosVisitante++;
+                }
+                else if(superi==2 && ranN<=1){//0
+                    this.golosVisitado++;
+                }
+                else if(superi>2 && ranN<=0){//0
+                    this.golosVisitado++;
+                }
+
+            }
+            else{
+                //0 e 1 e 2 para a e1
+                //9 e 8 e 7 para a e2
+                //3 4 5 6  para nada
+                if(ranN<=1){
+                    this.golosVisitado++;
+                }
+                else if(ranN>=8){
+                    this.golosVisitante++;
+                }
+            }
+
+
+            --i;
+        }
     }
 
     /**

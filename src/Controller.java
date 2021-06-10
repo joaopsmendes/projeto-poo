@@ -99,8 +99,10 @@ public class Controller {
                         }
 
                         Jogo jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2);
-                        jogo.simulacao();
-                        jogo.printJogo();
+                        jogo.simulacao_part1();
+                        Map<Integer,Integer> subs=jan.printJogoInter(jogo);
+                        jogo.simulacao_part2(subs);
+                        jan.printJogo(jogo);
                     }else if(selecao == 2) {
                         jan.printEquipas(informacoes.getEquipas());
                     }else if(selecao == 3) {

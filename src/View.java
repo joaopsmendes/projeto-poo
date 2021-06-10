@@ -67,7 +67,7 @@ public class View {
      */
     public void printJogos(List<Jogo> jogos){
         for(Jogo jogo: jogos){
-            jogo.printJogo();
+            this.printJogo(jogo);
         }
     }
 
@@ -113,6 +113,115 @@ public class View {
 
     public void printOPIN(){
         System.out.println("Opçao invalida.");
+    }
+
+    /**
+     * Função que indica quais os dados a imprimir em relação ao jogo
+     */
+    public void printJogo(Jogo jogo){
+        System.out.println("[Jogo] "
+                + jogo.getEquipa1().getNome() + " : "
+                + jogo.getGolosVisitado() + " vs " + jogo.getGolosVisitante() + " : "
+                + jogo.getEquipa2().getNome());
+    }
+
+    public Map<Integer,Integer> printJogoInter(Jogo jogo){
+        System.out.println("[Jogo Ao Intervalo] "
+                + jogo.getEquipa1().getNome() + " : "
+                + jogo.getGolosVisitado() + " vs " + jogo.getGolosVisitante() + " : "
+                + jogo.getEquipa2().getNome());
+        System.out.println("Deseja fazer substituições ?");
+        System.out.println("1:Sim    2:Não");
+        Map<Integer,Integer> subs=new HashMap<>();
+        Scanner sc=new Scanner(System.in);
+        if(sc.nextInt()==1){
+            System.out.println("Equipa 1:1    Equipa 2:2");
+            int op=sc.nextInt();
+            if(op==1){
+                subs.put(0,1);
+                this.print11Inicial(jogo.getJogadoresEquipa1(),1);
+                this.printSup(jogo.getJogadoresEquipa1(),jogo.getEquipa1().getJogadores());
+                System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
+                int numSubs=3;
+                int crt11=sc.nextInt();
+                while(numSubs>0 && crt11!=-1){
+                    while(!jogo.getJogadoresEquipa1().contains(crt11)){
+                        System.out.println("Jogador não encontrado");
+                        crt11=sc.nextInt();
+                    }
+                    int crtSub=sc.nextInt();
+                    while(!jogo.getEquipa1().getJogadores().contains(crtSub)){
+                        System.out.println("Jogador não encontrado");
+                        crtSub=sc.nextInt();
+                    }
+                    subs.put(crt11,crtSub);
+                    numSubs--;
+                    crt11=sc.nextInt();
+                }
+
+            }
+            else if(op==2){
+                subs.put(0,2);
+                this.print11Inicial(jogo.getJogadoresEquipa2(),2);
+                this.printSup(jogo.getJogadoresEquipa2(),jogo.getEquipa2().getJogadores());
+                System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
+                int numSubs=3;
+                int crt11=sc.nextInt();
+                while(numSubs>0 && crt11!=-1){
+                    while(!jogo.getJogadoresEquipa2().contains(crt11)){
+                        System.out.println("Jogador não encontrado");
+                        crt11=sc.nextInt();
+                    }
+                    int crtSub=sc.nextInt();
+                    while(!jogo.getEquipa2().getJogadores().contains(crtSub)){
+                        System.out.println("Jogador não encontrado");
+                        crtSub=sc.nextInt();
+                    }
+                    subs.put(crt11,crtSub);
+                    numSubs--;
+                    crt11=sc.nextInt();
+                }
+
+            }
+            else{
+                this.printOPIN();
+            }
+        }
+        return subs;
+    }
+
+    public void print11Inicial(List<Jogador> e, int num){
+        System.out.println("11 Inicial da Equipa " + num );
+        for(Jogador jog:e){
+            System.out.println(jog.getnCamisola() + " " + jog.getNome() + " " + this.printPosicao(jog.getPosicao()) );
+        }
+    }
+
+    public void printSup(List<Jogador> onze, List<Jogador> plantel){
+        for(Jogador joga:plantel){
+            if(!onze.contains(joga)){
+                System.out.println(joga.getnCamisola() + " " + joga.getNome() + " " + printPosicao(joga.getPosicao()));
+            }
+        }
+    }
+
+    public String printPosicao(Jogador.Posicao pos){
+        if(pos.equals(Jogador.Posicao.AVANCADO)){
+            return "Avançado";
+        }
+        else if(pos.equals(Jogador.Posicao.MEDIO)){
+            return "Médio";
+        }
+        else if(pos.equals(Jogador.Posicao.DEFESA)){
+            return "Defesa";
+        }
+        else if(pos.equals(Jogador.Posicao.LATERAL)){
+            return "Lateral";
+        }
+        else if(pos.equals(Jogador.Posicao.GUARDA_REDES)){
+            return "Guarda-Redes";
+        }
+        return null;
     }
 
     public Jogador printJogador(){
