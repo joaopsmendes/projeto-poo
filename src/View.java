@@ -40,9 +40,11 @@ public class View {
      * @param equipas Equipas a ser imprimidas
      */
     public void printEquipas(Map<String,Equipa> equipas){
-        System.out.println(ANSI_GREEN + "Nome da Equipa " + " - " + " Data de Formação " + " - " + " Overall da Equipa" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Nome da Equipa " + " - "
+                + " Data de Formação " + " - " + " Overall da Equipa" + ANSI_RESET);
         for(Equipa equipa : equipas.values()){
-            System.out.println( equipa.getNome() + " - " + equipa.getFundacaoEquipa() + " - " + equipa.calculaOverall());
+            System.out.println( equipa.getNome() + " - " + equipa.getFundacaoEquipa()
+                    + " - " + equipa.calculaOverall());
         }
     }
 
@@ -51,7 +53,8 @@ public class View {
      * @param jogadores Jogadores a ser imprimidos
      */
     public void printJogadores(Map<Integer, Jogador> jogadores){
-        System.out.println(ANSI_GREEN + "[ID do jogador] " + " " + "Nome do jogador " + " - " + " Número da Camisola " + " - " +
+        System.out.println(ANSI_GREEN + "[ID do jogador] " + " " + "Nome do jogador " + " - " +
+                "" + " Número da Camisola " + " - " +
                            " Posição " + " - " + " Equipa " + " - " + " Overall do Jogador" + ANSI_RESET);
         for(Map.Entry<Integer, Jogador> entry : jogadores.entrySet()){
             Jogador jogador = entry.getValue();
@@ -145,7 +148,8 @@ public class View {
                 subs.put(0,1);
                 this.print11Inicial(jogo.getJogadoresEquipa1(),1);
                 this.printSup(jogo.getJogadoresEquipa1(),jogo.getEquipa1().getJogadores());
-                System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
+                System.out.println("Para substituir os jogadores use os números da camisola. " +
+                        "Para finalizar digite -1. Tem um máximo de 3 substituições");
                 int numSubs=3;
                 int crt11=sc.nextInt();
                 while(numSubs>0 && crt11!=-1){
@@ -175,7 +179,8 @@ public class View {
                 subs.put(0,2);
                 this.print11Inicial(jogo.getJogadoresEquipa2(),2);
                 this.printSup(jogo.getJogadoresEquipa2(),jogo.getEquipa2().getJogadores());
-                System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
+                System.out.println("Para substituir os jogadores use os números da camisola. " +
+                        "Para finalizar digite -1. Tem um máximo de 3 substituições");
                 int numSubs=3;
                 int crt11=sc.nextInt();
                 while(numSubs>0 && crt11!=-1){
@@ -224,7 +229,8 @@ public class View {
     public void print11Inicial(List<Jogador> e, int num){
         System.out.println("11 Inicial da Equipa " + num );
         for(Jogador jog:e){
-            System.out.println(jog.getnCamisola() + " - " + jog.getNome() + " : " + this.printPosicao(jog.getPosicao()) );
+            System.out.println(jog.getnCamisola() + " - " + jog.getNome() +
+                    " : " + this.printPosicao(jog.getPosicao()) );
         }
     }
 
@@ -232,7 +238,8 @@ public class View {
         System.out.println("Suplentes " );
         for(Jogador joga:plantel){
             if(!onze.contains(joga)){
-                System.out.println(joga.getnCamisola() + " - " + joga.getNome() + " : " + printPosicao(joga.getPosicao()));
+                System.out.println(joga.getnCamisola() + " - " + joga.getNome() +
+                        " : " + printPosicao(joga.getPosicao()));
             }
         }
     }

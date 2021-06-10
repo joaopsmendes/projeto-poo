@@ -110,8 +110,8 @@ public class Jogo {
      * @param substituicoesEquipa2 Substituições da segunda equipa
      */
     public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitada,
-                int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2, TaticaEquipa taticaEquipa1,
-                TaticaEquipa taticaEquipa2, Map<Integer, Integer> substituicoesEquipa1,
+                int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2,
+                TaticaEquipa taticaEquipa1, TaticaEquipa taticaEquipa2, Map<Integer, Integer> substituicoesEquipa1,
                 Map<Integer, Integer> substituicoesEquipa2) {
         this.tempo = tempo;
         this.estado = estado;
@@ -176,7 +176,8 @@ public class Jogo {
      * @throws NumberFormatException
      */
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
-//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47,35,2,36,39,14,43,5,32,50,14->0,4->30,36->21,43,30,1,22,33,11,38,31,39,6,12,43->3,31->34,12->20
+//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47,35,2,36,39,14,43,5,32,50,14->0,
+//        4->30,36->21,43,30,1,22,33,11,38,31,39,6,12,43->3,31->34,12->20
         String[] campos = input.split(",");
         Equipa equipa1 = equipas.get(campos[0]);
         Equipa equipa2 = equipas.get(campos[1]);
@@ -192,13 +193,19 @@ public class Jogo {
             jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(i));
         }
         Map<Integer,Integer> substituicoesEquipa1 = new HashMap<>();
-        substituicoesEquipa1.put(Integer.parseInt(campos[16].split("->")[0]), Integer.parseInt(campos[16].split("->")[1]));
-        substituicoesEquipa1.put(Integer.parseInt(campos[17].split("->")[0]), Integer.parseInt(campos[17].split("->")[1]));
-        substituicoesEquipa1.put(Integer.parseInt(campos[18].split("->")[0]), Integer.parseInt(campos[18].split("->")[1]));
+        substituicoesEquipa1.put(Integer.parseInt(campos[16].split("->")[0]),
+                Integer.parseInt(campos[16].split("->")[1]));
+        substituicoesEquipa1.put(Integer.parseInt(campos[17].split("->")[0]),
+                Integer.parseInt(campos[17].split("->")[1]));
+        substituicoesEquipa1.put(Integer.parseInt(campos[18].split("->")[0]),
+                Integer.parseInt(campos[18].split("->")[1]));
         Map<Integer,Integer> substituicoesEquipa2 = new HashMap<>();
-        substituicoesEquipa2.put(Integer.parseInt(campos[30].split("->")[0]), Integer.parseInt(campos[30].split("->")[1]));
-        substituicoesEquipa2.put(Integer.parseInt(campos[31].split("->")[0]), Integer.parseInt(campos[31].split("->")[1]));
-        substituicoesEquipa2.put(Integer.parseInt(campos[32].split("->")[0]), Integer.parseInt(campos[32].split("->")[1]));
+        substituicoesEquipa2.put(Integer.parseInt(campos[30].split("->")[0]),
+                Integer.parseInt(campos[30].split("->")[1]));
+        substituicoesEquipa2.put(Integer.parseInt(campos[31].split("->")[0]),
+                Integer.parseInt(campos[31].split("->")[1]));
+        substituicoesEquipa2.put(Integer.parseInt(campos[32].split("->")[0]),
+                Integer.parseInt(campos[32].split("->")[1]));
 
         return new Jogo(
                 90,
@@ -583,7 +590,8 @@ public class Jogo {
         if (equipa2 != null ? !equipa2.equals(jogo.equipa2) : jogo.equipa2 != null) return false;
         if (jogadoresEquipa1 != null ? !jogadoresEquipa1.equals(jogo.jogadoresEquipa1) : jogo.jogadoresEquipa1 != null)
             return false;
-        return jogadoresEquipa2 != null ? jogadoresEquipa2.equals(jogo.jogadoresEquipa2) : jogo.jogadoresEquipa2 == null;
+        return jogadoresEquipa2 != null ? jogadoresEquipa2.equals(jogo.jogadoresEquipa2) :
+                jogo.jogadoresEquipa2 == null;
     }
 
     /**

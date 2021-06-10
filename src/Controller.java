@@ -70,7 +70,8 @@ public class Controller {
                         String dummy1 = scanner.nextLine();
                         while(equipa2==null){
                             String equipa2Nome =scanner.nextLine();
-                            if(!equipa2Nome.equalsIgnoreCase(equipa1.getNome()) && informacoes.getEquipas().containsKey(equipa2Nome))
+                            if(!equipa2Nome.equalsIgnoreCase(equipa1.getNome())
+                                    && informacoes.getEquipas().containsKey(equipa2Nome))
                                 equipa2 = informacoes.getEquipas().get(equipa2Nome);
                             else{
                                 jan.printEquipInval();
