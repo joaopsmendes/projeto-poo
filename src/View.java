@@ -154,7 +154,7 @@ public class View {
                         break;
                     }
                     int crtSub=sc.nextInt();
-                    while(!contemJogador(crtSub,jogo.getJogadoresEquipa1()) && crtSub!=-1){
+                    while(!contemJogador(crtSub,jogo.getEquipa1().getJogadores()) && crtSub!=-1){
                         System.out.println("Jogador não encontrado");
                         crtSub=sc.nextInt();
                     }
