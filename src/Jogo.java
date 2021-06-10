@@ -63,21 +63,6 @@ public class Jogo {
         this.substituicoesEquipa2 = new HashMap<>();
     }
 
-    public Jogo(Equipa equipa1, Equipa equipa2, TaticaEquipa taticaEquipa1, TaticaEquipa taticaEquipa2,List<Jogador> onze1,List<Jogador> onze2){
-        this.tempo = 0;
-        this.estado = Estado.POR_INICIAR;
-        setEquipa1(equipa1);
-        setEquipa2(equipa2);
-        this.golosVisitada = 0;
-        this.golosVisitante = 0;
-        setJogadoresEquipa1(onze1);
-        setJogadoresEquipa2(onze2);
-        this.taticaEquipa1 = taticaEquipa1;
-        this.taticaEquipa2 = taticaEquipa2;
-        this.substituicoesEquipa1 = new HashMap<>();
-        this.substituicoesEquipa2 = new HashMap<>();
-    }
-
     /**
      * Criação do construtor parametrizado sem táticas
      *

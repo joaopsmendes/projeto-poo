@@ -101,7 +101,7 @@ public class Parser {
     }
 
     /**
-     * Funçao que permite ler os ficheiros
+     * Função que permite ler os ficheiros
      * @param nomeFicheiro nome do ficheiro
      * @return Retorna uma lista com o conteúdo do ficheiro
      */

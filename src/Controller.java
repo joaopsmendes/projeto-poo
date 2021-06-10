@@ -20,7 +20,6 @@ public class Controller {
         try {
             Informacoes informacoes = Parser.parse();
             View jan=new View();
-            Jogo jogo=new Jogo();
             while(!quit){
                 jan.printMenuInicial();
                 try{
@@ -32,15 +31,11 @@ public class Controller {
 
                         jan.printIndiquEquip();
                         Equipa equipa1=null;
-                        List<Jogador> onzeJoga1=null;
                         String dummy = scanner.nextLine();
                         while(equipa1==null){
                             String equipa1Nome =scanner.nextLine();
-                            if(informacoes.getEquipas().containsKey(equipa1Nome)){
+                            if(informacoes.getEquipas().containsKey(equipa1Nome))
                                 equipa1 = informacoes.getEquipas().get(equipa1Nome);
-                                List<Integer> onze1= jan.printJogadoresEquipa(equipa1,1);
-                                onzeJoga1=informacoes.get11Jogadores(onze1,equipa1);
-                            }
                             else{
                                 jan.printEquipInval();
                             }
@@ -69,16 +64,12 @@ public class Controller {
 
                         jan.printIndiquEquip();
                         Equipa equipa2=null;
-                        List<Jogador> onzeJoga2=null;
                         String dummy1 = scanner.nextLine();
                         while(equipa2==null){
                             String equipa2Nome =scanner.nextLine();
                             if(!equipa2Nome.equalsIgnoreCase(equipa1.getNome())
-                                    && informacoes.getEquipas().containsKey(equipa2Nome)){
+                                    && informacoes.getEquipas().containsKey(equipa2Nome))
                                 equipa2 = informacoes.getEquipas().get(equipa2Nome);
-                                List<Integer> onze2= jan.printJogadoresEquipa(equipa2,2);
-                                onzeJoga2=informacoes.get11Jogadores(onze2,equipa2);
-                            }
                             else{
                                 jan.printEquipInval();
                             }
@@ -105,7 +96,7 @@ public class Controller {
                             }
                         }
 
-                        jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2,onzeJoga1,onzeJoga2);
+                        Jogo jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2);
                         jogo.simulacao_part1();
                         Map<Integer,Integer> subs1=jan.printJogoInter(jogo,1);
                         Map<Integer,Integer> subs2=jan.printJogoInter(jogo,2);
@@ -163,8 +154,7 @@ public class Controller {
                             jan.printEquipInval();
                         }
                     }else if(selecao==7){
-                        Equipa novaEq=jan.printEquipa();
-                        informacoes.addEquipa(novaEq);
+
                     }else if(selecao==8){
 
                     }else if(selecao==9){

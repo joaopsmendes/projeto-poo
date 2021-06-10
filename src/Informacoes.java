@@ -17,7 +17,7 @@ public class Informacoes {
     private List<Jogo> jogos;
 
     /**
-     * Criaçao do construtor vazio
+     * Criação do construtor vazio
      */
     public Informacoes(){
         this.equipas = new HashMap<>();
@@ -48,7 +48,7 @@ public class Informacoes {
     }
 
     /**
-     * Função que permite trasnferencia dos jogadores entre equipa
+     * Função que permite transferẽncia dos jogadores entre equipas
      * @param id Id do jogador
      * @param jogador Jogador a ser transferido
      * @param nomeEquipaFinal Equipa para o qual vai ser tranferido
@@ -70,6 +70,11 @@ public class Informacoes {
         this.jogadores.put(id, novoJogador.clone());
     }
 
+    /**
+     * Verifica se a equipa existe
+     * @param nomeEqu Nome da equipa
+     * @return Boleano que indica se a equipa existe
+     */
     public boolean verificaEquipa(String nomeEqu){
         for(Map.Entry<String,Equipa> entry: this.getEquipas().entrySet()){
             if(entry.getValue().getNome().equals(nomeEqu)) return true;
@@ -77,6 +82,11 @@ public class Informacoes {
         return false;
     }
 
+    /**
+     * Função que através do nome da equipa retorna a Equipa
+     * @param nomeEqu nome da equipa
+     * @return Objeto equipa
+     */
     public Equipa getEquipa_fromNome(String nomeEqu){
         for(Map.Entry<String,Equipa> entry: this.getEquipas().entrySet()){
             if(entry.getValue().getNome().equals(nomeEqu)) return entry.getValue().clone();
@@ -84,6 +94,10 @@ public class Informacoes {
         return null;
     }
 
+    /**
+     * Getter das Equipas
+     * @return Todas as equipas
+     */
     public Map<String, Equipa> getEquipas() {
         Map<String, Equipa> newMap = new HashMap<>();
         for(Map.Entry<String, Equipa> atual : equipas.entrySet()){
@@ -92,6 +106,10 @@ public class Informacoes {
         return newMap;
     }
 
+    /**
+     * Setter das equipas
+     * @param equipas Mapa das equipas
+     */
     public void setEquipas(Map<String, Equipa> equipas) {
         Map<String, Equipa> newMap = new HashMap<>();
         for(Map.Entry<String, Equipa> atual : equipas.entrySet()){
@@ -100,6 +118,10 @@ public class Informacoes {
         this.equipas = newMap;
     }
 
+    /**
+     * Getter dos Jogadores
+     * @return Todos os jogadores
+     */
     public Map<Integer, Jogador> getJogadores() {
         Map<Integer, Jogador> newMap = new HashMap<>();
         for(Map.Entry<Integer, Jogador> atual : jogadores.entrySet()){
@@ -108,26 +130,10 @@ public class Informacoes {
         return newMap;
     }
 
-    public List<Jogador> get11Jogadores(List<Integer> onzeInt,Equipa e1){
-        List<Jogador> onze=new ArrayList<>();
-        for(Equipa e:getEquipas().values()){
-            if(e.getNome().equals(e1.getNome())){
-                for(Integer inteiro:onzeInt){
-                    Jogador jog=getJogador_fromNum(inteiro,e.getJogadores());
-                    onze.add(jog);
-                }
-            }
-        }
-        return onze;
-    }
-
-    private Jogador getJogador_fromNum(Integer num,List<Jogador> listJoga){
-        for(Jogador jog:listJoga){
-            if(jog.getnCamisola()==num) return jog;
-        }
-        return null;
-    }
-
+    /**
+     * Setter dos jogadores
+     * @param jogadores Mapa de jogadores
+     */
     public void setJogadores(Map<Integer, Jogador> jogadores) {
         Map<Integer, Jogador> newMap = new HashMap<>();
         for(Map.Entry<Integer, Jogador> atual : jogadores.entrySet()){
@@ -136,6 +142,10 @@ public class Informacoes {
         this.jogadores = newMap;
     }
 
+    /**
+     * Getter da Lista de jogos
+     * @return Lista de jogos
+     */
     public List<Jogo> getJogos() {
         List<Jogo> newList = new ArrayList<>();
         for(Jogo atual : this.jogos){
@@ -144,18 +154,16 @@ public class Informacoes {
         return newList;
     }
 
+    /**
+     * Setter de jogos
+     * @param jogos Lista de jogos
+     */
     public void setJogos(List<Jogo> jogos) {
         List<Jogo> newList = new ArrayList<>();
         for(Jogo atual : jogos){
             newList.add(atual.clone());
         }
         this.jogos = jogos;
-    }
-
-    public void addEquipa(Equipa novaEqu){
-        Map<String,Equipa> novoMapa=getEquipas();
-        novoMapa.put(novaEqu.getNome(),novaEqu.clone());
-        setEquipas(novoMapa);
     }
 
     /**
