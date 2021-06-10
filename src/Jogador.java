@@ -34,7 +34,8 @@ public class Jogador{
      * @param skills Habilidades do jogador
      * @param historial Equipas por onde passou
      */
-    public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills, List<String> historial) {
+    public Jogador(String nome, int nCamisola, Posicao posicao, Map<Habilidades,Integer> skills,
+                   List<String> historial) {
         this.nome = nome;
         this.nCamisola = nCamisola;
         this.posicao = posicao;
@@ -348,7 +349,8 @@ public class Jogador{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Jogador jogador = (Jogador) o;
-        return nCamisola == jogador.nCamisola && Objects.equals(nome, jogador.nome) && posicao == jogador.posicao && Objects.equals(skills, jogador.skills);
+        return nCamisola == jogador.nCamisola && Objects.equals(nome, jogador.nome)
+                && posicao == jogador.posicao && Objects.equals(skills, jogador.skills);
     }
 
     /**
