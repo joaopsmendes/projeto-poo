@@ -128,21 +128,18 @@ public class View {
                 + jogo.getEquipa2().getNome());
     }
 
-    public Map<Integer,Integer> printJogoInter(Jogo jogo){
+    public Map<Integer,Integer> printJogoInter(Jogo jogo,int numEqu){
         System.out.println("[Jogo Ao Intervalo] "
                 + jogo.getEquipa1().getNome() + " : "
                 + jogo.getGolosVisitada() + " vs " + jogo.getGolosVisitante() + " : "
                 + jogo.getEquipa2().getNome());
-        System.out.println("Deseja fazer substituições ?");
+        System.out.println("Equipa" + numEqu + "-> Deseja fazer substituições ?");
         System.out.println("1:Sim    2:Não");
         Map<Integer,Integer> subs=new HashMap<>();
         Scanner sc=new Scanner(System.in);
         int quer=sc.nextInt();
         if(quer==1){
-            System.out.println("Equipa 1:1    Equipa 2:2");
-            int op=sc.nextInt();
-            if(op==1){
-                subs.put(0,1);
+            if(numEqu==1){
                 this.print11Inicial(jogo.getJogadoresEquipa1(),1);
                 this.printSup(jogo.getJogadoresEquipa1(),jogo.getEquipa1().getJogadores());
                 System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
@@ -171,8 +168,7 @@ public class View {
                 }
 
             }
-            else if(op==2){
-                subs.put(0,2);
+            else if(numEqu==2){
                 this.print11Inicial(jogo.getJogadoresEquipa2(),2);
                 this.printSup(jogo.getJogadoresEquipa2(),jogo.getEquipa2().getJogadores());
                 System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
@@ -206,7 +202,7 @@ public class View {
             }
         }
         else if(quer==2){
-            subs=new HashMap<>();
+
         }
         else{
             System.out.println("Comando Inválido.");

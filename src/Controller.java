@@ -6,10 +6,7 @@
  * @author Ricardo Silva
  */
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Controller {
@@ -100,8 +97,9 @@ public class Controller {
 
                         Jogo jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2);
                         jogo.simulacao_part1();
-                        Map<Integer,Integer> subs=jan.printJogoInter(jogo);
-                        jogo.simulacao_part2(subs);
+                        Map<Integer,Integer> subs1=jan.printJogoInter(jogo,1);
+                        Map<Integer,Integer> subs2=jan.printJogoInter(jogo,2);
+                        jogo.simulacao_part2(subs1,subs2);
                         jan.printJogo(jogo);
                     }else if(selecao == 2) {
                         jan.printEquipas(informacoes.getEquipas());
@@ -135,7 +133,7 @@ public class Controller {
                         String ult_equi=histo.get(histo.size()-1);
 
                         if(informacoes.verificaEquipa(ult_equi) ){
-                            Map<String,Equipa> newMAPEqui=null;
+                            Map<String,Equipa> newMAPEqui=new HashMap<>();
                             Equipa newEqui=informacoes.getEquipa_fromNome(ult_equi);
                             newEqui.insereJogador(jogador);
                             for(Equipa e:informacoes.getEquipas().values()){
@@ -147,10 +145,15 @@ public class Controller {
                                 }
                             }
                             informacoes.setEquipas(newMAPEqui);
+                            for(Equipa e:informacoes.getEquipas().values()){
+                                System.out.println(e.toString());
+                            }
                         }
                         else{
                             jan.printEquipInval();
                         }
+                    }else if(selecao==7){
+
                     }
                     else if(selecao == 0){
                         quit = true;
