@@ -29,6 +29,9 @@ public class View {
         System.out.println("        (4) - Mudar Jogador de Equipa");
         System.out.println("        (5) - Ver resultados de jogos realizados");
         System.out.println("        (6) - Criar Jogador");
+        System.out.println("        (7) - Criar Equipa");
+        System.out.println("        (8) - Guardar Progresso no ficheiro");
+        System.out.println("        (9) - Carregar Progresso");
         System.out.println(ANSI_RED + "        (0) - Sair\n" +ANSI_RESET);
     }
 
@@ -121,14 +124,14 @@ public class View {
     public void printJogo(Jogo jogo){
         System.out.println("[Jogo] "
                 + jogo.getEquipa1().getNome() + " : "
-                + jogo.getGolosVisitado() + " vs " + jogo.getGolosVisitante() + " : "
+                + jogo.getGolosVisitada() + " vs " + jogo.getGolosVisitante() + " : "
                 + jogo.getEquipa2().getNome());
     }
 
     public Map<Integer,Integer> printJogoInter(Jogo jogo){
         System.out.println("[Jogo Ao Intervalo] "
                 + jogo.getEquipa1().getNome() + " : "
-                + jogo.getGolosVisitado() + " vs " + jogo.getGolosVisitante() + " : "
+                + jogo.getGolosVisitada() + " vs " + jogo.getGolosVisitante() + " : "
                 + jogo.getEquipa2().getNome());
         System.out.println("Deseja fazer substituições ?");
         System.out.println("1:Sim    2:Não");
@@ -221,7 +224,7 @@ public class View {
     public void print11Inicial(List<Jogador> e, int num){
         System.out.println("11 Inicial da Equipa " + num );
         for(Jogador jog:e){
-            System.out.println(jog.getnCamisola() + " " + jog.getNome() + " " + this.printPosicao(jog.getPosicao()) );
+            System.out.println(jog.getnCamisola() + " - " + jog.getNome() + " : " + this.printPosicao(jog.getPosicao()) );
         }
     }
 
@@ -229,7 +232,7 @@ public class View {
         System.out.println("Suplentes " );
         for(Jogador joga:plantel){
             if(!onze.contains(joga)){
-                System.out.println(joga.getnCamisola() + " " + joga.getNome() + " " + printPosicao(joga.getPosicao()));
+                System.out.println(joga.getnCamisola() + " - " + joga.getNome() + " : " + printPosicao(joga.getPosicao()));
             }
         }
     }

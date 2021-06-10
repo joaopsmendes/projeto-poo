@@ -14,7 +14,7 @@ public class Jogo {
     private Estado estado;
     private Equipa equipa1;
     private Equipa equipa2;
-    private int golosVisitado;
+    private int golosVisitada;
     private int golosVisitante;
     private List<Jogador> jogadoresEquipa1;
     private List<Jogador> jogadoresEquipa2;
@@ -31,7 +31,7 @@ public class Jogo {
         this.estado = Estado.POR_INICIAR;
         this.equipa1 = new Equipa();
         this.equipa2 = new Equipa();
-        this.golosVisitado = 0;
+        this.golosVisitada = 0;
         this.golosVisitante = 0;
         this.jogadoresEquipa1 = new ArrayList<>();
         this.jogadoresEquipa2 = new ArrayList<>();
@@ -42,6 +42,7 @@ public class Jogo {
     }
 
     /**
+     *
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
      * @param taticaEquipa1 Tática da primeira equipa
@@ -52,7 +53,7 @@ public class Jogo {
         this.estado = Estado.POR_INICIAR;
         setEquipa1(equipa1);
         setEquipa2(equipa2);
-        this.golosVisitado = 0;
+        this.golosVisitada = 0;
         this.golosVisitante = 0;
         this.jogadoresEquipa1 = this.equipa1.getJogadores().stream().limit(11).collect(Collectors.toList());
         this.jogadoresEquipa2 = this.equipa2.getJogadores().stream().limit(11).collect(Collectors.toList());
@@ -69,21 +70,21 @@ public class Jogo {
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
-     * @param golosVisitado Golos da equipa da casa
+     * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
      * @param substituicoesEquipa1 Substituições da primeira equipa
      * @param substituicoesEquipa2 Substituições da segunda equipa
      */
-    public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
+    public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitada,
                 int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2,
                 Map<Integer, Integer> substituicoesEquipa1, Map<Integer, Integer> substituicoesEquipa2) {
         this.tempo = tempo;
         this.estado = estado;
         setEquipa1(equipa1);
         setEquipa2(equipa2);
-        this.golosVisitado = golosVisitado;
+        this.golosVisitada = golosVisitada;
         this.golosVisitante = golosVisitante;
         setJogadoresEquipa1(jogadoresEquipa1);
         setJogadoresEquipa2(jogadoresEquipa2);
@@ -99,7 +100,7 @@ public class Jogo {
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
-     * @param golosVisitado Golos da equipa da casa
+     * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
@@ -108,7 +109,7 @@ public class Jogo {
      * @param substituicoesEquipa1 Substituições da primeira equipa
      * @param substituicoesEquipa2 Substituições da segunda equipa
      */
-    public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitado,
+    public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitada,
                 int golosVisitante, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2, TaticaEquipa taticaEquipa1,
                 TaticaEquipa taticaEquipa2, Map<Integer, Integer> substituicoesEquipa1,
                 Map<Integer, Integer> substituicoesEquipa2) {
@@ -116,7 +117,7 @@ public class Jogo {
         this.estado = estado;
         setEquipa1(equipa1);
         setEquipa2(equipa2);
-        this.golosVisitado = golosVisitado;
+        this.golosVisitada = golosVisitada;
         this.golosVisitante = golosVisitante;
         setJogadoresEquipa1(jogadoresEquipa1);
         setJogadoresEquipa2(jogadoresEquipa2);
@@ -136,7 +137,7 @@ public class Jogo {
         this.estado = jogo.getEstado();
         setEquipa1(jogo.getEquipa1());
         setEquipa2(jogo.getEquipa2());
-        this.golosVisitado = jogo.getGolosVisitado();
+        this.golosVisitada = jogo.getGolosVisitada();
         this.golosVisitante = jogo.getGolosVisitante();
         setJogadoresEquipa1(jogo.getJogadoresEquipa1());
         setJogadoresEquipa2(jogo.getJogadoresEquipa2());
@@ -245,12 +246,12 @@ public class Jogo {
         this.equipa2 = equipa2.clone();
     }
 
-    public int getGolosVisitado() {
-        return golosVisitado;
+    public int getGolosVisitada() {
+        return golosVisitada;
     }
 
-    public void setGolosVisitado(int golosVisitado) {
-        this.golosVisitado = golosVisitado;
+    public void setGolosVisitada(int golosVisitada) {
+        this.golosVisitada = golosVisitada;
     }
 
     public int getGolosVisitante() {
@@ -358,7 +359,7 @@ public class Jogo {
                 int superi=numOps(ratio);
                 //nada  para 2->1,2,3,4,5,6
                 if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(superi==2 && ranN<=1){//0
                     this.golosVisitante++;
@@ -378,10 +379,10 @@ public class Jogo {
                     this.golosVisitante++;
                 }
                 else if(superi==2 && ranN<=1){//0
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(superi>2 && ranN<=0){//0
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
 
             }
@@ -390,7 +391,7 @@ public class Jogo {
                 //9 e 8 e 7 para a e2
                 //3 4 5 6  para nada
                 if(ranN<=1){
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(ranN>=8){
                     this.golosVisitante++;
@@ -483,7 +484,7 @@ public class Jogo {
                 int superi=numOps(ratio);
                 //nada  para 2->1,2,3,4,5,6
                 if(ranN>=9-superi){//para 2->7,8,9; para 3-> 6,7,8,9; para 4->5,6,7,8,9
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(superi==2 && ranN<=1){//0
                     this.golosVisitante++;
@@ -503,10 +504,10 @@ public class Jogo {
                     this.golosVisitante++;
                 }
                 else if(superi==2 && ranN<=1){//0
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(superi>2 && ranN<=0){//0
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
 
             }
@@ -515,7 +516,7 @@ public class Jogo {
                 //9 e 8 e 7 para a e2
                 //3 4 5 6  para nada
                 if(ranN<=1){
-                    this.golosVisitado++;
+                    this.golosVisitada++;
                 }
                 else if(ranN>=8){
                     this.golosVisitante++;
@@ -554,7 +555,7 @@ public class Jogo {
         sb.append(", estado=").append(estado).append('\n');
         sb.append(", equipa1=").append(equipa1).append('\n');
         sb.append(", equipa2=").append(equipa2).append('\n');
-        sb.append(", golosVisitado=").append(golosVisitado).append('\n');
+        sb.append(", golosVisitado=").append(golosVisitada).append('\n');
         sb.append(", golosVisitante=").append(golosVisitante).append('\n');
         sb.append(", formacaoEquipa1=").append(jogadoresEquipa1).append('\n');
         sb.append(", formacaoEquipa2=").append(jogadoresEquipa2).append('\n');
@@ -575,7 +576,7 @@ public class Jogo {
         Jogo jogo = (Jogo) o;
 
         if (tempo != jogo.tempo) return false;
-        if (golosVisitado != jogo.golosVisitado) return false;
+        if (golosVisitada != jogo.golosVisitada) return false;
         if (golosVisitante != jogo.golosVisitante) return false;
         if (estado != jogo.estado) return false;
         if (equipa1 != null ? !equipa1.equals(jogo.equipa1) : jogo.equipa1 != null) return false;
