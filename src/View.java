@@ -145,9 +145,12 @@ public class View {
                 int numSubs=3;
                 int crt11=sc.nextInt();
                 while(numSubs>0 && crt11!=-1){
-                    while(!jogo.getJogadoresEquipa1().contains(crt11) && crt11!=-1){
+                    while(!(jogo.getJogadoresEquipa1().contains(crt11)) && crt11!=-1){
                         System.out.println("Jogador não encontrado");
                         crt11=sc.nextInt();
+                    }
+                    if(crt11==-1){
+                        break;
                     }
                     int crtSub=sc.nextInt();
                     while(!jogo.getEquipa1().getJogadores().contains(crtSub) && crtSub!=-1){
