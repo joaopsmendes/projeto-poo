@@ -192,8 +192,11 @@ public class View {
                 this.printOPIN();
             }
         }
-        else{
+        else if(quer==2){
             subs=new HashMap<>();
+        }
+        else{
+            System.out.println("Comando Inválido.");
         }
         return subs;
     }
