@@ -176,17 +176,24 @@ public class View {
                 int numSubs=3;
                 int crt11=sc.nextInt();
                 while(numSubs>0 && crt11!=-1){
-                    while(!jogo.getJogadoresEquipa2().contains(crt11)){
+                    while( !contemJogador(crt11,jogo.getJogadoresEquipa2()) && crt11!=-1){
                         System.out.println("Jogador não encontrado");
                         crt11=sc.nextInt();
                     }
+                    if(crt11==-1){
+                        break;
+                    }
                     int crtSub=sc.nextInt();
-                    while(!jogo.getEquipa2().getJogadores().contains(crtSub)){
+                    while(!contemJogador(crtSub,jogo.getEquipa2().getJogadores()) && crtSub!=-1){
                         System.out.println("Jogador não encontrado");
                         crtSub=sc.nextInt();
                     }
+                    if(crtSub==-1) break;
                     subs.put(crt11,crtSub);
                     numSubs--;
+                    if(numSubs==0){
+                        break;
+                    }
                     crt11=sc.nextInt();
                 }
 
