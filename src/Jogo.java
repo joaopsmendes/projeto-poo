@@ -128,6 +128,32 @@ public class Jogo {
     }
 
     /**
+     * Criação do construtor parametrizado
+     * @param equipa1 Equipa da casa
+     * @param equipa2 Equipa visitante
+     * @param taticaEquipa1 Tática da equipa da casa
+     * @param taticaEquipa2 Tática da equipa visitante
+     * @param onze1 Onze inicial da equipa da casa
+     * @param onze2 Onze inicial da equipa visitante
+     */
+    public Jogo(Equipa equipa1, Equipa equipa2, TaticaEquipa taticaEquipa1,
+                TaticaEquipa taticaEquipa2,List<Jogador> onze1,List<Jogador> onze2){
+        this.tempo = 0;
+        this.estado = Estado.POR_INICIAR;
+        setEquipa1(equipa1);
+        setEquipa2(equipa2);
+        this.golosVisitada = 0;
+        this.golosVisitante = 0;
+        setJogadoresEquipa1(onze1);
+        setJogadoresEquipa2(onze2);
+        this.taticaEquipa1 = taticaEquipa1;
+        this.taticaEquipa2 = taticaEquipa2;
+        this.substituicoesEquipa1 = new HashMap<>();
+        this.substituicoesEquipa2 = new HashMap<>();
+    }
+
+
+    /**
      * Craição do construtor cópia
      *
      * @param jogo Objeto Jogo
@@ -147,6 +173,7 @@ public class Jogo {
         setSubstituicoesEquipa2(jogo.getSubstituicoesEquipa2());
     }
 
+
     /**
      * Indica os diferentes estado em que o jogo pode se encontrar
      */
@@ -155,7 +182,7 @@ public class Jogo {
         PRIMEIRA_PARTE,
         INTERVALO,
         SEGUNDA_PARTE,
-        TERMINADO
+        TERMINADO;
     }
 
     /**

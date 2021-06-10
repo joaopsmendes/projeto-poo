@@ -131,6 +131,38 @@ public class Informacoes {
     }
 
     /**
+     * Função para obter o onze inical de uma equipa
+     * @param onzeInt Lista de jogadores
+     * @param e1 Equipa pretendida
+     * @return Lista de jogadores
+     */
+    public List<Jogador> get11Jogadores(List<Integer> onzeInt,Equipa e1){
+        List<Jogador> onze=new ArrayList<>();
+        for(Equipa e:getEquipas().values()){
+            if(e.getNome().equals(e1.getNome())){
+                for(Integer inteiro:onzeInt){
+                    Jogador jog=getJogador_fromNum(inteiro,e.getJogadores());
+                    onze.add(jog);
+                }
+            }
+        }
+        return onze;
+    }
+
+    /**
+     * Função para obter um jogador através do seu número da camisola
+     * @param num Número da camisola
+     * @param listJoga Lista de jogadores
+     * @return Jogador pretendido
+     */
+    private Jogador getJogador_fromNum(Integer num,List<Jogador> listJoga){
+        for(Jogador jog:listJoga){
+            if(jog.getnCamisola()==num) return jog;
+        }
+        return null;
+    }
+
+    /**
      * Setter dos jogadores
      * @param jogadores Mapa de jogadores
      */
@@ -164,6 +196,16 @@ public class Informacoes {
             newList.add(atual.clone());
         }
         this.jogos = jogos;
+    }
+
+    /**
+     * Função que cria uma nova equipa
+     * @param novaEqu Noca equipa
+     */
+    public void addEquipa(Equipa novaEqu){
+        Map<String,Equipa> novoMapa=getEquipas();
+        novoMapa.put(novaEqu.getNome(),novaEqu.clone());
+        setEquipas(novoMapa);
     }
 
     /**

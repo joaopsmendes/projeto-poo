@@ -20,7 +20,7 @@ public class Parser {
     /**
      * Função principal do parser que imprime as informações
      * @return Retorna as informaçoes
-     * @throws LinhaIncorretaException
+     * @throws LinhaIncorretaException Linha incorreta
      */
     public static Informacoes parse() throws LinhaIncorretaException {
         List<String> linhas = lerFicheiro("src/logs.txt");

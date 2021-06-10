@@ -7,6 +7,7 @@
  */
 
 import java.util.*;
+import java.time.LocalDate;
 
 public class View {
     public View(){
@@ -50,8 +51,14 @@ public class View {
         System.out.println(ANSI_GREEN + "Nome da Equipa " + " - "
                 + " Data de Formação " + " - " + " Overall da Equipa" + ANSI_RESET);
         for(Equipa equipa : equipas.values()){
-            System.out.println( equipa.getNome() + " - " + equipa.getFundacaoEquipa()
-                    + " - " + equipa.calculaOverall());
+            if(equipa.getJogadores().isEmpty()){
+                System.out.println( equipa.getNome() + " - " + equipa.getFundacaoEquipa()
+                        + " - " + "0");
+            }
+            else{
+                System.out.println( equipa.getNome() + " - " + equipa.getFundacaoEquipa()
+                        + " - " + equipa.calculaOverall());
+            }
         }
     }
 
@@ -138,6 +145,12 @@ public class View {
     }
 
     /**
+     *
+     */
+    public void printNumJogadorInv(){
+        System.out.println("Número de Jogador inválido");
+    }
+    /**
      * Função que indica ao utilizador que o id é inválido
      */
     public void printIdIn(){
@@ -170,6 +183,46 @@ public class View {
                 + jogo.getEquipa2().getNome());
     }
 
+    /**
+     * Função que
+     * @param e1
+     * @param numEQ
+     * @return
+     */
+    public List<Integer> printJogadoresEquipa(Equipa e1,int numEQ){
+        System.out.println("Plantel da Equipa " + numEQ);
+        for(Jogador jog:e1.getJogadores()){
+            System.out.println(jog.getnCamisola() + " - " + jog.getNome() + " - " + jog.getPosicao());
+        }
+        System.out.println("Digite o número de camisola de 11 jogadores da equipa.");
+        List<Integer> onzeLista=new ArrayList<>();
+        int onze=11;
+        Scanner sc=new Scanner(System.in);
+        while(true){
+            int numJog=sc.nextInt();
+            while(!equipContemNumJog(e1,numJog)){
+                this.printNumJogadorInv();
+                numJog=sc.nextInt();
+            }
+            onzeLista.add(numJog);
+            onze--;
+            if(onze==0 && onzeLista.size()==11) break;
+        }
+        return onzeLista;
+    }
+
+    /**
+     * Função que verifica a existência de um jogador numa equipa
+     * @param e1 Equipa
+     * @param numJog
+     * @return
+     */
+    public boolean equipContemNumJog(Equipa e1,int numJog){
+        for(Jogador jog:e1.getJogadores()){
+            if(jog.getnCamisola()==numJog) return true;
+        }
+        return false;
+    }
     /**
      * Função que indica o resultado ao intervalo e pergunta ao utilizador se pretende fazer alterações a alguma
      * das equipas
@@ -447,6 +500,18 @@ public class View {
             habilidades.put(Jogador.Habilidades.PASSE, passe);
         }
         return habilidades;
+    }
+
+    /**
+     * Função que cria uma equipa
+     * @return Equipa criada
+     */
+    public Equipa printEquipa(){
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Introduza o nome da Equipa que deseja criar.");
+        String nome=sc.nextLine();
+        LocalDate ld=LocalDate.now();
+        return new Equipa(nome,ld,new ArrayList<>());
     }
 
 }
