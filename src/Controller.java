@@ -102,7 +102,6 @@ public class Controller {
                         jogo.simulacao_part1();
                         Map<Integer,Integer> subs=jan.printJogoInter(jogo);
                         jogo.simulacao_part2(subs);
-                        jan.print11Inicial(jogo.getJogadoresEquipa1(),1);
                         jan.printJogo(jogo);
                     }else if(selecao == 2) {
                         jan.printEquipas(informacoes.getEquipas());
