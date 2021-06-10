@@ -414,57 +414,60 @@ public class Jogo {
 
     public void simulacao_part2(Map<Integer,Integer> subs){
         //mudar a lista de titulares de acordo com as sub
-        int equi=subs.get(0);
-        if(equi==1){
-            Map<Integer,Integer> newSubs=new HashMap<>();
-            List<Jogador> newJogadores=new ArrayList<>();
-            for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
-                if(entry.getKey()!=0){
-                    newSubs.put(entry.getKey(),entry.getValue());
-                    System.out.println("O jogador->" + entry.getKey() + " substituiu " + entry.getValue());
-                }
-                else{
-                    continue;
-                }
-                for(Jogador jog:this.getJogadoresEquipa1()){
-                    if(jog.getnCamisola()!=entry.getKey()){
-                        newJogadores.add(jog);
+        if(!subs.isEmpty()){
+
+            int equi=subs.get(0);
+            if(equi==1){
+                Map<Integer,Integer> newSubs=new HashMap<>();
+                List<Jogador> newJogadores=new ArrayList<>();
+                for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
+                    if(entry.getKey()!=0){
+                        newSubs.put(entry.getKey(),entry.getValue());
+                        System.out.println("O jogador->" + entry.getValue() + " substituiu " + entry.getKey());
                     }
                     else{
-                        Jogador xjogador=getJogad_fromNum(this.getEquipa1().getJogadores(), entry.getValue());
-                        if(xjogador!=null){
-                            newJogadores.add(xjogador);
+                        continue;
+                    }
+                    for(Jogador jog:this.getJogadoresEquipa1()){
+                        if(jog.getnCamisola()!=entry.getKey()){
+                            newJogadores.add(jog);
+                        }
+                        else{
+                            Jogador xjogador=getJogad_fromNum(this.getEquipa1().getJogadores(), entry.getValue());
+                            if(xjogador!=null){
+                                newJogadores.add(xjogador);
+                            }
                         }
                     }
                 }
+                setSubstituicoesEquipa1(newSubs);
+                setJogadoresEquipa1(newJogadores);
             }
-            setSubstituicoesEquipa1(newSubs);
-            setJogadoresEquipa1(newJogadores);
-        }
-        else if(equi==2){
-            Map<Integer,Integer> newSubs=new HashMap<>();
-            List<Jogador> newJogadores=new ArrayList<>();
-            for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
-                if(entry.getKey()!=0){
-                    newSubs.put(entry.getKey(),entry.getValue());
-                }
-                else{
-                    continue;
-                }
-                for(Jogador jog:this.getJogadoresEquipa2()){
-                    if(jog.getnCamisola()!=entry.getKey()){
-                        newJogadores.add(jog);
+            else if(equi==2){
+                Map<Integer,Integer> newSubs=new HashMap<>();
+                List<Jogador> newJogadores=new ArrayList<>();
+                for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
+                    if(entry.getKey()!=0){
+                        newSubs.put(entry.getKey(),entry.getValue());
                     }
                     else{
-                        Jogador xjogador=getJogad_fromNum(this.getEquipa2().getJogadores(), entry.getValue());
-                        if(xjogador!=null){
-                            newJogadores.add(xjogador);
+                        continue;
+                    }
+                    for(Jogador jog:this.getJogadoresEquipa2()){
+                        if(jog.getnCamisola()!=entry.getKey()){
+                            newJogadores.add(jog);
+                        }
+                        else{
+                            Jogador xjogador=getJogad_fromNum(this.getEquipa2().getJogadores(), entry.getValue());
+                            if(xjogador!=null){
+                                newJogadores.add(xjogador);
+                            }
                         }
                     }
                 }
+                setSubstituicoesEquipa2(newSubs);
+                setJogadoresEquipa2(newJogadores);
             }
-            setSubstituicoesEquipa2(newSubs);
-            setJogadoresEquipa2(newJogadores);
         }
         int i=9;
         float over1=overallTits(this.jogadoresEquipa1);
