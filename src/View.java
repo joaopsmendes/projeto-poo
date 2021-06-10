@@ -134,7 +134,8 @@ public class View {
         System.out.println("1:Sim    2:Não");
         Map<Integer,Integer> subs=new HashMap<>();
         Scanner sc=new Scanner(System.in);
-        if(sc.nextInt()==1){
+        int quer=sc.nextInt();
+        if(quer==1){
             System.out.println("Equipa 1:1    Equipa 2:2");
             int op=sc.nextInt();
             if(op==1){
@@ -190,6 +191,9 @@ public class View {
             else{
                 this.printOPIN();
             }
+        }
+        else{
+            subs=new HashMap<>();
         }
         return subs;
     }
