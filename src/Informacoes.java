@@ -108,6 +108,26 @@ public class Informacoes {
         return newMap;
     }
 
+    public List<Jogador> get11Jogadores(List<Integer> onzeInt,Equipa e1){
+        List<Jogador> onze=new ArrayList<>();
+        for(Equipa e:getEquipas().values()){
+            if(e.getNome().equals(e1.getNome())){
+                for(Integer inteiro:onzeInt){
+                    Jogador jog=getJogador_fromNum(inteiro,e.getJogadores());
+                    onze.add(jog);
+                }
+            }
+        }
+        return onze;
+    }
+
+    private Jogador getJogador_fromNum(Integer num,List<Jogador> listJoga){
+        for(Jogador jog:listJoga){
+            if(jog.getnCamisola()==num) return jog;
+        }
+        return null;
+    }
+
     public void setJogadores(Map<Integer, Jogador> jogadores) {
         Map<Integer, Jogador> newMap = new HashMap<>();
         for(Map.Entry<Integer, Jogador> atual : jogadores.entrySet()){
@@ -130,6 +150,12 @@ public class Informacoes {
             newList.add(atual.clone());
         }
         this.jogos = jogos;
+    }
+
+    public void addEquipa(Equipa novaEqu){
+        Map<String,Equipa> novoMapa=getEquipas();
+        novoMapa.put(novaEqu.getNome(),novaEqu.clone());
+        setEquipas(novoMapa);
     }
 
     /**
