@@ -133,13 +133,18 @@ public class Controller {
                         Jogador jogador=jan.printJogador();
                         List<String> histo=jogador.getHistorial();
                         String ult_equi=histo.get(histo.size()-1);
-                        System.out.println(ult_equi);
-                        if(informacoes.getEquipas().containsKey(ult_equi)){
+
+                        if(informacoes.verificaEquipa(ult_equi) ){
                             Map<String,Equipa> newMAPEqui=null;
-                            Equipa newEqui=informacoes.getEquipas().get(ult_equi);
+                            Equipa newEqui=informacoes.getEquipa_fromNome(ult_equi);
                             newEqui.insereJogador(jogador);
                             for(Equipa e:informacoes.getEquipas().values()){
-                                newMAPEqui.put(e.getNome(),e.clone());
+                                if(newEqui.getNome().equals(e.getNome())){
+                                    newMAPEqui.put(newEqui.getNome(),newEqui.clone());
+                                }
+                                else{
+                                    newMAPEqui.put(e.getNome(),e.clone());
+                                }
                             }
                             informacoes.setEquipas(newMAPEqui);
                         }

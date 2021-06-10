@@ -423,7 +423,7 @@ public class Jogo {
                 for(Map.Entry<Integer,Integer> entry: subs.entrySet()){
                     if(entry.getKey()!=0){
                         newSubs.put(entry.getKey(),entry.getValue());
-                        System.out.println("O jogador->" + entry.getValue() + " substituiu " + entry.getKey());
+                        //System.out.println("O jogador->" + entry.getValue() + " substituiu " + entry.getKey());
                     }
                     else{
                         continue;

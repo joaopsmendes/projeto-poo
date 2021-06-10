@@ -70,6 +70,20 @@ public class Informacoes {
         this.jogadores.put(id, novoJogador.clone());
     }
 
+    public boolean verificaEquipa(String nomeEqu){
+        for(Map.Entry<String,Equipa> entry: this.getEquipas().entrySet()){
+            if(entry.getValue().getNome().equals(nomeEqu)) return true;
+        }
+        return false;
+    }
+
+    public Equipa getEquipa_fromNome(String nomeEqu){
+        for(Map.Entry<String,Equipa> entry: this.getEquipas().entrySet()){
+            if(entry.getValue().getNome().equals(nomeEqu)) return entry.getValue().clone();
+        }
+        return null;
+    }
+
     public Map<String, Equipa> getEquipas() {
         Map<String, Equipa> newMap = new HashMap<>();
         for(Map.Entry<String, Equipa> atual : equipas.entrySet()){
