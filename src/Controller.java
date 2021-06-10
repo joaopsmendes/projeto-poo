@@ -155,6 +155,10 @@ public class Controller {
                         }
                     }else if(selecao==7){
 
+                    }else if(selecao==8){
+
+                    }else if(selecao==9){
+
                     }
                     else if(selecao == 0){
                         quit = true;
