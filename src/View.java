@@ -145,7 +145,7 @@ public class View {
                 System.out.println("Para substituir os jogadores use os números da camisola. Para finalizar digite -1. Tem um máximo de 3 substituições");
                 int numSubs=3;
                 int crt11=sc.nextInt();
-                while(numSubs>1 && crt11!=-1){
+                while(numSubs>0 && crt11!=-1){
                     while( !contemJogador(crt11,jogo.getJogadoresEquipa1()) && crt11!=-1){
                         System.out.println("Jogador não encontrado");
                         crt11=sc.nextInt();
@@ -161,6 +161,9 @@ public class View {
                     if(crtSub==-1) break;
                     subs.put(crt11,crtSub);
                     numSubs--;
+                    if(numSubs==0){
+                        break;
+                    }
                     crt11=sc.nextInt();
                 }
 
