@@ -145,7 +145,7 @@ public class View {
                 int numSubs=3;
                 int crt11=sc.nextInt();
                 while(numSubs>0 && crt11!=-1){
-                    while(!(jogo.getJogadoresEquipa1().contains(crt11)) && crt11!=-1){
+                    while( !contemJogador(crt11,jogo.getJogadoresEquipa1()) && crt11!=-1){
                         System.out.println("Jogador não encontrado");
                         crt11=sc.nextInt();
                     }
@@ -153,10 +153,11 @@ public class View {
                         break;
                     }
                     int crtSub=sc.nextInt();
-                    while(!jogo.getEquipa1().getJogadores().contains(crtSub) && crtSub!=-1){
+                    while(!contemJogador(crtSub,jogo.getJogadoresEquipa1()) && crtSub!=-1){
                         System.out.println("Jogador não encontrado");
                         crtSub=sc.nextInt();
                     }
+                    if(crtSub==-1) break;
                     subs.put(crt11,crtSub);
                     numSubs--;
                     crt11=sc.nextInt();
@@ -191,6 +192,13 @@ public class View {
             }
         }
         return subs;
+    }
+
+    private boolean contemJogador(int num, List<Jogador> lista){
+        for(Jogador jog:lista){
+            if(jog.getnCamisola()==num) return true;
+        }
+        return false;
     }
 
     public void print11Inicial(List<Jogador> e, int num){
