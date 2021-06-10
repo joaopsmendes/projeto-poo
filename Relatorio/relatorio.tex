@@ -67,15 +67,19 @@
     \begin{itemize}
         \item nome - que se refere ao nome do jogador
         \item nCamisola - que se refere ao numero da camisola
-        \item posicao - que indica a posiçao a que joga o jogador
-        \item skills - que se refere as habilidades do jogador
-        \item historial - que se refere ao historial do jogador
+        \item posicao - que indica a posiçao a que joga o jogador. Para sabermos a posiçao do jogador desenvolvemos
+um \emph{enum}
+        \item skills - que se refere as habilidades do jogador, elaborado através \emph{Map}, onde a \emph{key}
+que se refere às Habilidades e a \emph{value} se refere à qualidade da habilidade
+        \item historial - que se refere ao historial do jogador, através de uma \emph{List} de equipas por onde o
+jogador jogou
     \end{itemize}
 
     Elaboramos os seus respetivos construtores bem como os seus \emph{getters} e \emph{setters} devido ao encapsulamento.
 Nesta classe, desenvolvemos um método que permite calcular o overall do jogador consoante a sua posição. Construimos
 ainda um método \emph{ Jogador parse} ...\par
-    Por fim, estão definidos as funções \emph{toString}, \emph{equals} e \emph{clone}.
+
+    Por fim, estão definidos as funções \emph{toString}, \emph{equals} e \emph{clone}. \par
 
 \section{Equipa}
     Na Classe Equipa desenvolvemos as seguintes variáveis:
@@ -107,16 +111,18 @@ ainda um método \emph{ Jogador parse} ...\par
 \section{Informacoes}
     Na Classe Informacoes desenvolvemos as seguintes variáveis:
     \begin{itemize}
-        \item
-        \item
-        \item
+        \item equipa - que se refere a todas as equipas
+        \item jogadores - que se refere a todos os jogadores
+        \item jogos - que se refere a todos os jogos
     \end{itemize}
+
 
 \section{Parser}
 
 \section{Controller}
 
 \section{View}
+    Esta classe é encarregue de imprimir toda a informação para o utilizador
 
 \section{FM}
     Este objeto tem como objetivo compilar e correr o programa
