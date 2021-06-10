@@ -56,7 +56,7 @@ public class Jogador{
     }
 
     /**
-     * Indica as habilidades que cada jogador pode obter
+     * Indica as habilidades que um jogador pode obter
      */
     public enum Habilidades {
         DESTREZA,
@@ -72,7 +72,7 @@ public class Jogador{
     }
 
     /**
-     * Indica a  posiçao que o jogador joga
+     * Indica a posição que o jogador joga
      */
     public enum Posicao {
         AVANCADO,
@@ -242,10 +242,10 @@ public class Jogador{
     }
 
     /**
-     *
-     * @param input
-     * @param pos
-     * @return
+     * Função que recebendo um input e uma posição identifica as habilidades do jogador
+     * @param input Linha com as informações do jogador
+     * @param pos Posição do jogador
+     * @return Jogador com as habilidades dadas
      */
     public static Jogador parse(String input, Posicao pos){
         String[] campos = input.split(",");
@@ -276,30 +276,58 @@ public class Jogador{
         );
     }
 
+    /**
+     * Getter do nome do jogador
+     * @return Nome do jogador
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Setter do nome do jogador
+     * @param nome Nome do jogador
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * Getter do número da camisola
+     * @return Número da camisola
+     */
     public int getnCamisola() {
         return this.nCamisola;
     }
 
+    /**
+     * Setter do número da camisola
+     * @param nCamisola Número da camisola
+     */
     public void setnCamisola(int nCamisola) {
         this.nCamisola = nCamisola;
     }
 
+    /**
+     * Getter da posição do jogador
+     * @return Posição do jogador
+     */
     public Posicao getPosicao() {
         return posicao;
     }
 
+    /**
+     * Setter da posição do jogador
+     * @param posicao Posição do jogador
+     */
     public void setPosicao(Posicao posicao) {
         this.posicao = posicao;
     }
 
+    /**
+     * Getter das skills do jogador
+     * @return Mapa das skills do jogador
+     */
     public Map<Habilidades, Integer> getSkills() {
         Map<Habilidades, Integer> newMap = new HashMap<>();
         for(Map.Entry<Habilidades, Integer> skill : this.skills.entrySet()){
@@ -308,6 +336,10 @@ public class Jogador{
         return newMap;
     }
 
+    /**
+     * Setter das skills do jogador
+     * @param skills mapa com as skills do jogador
+     */
     public void setSkills(Map<Habilidades, Integer> skills) {
         Map<Habilidades, Integer> newMap = new HashMap<>();
         for(Map.Entry<Habilidades, Integer> skill : skills.entrySet()){
@@ -316,17 +348,24 @@ public class Jogador{
         this.skills = newMap;
     }
 
+    /**
+     * Getter do historial de clubes do jogador
+     * @return Lista de clubes que o jogador jogou
+     */
     public List<String> getHistorial() {
         return new ArrayList<>(this.historial);
     }
 
+    /**
+     * Setter do historial de clubes do jogador
+     * @param historial Lista de clubes que o jogador jogou
+     */
     public void setHistorial(List<String> historial) {
         this.historial = new ArrayList<>(historial);
     }
 
     /**
      * Função que indica a informação que pretende ser impressa
-     *
      * @return Informação imprimida
      */
     @Override

@@ -93,15 +93,26 @@ public class Equipa {
         this.jogadores.remove(jogador);
     }
 
-
+    /**
+     * Getter do nome da equipa
+     * @return Nome da equipa
+     */
     public String getNome() {
         return this.nome;
     }
 
+    /**
+     * Setter do nome da equipa
+     * @param nome Nome da equipa
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * Getter da data que a equipa foi fundada
+     * @return Data em que a equipa foi fundada
+     */
     public LocalDate getFundacaoEquipa() {
         return LocalDate.of(
                 this.fundacaoEquipa.getYear(),
@@ -110,6 +121,10 @@ public class Equipa {
         );
     }
 
+    /**
+     * Setter da data que a equipa foi fundada
+     * @param fundacaoEquipa Data de fundação
+     */
     public void setFundacaoEquipa(LocalDate fundacaoEquipa) {
         this.fundacaoEquipa = LocalDate.of(
                 fundacaoEquipa.getYear(),
@@ -118,6 +133,10 @@ public class Equipa {
         );
     }
 
+    /**
+     * Getter da lista de jogadores dessa equipa
+     * @return Lista de jogadores
+     */
     public List<Jogador> getJogadores() {
         List<Jogador> newArray = new ArrayList<>();
         for(Jogador jogador : this.jogadores){
@@ -126,6 +145,10 @@ public class Equipa {
         return newArray;
     }
 
+    /**
+     * Setter da lista de jogadores
+     * @param jogadores Jogadores da equipa
+     */
     public void setJogadores(List<Jogador> jogadores) {
         List<Jogador> newArray = new ArrayList<>();
         for(Jogador jogador : jogadores){

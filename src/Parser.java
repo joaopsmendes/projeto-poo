@@ -17,6 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
+    /**
+     * Função principal do parser que imprime as informações
+     * @return Retorna as informaçoes
+     * @throws LinhaIncorretaException
+     */
     public static Informacoes parse() throws LinhaIncorretaException {
         List<String> linhas = lerFicheiro("src/logs.txt");
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
@@ -97,8 +102,8 @@ public class Parser {
 
     /**
      * Funçao que permite ler os ficheiros
-     * @param nomeFicheiro
-     * @return do ficheiro
+     * @param nomeFicheiro nome do ficheiro
+     * @return Retorna uma lista com o conteúdo do ficheiro
      */
     public static List<String> lerFicheiro(String nomeFicheiro) {
         List<String> lines;

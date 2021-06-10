@@ -1,7 +1,14 @@
+/**
+ * Criação do módulo View
+ *
+ * @author João Mendes
+ * @author Francisco Paiva
+ * @author Ricardo Silva
+ */
+
 import java.util.*;
 
 public class View {
-
     public View(){
 
     }
@@ -68,8 +75,8 @@ public class View {
     }
 
     /**
-     *
-     * @param jogos Jogos a ser imprimidos
+     * Função que imprime os jogos
+     * @param jogos Lista de jogos a ser imprimidos
      */
     public void printJogos(List<Jogo> jogos){
         for(Jogo jogo: jogos){
@@ -77,6 +84,9 @@ public class View {
         }
     }
 
+    /**
+     * Função que imprime as táticas possíveis a ser escolhidas
+     */
     public void printTatics(){
         System.out.println("Indica uma tática para a equipa escolhida: \n");
         System.out.println("[1] - 4-3-3");
@@ -85,38 +95,67 @@ public class View {
         System.out.println("[4] - 4-2-3-1");
     }
 
+    /**
+     * Função que imprime o erro caso o nome da equipa introduzido seja inválido
+     */
     public void printEquipInval(){
         System.out.println("Nome de equipa invalido");
     }
 
+    /**
+     * Função que pede ao utilizador que indique a equipa pretendida
+     */
     public void printIndiquEquip(){
         System.out.println("Indique uma equipa: \n");
     }
 
+    /**
+     * Função que indica ao utilizador que a tática pretendida é inválida
+     */
     public void printTaticInv(){
         System.out.println("Tatica invalida.");
     }
 
+    /**
+     * Função que pede ao utilizador que introduza o número
+     */
     public void printIntroNum(){
         System.out.println("Introduza um numero.");
     }
 
+    /**
+     * Função que pede ao utilizador que introduza o nome da equipa
+     */
     public void printNomeEquipa(){
         System.out.println("Introduza o nome da equipa: ");
     }
 
+    /**
+     * Função que pede ao utilizador o id do jogador
+     */
     public void printIDJogador(){
         System.out.println("Introduza o id do jogador: ");
     }
 
+    /**
+     * Função que indica ao utilizador que o id é inválido
+     */
     public void printIdIn(){
-        System.out.println("Id the jogador invalido");
+        System.out.println("Id de jogador invalido");
     }
 
+    /**
+     * Função que indica o jogador e para que equipa foi transferido
+     * @param stJog Nome do jogador
+     * @param stEqu Nome da equipa
+     */
     public void printTransfer(String stJog,String stEqu){
         System.out.println(stJog + " foi transferido para " + stEqu);
     }
 
+    /**
+     * Função que indica ao utilizador que a opção escolhida é inválida
+     */
     public void printOPIN(){
         System.out.println("Opçao invalida.");
     }
@@ -131,6 +170,13 @@ public class View {
                 + jogo.getEquipa2().getNome());
     }
 
+    /**
+     * Função que indica o resultado ao intervalo e pergunta ao utilizador se pretende fazer alterações a alguma
+     * das equipas
+     * @param jogo jogo em questão
+     * @param numEqu 1- Equipa da casa, 2- Equipa visitante
+     * @return Retorna o resultado e se pretende fazer substuições
+     */
     public Map<Integer,Integer> printJogoInter(Jogo jogo,int numEqu){
         System.out.println("[Jogo Ao Intervalo] "
                 + jogo.getEquipa1().getNome() + " : "
@@ -215,6 +261,12 @@ public class View {
         return subs;
     }
 
+    /**
+     * Função que verifica se o jogador existe numa lista de jogadores
+     * @param num Número da camisola do jogador
+     * @param lista Lista onde se pretende verificar a existência do jogador
+     * @return Boleano que indica o jogador está nessa lista
+     */
     private boolean contemJogador(int num, List<Jogador> lista){
         for(Jogador jog:lista){
             if(jog.getnCamisola()==num) return true;
@@ -222,6 +274,11 @@ public class View {
         return false;
     }
 
+    /**
+     * Função que imprime o 11 inical de uma equipa
+     * @param e Lista de jogadores
+     * @param num Número da equipa
+     */
     public void print11Inicial(List<Jogador> e, int num){
         System.out.println("11 Inicial da Equipa " + num );
         for(Jogador jog:e){
@@ -230,6 +287,11 @@ public class View {
         }
     }
 
+    /**
+     * Função que imprime os jogadores suplentes de uma equipa
+     * @param onze jogadores titulares de uma equipa
+     * @param plantel Todos os jogadores de uma equipa
+     */
     public void printSup(List<Jogador> onze, List<Jogador> plantel){
         System.out.println("Suplentes " );
         for(Jogador joga:plantel){
@@ -240,6 +302,11 @@ public class View {
         }
     }
 
+    /**
+     * Função que imprime a posição de um jogador
+     * @param pos Posição do jogador
+     * @return Imprime uma String da posição do jogador
+     */
     public String printPosicao(Jogador.Posicao pos){
         if(pos.equals(Jogador.Posicao.AVANCADO)){
             return "Avançado";
@@ -259,6 +326,10 @@ public class View {
         return null;
     }
 
+    /**
+     * Função para criar um jogador
+     * @return Jogador criado pelo utilizador
+     */
     public Jogador printJogador(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do jogador:");
@@ -283,6 +354,11 @@ public class View {
         return new Jogador(nome,numero,pos,hab,histo);
     }
 
+    /**
+     * Função que obtém a posição do jogador através de uma string
+     * @param st Posição introduzida pelo utilizador
+     * @return Retorna o jogador com a posição escolhida
+     */
     public Jogador.Posicao getPos_fromString(String st){
         Jogador.Posicao pos=null;
         if(st.equals("Guarda-Redes")){
@@ -303,6 +379,11 @@ public class View {
         return pos;
     }
 
+    /**
+     * Função que ao jogador criado atribui as habilidades introduzidas pelo utilizador ao jogador criado
+     * @param pos Posição do jogador
+     * @return Mapa com as habilidades e o respetivo overall
+     */
     public Map<Jogador.Habilidades,Integer> getHabilidades(Jogador.Posicao pos){
         Scanner sc=new Scanner(System.in);
         System.out.println("\tIntroduza a nota de Cabeceamento:");

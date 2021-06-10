@@ -42,7 +42,7 @@ public class Jogo {
     }
 
     /**
-     *
+     * Construtor parametrizado sem golos e substituições
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
      * @param taticaEquipa1 Tática da primeira equipa
@@ -64,9 +64,9 @@ public class Jogo {
     }
 
     /**
-     * Criação do construtor parametrizado
+     * Criação do construtor parametrizado sem táticas
      *
-     * @param tempo Tempo do jogo
+     * @param tempo Data do Jogo
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
@@ -95,8 +95,8 @@ public class Jogo {
     }
 
     /**
-     *
-     * @param tempo Tempo do jogo
+     * Construtor parametrizado mas com as táticas
+     * @param tempo Data do jogo
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
@@ -170,9 +170,9 @@ public class Jogo {
 
     /**
      *
-     * @param input
-     * @param equipas
-     * @return
+     * @param input Linha de um ficheiro com jogos
+     * @param equipas Equipas do jogo
+     * @return Retorna o jogo com as informações nessa linha
      * @throws NumberFormatException
      */
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
@@ -221,54 +221,105 @@ public class Jogo {
         );
     }
 
+    /**
+     * Getter da data do jogo
+     * @return Data do jogo
+     */
     public int getTempo() {
         return tempo;
     }
 
+    /**
+     * Setter da data do jogo
+     * @param tempo Data do jogo
+     */
     public void setTempo(int tempo) {
         this.tempo = tempo;
     }
 
+    /**
+     * Getter do estado do jogo
+     * @return Estado do jogo
+     */
     public Estado getEstado() {
         return estado;
     }
 
+    /**
+     * Setter do estado do jogo
+     * @param estado estado do jogo
+     */
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
+    /**
+     * Getter da equipa da casa
+     * @return Equipa da casa
+     */
     public Equipa getEquipa1() {
         return equipa1.clone();
     }
 
+    /**
+     * Setter da equipa da casa
+     * @param equipa1 Equipa da casa
+     */
     public void setEquipa1(Equipa equipa1) {
         this.equipa1 = equipa1.clone();
     }
 
+    /**
+     * Getter da equipa visitante
+     * @return Equipa visitante
+     */
     public Equipa getEquipa2() {
         return equipa2.clone();
     }
 
+    /**
+     * Setter da equipa visitante
+     * @param equipa2 Equipa visitante
+     */
     public void setEquipa2(Equipa equipa2) {
         this.equipa2 = equipa2.clone();
     }
 
+    /**
+     * Getter golos da equipa da casa
+     * @return Golos da equipa da casa
+     */
     public int getGolosVisitada() {
         return golosVisitada;
     }
-
+    /**
+     * Setter golos da equipa da casa
+     * @param golosVisitada Golos da equipa da casa
+     */
     public void setGolosVisitada(int golosVisitada) {
         this.golosVisitada = golosVisitada;
     }
 
+    /**
+     * Getter golos da equipa visitante
+     * @return Golos da equipa visitante
+     */
     public int getGolosVisitante() {
         return golosVisitante;
     }
 
+    /**
+     * Setter dos golos da equipa visitante
+     * @param golosVisitante Golos da equipa visitante
+     */
     public void setGolosVisitante(int golosVisitante) {
         this.golosVisitante = golosVisitante;
     }
 
+    /**
+     * Getter dos jogadores da equipa da casa
+     * @return Lista de jogadores da equipa da casa
+     */
     public List<Jogador> getJogadoresEquipa1() {
         List<Jogador> newArr = new ArrayList<>();
         for(Jogador jogador:this.jogadoresEquipa1){
@@ -277,6 +328,10 @@ public class Jogo {
         return newArr;
     }
 
+    /**
+     * Setter dos jogadores da equipa da casa
+     * @param jogadoresEquipa1 Lista de jogadores da equipa da casa
+     */
     public void setJogadoresEquipa1(List<Jogador> jogadoresEquipa1) {
         List<Jogador> newArr = new ArrayList<>();
         for(Jogador jogador: jogadoresEquipa1){
@@ -285,6 +340,10 @@ public class Jogo {
         this.jogadoresEquipa1 = newArr;
     }
 
+    /**
+     * Getter dos jogadores da equipa visitante
+     * @return Lista de jogadores da equipa visitante
+     */
     public List<Jogador> getJogadoresEquipa2() {
         List<Jogador> newArr = new ArrayList<>();
         for(Jogador jogador:this.jogadoresEquipa2){
@@ -293,6 +352,10 @@ public class Jogo {
         return newArr;
     }
 
+    /**
+     * Setter dos jogadores da equipa visitante
+     * @param jogadoresEquipa2 Lista de jogadores da equipa visitante
+     */
     public void setJogadoresEquipa2(List<Jogador> jogadoresEquipa2) {
         List<Jogador> newArr = new ArrayList<>();
         for(Jogador jogador: jogadoresEquipa2){
@@ -301,40 +364,72 @@ public class Jogo {
         this.jogadoresEquipa2 = newArr;
     }
 
+    /**
+     * Getter da tática da equipa da casa
+     * @return Tática da equipa da casa
+     */
     public TaticaEquipa getTaticaEquipa1() {
         return taticaEquipa1;
     }
 
+    /**
+     * Setter da tática da equipa da casa
+     * @param taticaEquipa1 tática da equipa da casa
+     */
     public void setTaticaEquipa1(TaticaEquipa taticaEquipa1) {
         this.taticaEquipa1 = taticaEquipa1;
     }
 
+    /**
+     * Getter da tática da equipa visitante
+     * @return Tática da equipa visitante
+     */
     public TaticaEquipa getTaticaEquipa2() {
         return taticaEquipa2;
     }
 
+    /**
+     * Setter da tática da equipa visitante
+     * @param taticaEquipa2 tática da equipa visitante
+     */
     public void setTaticaEquipa2(TaticaEquipa taticaEquipa2) {
         this.taticaEquipa2 = taticaEquipa2;
     }
 
+    /**
+     * Getter das substituições da equipa da casa
+     * @return Mapa das substituições da equipa da casa
+     */
     public Map<Integer, Integer> getSubstituicoesEquipa1() {
         return new HashMap<>(this.substituicoesEquipa1);
     }
 
+    /**
+     * Setter das substituições da equipa da casa
+     * @param substituicoesEquipa1 Mapa das substituições da equipa da casa
+     */
     public void setSubstituicoesEquipa1(Map<Integer, Integer> substituicoesEquipa1) {
         this.substituicoesEquipa1 = new HashMap<>(substituicoesEquipa1);
     }
 
+    /**
+     * Getter das substituições da equipa visitante
+     * @return Mapa das substituições da equipa visitante
+     */
     public Map<Integer, Integer> getSubstituicoesEquipa2() {
         return new HashMap<>(this.substituicoesEquipa2);
     }
 
+    /**
+     * Setter das substituições da equipa visitante
+     * @param substituicoesEquipa2 Mapa das substituições da equipa visitante
+     */
     public void setSubstituicoesEquipa2(Map<Integer, Integer> substituicoesEquipa2) {
         this.substituicoesEquipa2 = new HashMap<>(substituicoesEquipa2);
     }
 
     /**
-     * Funçao que devolve o overall da equipa incial
+     * Função que devolve o overall da equipa incial
      * @param jogs lista de jogadores que vão jogar de inicio
      * @return Overall da equipa titular
      */
@@ -349,7 +444,7 @@ public class Jogo {
     }
 
     /**
-     * Função que permite calcular o resultado de um jogo
+     * Função que permite simular o resultado de um jogo
      */
     public void simulacao_part1(){
         int i=9;
@@ -411,6 +506,12 @@ public class Jogo {
 
     }
 
+    /**
+     * Função que retorna um jogador através do número da camisola
+     * @param lista Lista de jogadores
+     * @param num Número da camisola
+     * @return Jogador correspondente
+     */
     private Jogador getJogad_fromNum(List<Jogador> lista,int num){
         for(Jogador jog:lista){
             if(jog.getnCamisola()==num){
@@ -420,6 +521,11 @@ public class Jogo {
         return null;
     }
 
+    /**
+     * Função que simula a segunda parte do jogo de acordo com as substiuições efetuadas ao intervalo
+     * @param subs1 Substituições feitas à equipa da casa
+     * @param subs2 Substituições feitas à equipa visitante
+     */
     public void simulacao_part2(Map<Integer,Integer> subs1,Map<Integer,Integer> subs2){
         //mudar a lista de titulares de acordo com as sub
         if(!subs1.isEmpty()) {

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Controller {
     /**
-     * Funçao que inicializa o Menu para começar a jogar
+     * Função que inicializa o Menu para começar o programa
      */
 
     public void initMenuInicial(){
