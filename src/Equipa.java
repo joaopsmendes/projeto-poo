@@ -6,13 +6,14 @@
  * @author Ricardo Silva
  */
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-public class Equipa {
+public class Equipa implements Serializable {
     private String nome;
     private LocalDate fundacaoEquipa;
     private List<Jogador> jogadores;

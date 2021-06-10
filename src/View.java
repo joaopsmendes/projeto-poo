@@ -6,6 +6,7 @@
  * @author Ricardo Silva
  */
 
+import java.io.File;
 import java.util.*;
 import java.time.LocalDate;
 
@@ -336,7 +337,7 @@ public class View {
         System.out.println("11 Inicial da Equipa " + num );
         for(Jogador jog:e){
             System.out.println(jog.getnCamisola() + " - " + jog.getNome() +
-                    " : " + this.printPosicao(jog.getPosicao()) );
+                    " : " + printPosicao(jog.getPosicao()) );
         }
     }
 
@@ -345,7 +346,7 @@ public class View {
      * @param onze jogadores titulares de uma equipa
      * @param plantel Todos os jogadores de uma equipa
      */
-    public void printSup(List<Jogador> onze, List<Jogador> plantel){
+    private void printSup(List<Jogador> onze, List<Jogador> plantel){
         System.out.println("Suplentes " );
         for(Jogador joga:plantel){
             if(!onze.contains(joga)){
@@ -360,7 +361,7 @@ public class View {
      * @param pos Posição do jogador
      * @return Imprime uma String da posição do jogador
      */
-    public String printPosicao(Jogador.Posicao pos){
+    private String printPosicao(Jogador.Posicao pos){
         if(pos.equals(Jogador.Posicao.AVANCADO)){
             return "Avançado";
         }
@@ -412,7 +413,7 @@ public class View {
      * @param st Posição introduzida pelo utilizador
      * @return Retorna o jogador com a posição escolhida
      */
-    public Jogador.Posicao getPos_fromString(String st){
+    private Jogador.Posicao getPos_fromString(String st){
         Jogador.Posicao pos=null;
         if(st.equals("Guarda-Redes")){
             pos= Jogador.Posicao.GUARDA_REDES;
@@ -437,7 +438,7 @@ public class View {
      * @param pos Posição do jogador
      * @return Mapa com as habilidades e o respetivo overall
      */
-    public Map<Jogador.Habilidades,Integer> getHabilidades(Jogador.Posicao pos){
+    private Map<Jogador.Habilidades,Integer> getHabilidades(Jogador.Posicao pos){
         Scanner sc=new Scanner(System.in);
         System.out.println("\tIntroduza a nota de Cabeceamento:");
         int cabeca=sc.nextInt();
@@ -506,7 +507,7 @@ public class View {
      * Função que cria uma equipa
      * @return Equipa criada
      */
-    public Equipa printEquipa(){
+    public Equipa printCriaEquipa(){
         Scanner sc= new Scanner(System.in);
         System.out.println("Introduza o nome da Equipa que deseja criar.");
         String nome=sc.nextLine();
@@ -514,4 +515,32 @@ public class View {
         return new Equipa(nome,ld,new ArrayList<>());
     }
 
+    public String printGuarda(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Introduza o nome do ficheiro onde pretende guardar os dados.");
+        File f=new File("");
+        String path=f.getPath();
+        System.out.println(path);
+        String nomefp=sc.nextLine();
+        path.concat(nomefp);
+        return path;
+    }
+
+    public String printLe(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Introduza o nome do ficheiro que pretende ler.");
+        File f=new File("");
+        String path=f.getPath();
+        String nomefp=sc.nextLine();
+        path.concat(nomefp);
+        return path;
+    }
+
+    public void printFichNotFind(){
+        System.out.println("Ficheiro não foi encontrado.");
+    }
+
+    public void printClassNotFound(){
+        System.out.println("Classe não encontrada.");
+    }
 }

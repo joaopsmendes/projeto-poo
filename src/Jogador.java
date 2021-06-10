@@ -6,9 +6,10 @@
  * @author Ricardo Silva
  */
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Jogador{
+public class Jogador implements Serializable {
     private String nome;
     private int nCamisola;
     private Posicao posicao;

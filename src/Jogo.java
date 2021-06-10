@@ -6,10 +6,11 @@
  * @author Ricardo Silva
  */
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Jogo {
+public class Jogo implements Serializable {
     private int tempo; // segundos (120 = 2:00) / (110 = 1:50)
     private Estado estado;
     private Equipa equipa1;

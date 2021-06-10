@@ -6,12 +6,13 @@
  * @author Ricardo Silva
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
-public class Informacoes {
+public class Informacoes implements Serializable{
     private Map<String,Equipa> equipas;
     private Map<Integer, Jogador> jogadores;
     private List<Jogo> jogos;
@@ -206,6 +207,42 @@ public class Informacoes {
         Map<String,Equipa> novoMapa=getEquipas();
         novoMapa.put(novaEqu.getNome(),novaEqu.clone());
         setEquipas(novoMapa);
+    }
+
+    public Informacoes readFile(String filename) throws IOException, ClassNotFoundException {
+
+        // lines = Files.readAllLines(Paths.get(nomeFicheiro), StandardCharsets.UTF_8);
+
+        FileInputStream fis=new FileInputStream(filename);
+        ObjectInputStream ois=new ObjectInputStream(fis);
+        Informacoes info= (Informacoes) ois.readObject();
+        ois.close();
+        return info;
+    }
+
+    public void writeBin(String filename) throws IOException {
+        FileOutputStream fos=new FileOutputStream(filename);
+        System.out.println("Ainda nao deu erro");
+        ObjectOutputStream oos=new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.close();
+        /*
+        for(Equipa e:getEquipas().values()){
+            oos.writeObject(e);
+        }
+        for(Jogador jog:getJogadores().values()){
+            //oos.writeUTF();
+        }
+        for(Jogo jogo:getJogos()){
+            oos.writeUTF(jogo.getEquipa1().getNome());
+            oos.writeUTF(jogo.getEquipa2().getNome());
+            oos.write(jogo.getGolosVisitante());
+            oos.write(jogo.getGolosVisitada());
+            //oos.writeUTF("\n");
+        }
+        */
+
+
     }
 
     /**

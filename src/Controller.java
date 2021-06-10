@@ -6,6 +6,8 @@
  * @author Ricardo Silva
  */
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,7 +22,7 @@ public class Controller {
         try {
             Informacoes informacoes = Parser.parse();
             View jan=new View();
-            Jogo jogo=new Jogo();
+            Jogo jogo;
             while(!quit){
                 jan.printMenuInicial();
                 try{
@@ -141,7 +143,9 @@ public class Controller {
                         Jogador jogador=jan.printJogador();
                         List<String> histo=jogador.getHistorial();
                         String ult_equi=histo.get(histo.size()-1);
-
+                        Map<Integer,Jogador> lista_jogadores=informacoes.getJogadores();
+                        lista_jogadores.put(lista_jogadores.size(),jogador);
+                        informacoes.setJogadores(lista_jogadores);
                         if(informacoes.verificaEquipa(ult_equi) ){
                             Map<String,Equipa> newMAPEqui=new HashMap<>();
                             Equipa newEqui=informacoes.getEquipa_fromNome(ult_equi);
@@ -155,20 +159,23 @@ public class Controller {
                                 }
                             }
                             informacoes.setEquipas(newMAPEqui);
-                            for(Equipa e:informacoes.getEquipas().values()){
-                                System.out.println(e.toString());
-                            }
                         }
                         else{
                             jan.printEquipInval();
                         }
                     }else if(selecao==7){
-                        Equipa novaEq=jan.printEquipa();
+                        Equipa novaEq=jan.printCriaEquipa();
                         informacoes.addEquipa(novaEq);
                     }else if(selecao==8){
-
+                        String filePrint=jan.printGuarda();
+                        informacoes.writeBin(filePrint);
                     }else if(selecao==9){
-
+                        String fileRead=jan.printLe();
+                        //informacoes=Parser.parse(fileRead);
+                        Informacoes inf=informacoes.readFile(fileRead);
+                        informacoes.setJogadores(inf.getJogadores());
+                        informacoes.setEquipas(inf.getEquipas());
+                        informacoes.setJogos(inf.getJogos());
                     }
                     else if(selecao == 0){
                         quit = true;
@@ -177,6 +184,10 @@ public class Controller {
                     }
                 }catch (NumberFormatException e){
                     jan.printIntroNum();
+                }catch (IOException e) {
+                    jan.printFichNotFind();
+                } catch (ClassNotFoundException e) {
+                    jan.printClassNotFound();
                 }
             }
         } catch (LinhaIncorretaException e) {
