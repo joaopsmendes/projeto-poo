@@ -510,10 +510,17 @@ public class View {
         return new Equipa(nome,ld,new ArrayList<>());
     }
 
+    /**
+     * Função que imprime a mensagem de erro
+     */
     public void printErro(){
         System.out.println("Erro");
     }
 
+    /**
+     * Função que pede e lê o nome do ficheiro onde se pretende guardar os dados
+     * @return Nome do ficheiro
+     */
     public String printGuarda(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do ficheiro onde pretende guardar os dados.");
@@ -521,6 +528,10 @@ public class View {
         return nomefp;
     }
 
+    /**
+     * Função que pede e lê o nome do ficheiro de onde se pretende ler os ficheiros
+     * @return Nome do ficheiro
+     */
     public String printLe(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do ficheiro que pretende ler.");
@@ -528,10 +539,16 @@ public class View {
         return nomefp;
     }
 
+    /**
+     * Mensagem de erro quando o ficheiro não é encontrado
+     */
     public void printFichNotFind(){
         System.out.println("Ficheiro não foi encontrado.");
     }
 
+    /**
+     * Mensagem de erro quando a classe não é encotrada
+     */
     public void printClassNotFound(){
         System.out.println("Classe não encontrada.");
     }

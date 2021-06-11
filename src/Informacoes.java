@@ -201,7 +201,7 @@ public class Informacoes implements Serializable{
 
     /**
      * Função que cria uma nova equipa
-     * @param novaEqu Noca equipa
+     * @param novaEqu Nova equipa
      */
     public void addEquipa(Equipa novaEqu){
         Map<String,Equipa> novoMapa=getEquipas();
@@ -209,6 +209,13 @@ public class Informacoes implements Serializable{
         setEquipas(novoMapa);
     }
 
+    /**
+     * Função para ler o ficheiro default
+     * @param filename Nome do ficheiro
+     * @return Retorna as informações
+     * @throws IOException Exceção
+     * @throws ClassNotFoundException Classe não encontrada
+     */
     public Informacoes readFile(String filename) throws IOException, ClassNotFoundException {
 
         // lines = Files.readAllLines(Paths.get(nomeFicheiro), StandardCharsets.UTF_8);
@@ -220,6 +227,10 @@ public class Informacoes implements Serializable{
         return info;
     }
 
+    /**
+     * Função para adicionar a uma String todas as equipas
+     * @return String com todas as equipas
+     */
     public String printFileEqui(){
         StringBuilder sb=new StringBuilder();
         for(Equipa e:getEquipas().values()){
@@ -228,6 +239,10 @@ public class Informacoes implements Serializable{
         return sb.toString();
     }
 
+    /**
+     * Função para adicionar todos os jogos a uma String
+     * @return String com todos os jogos
+     */
     public String printFileJogo(){
         StringBuilder sb=new StringBuilder();
         for(Jogo jog:getJogos()){
@@ -236,6 +251,11 @@ public class Informacoes implements Serializable{
         return sb.toString();
     }
 
+    /**
+     * Função para escrever num ficheiro os objetos
+     * @param filename Nome do ficheiro
+     * @throws IOException Exceção
+     */
     public void writeBin(String filename) throws IOException {
         PrintWriter pw=new PrintWriter(filename);
         pw.print(this.printFileEqui());

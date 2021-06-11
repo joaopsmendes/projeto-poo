@@ -41,7 +41,7 @@ public class Equipa implements Serializable {
     }
 
     /**
-     * Crição do construtor cópia
+     * Criação do construtor cópia
      * @param equipa Objeto Equipa
      */
     public Equipa(Equipa equipa){
@@ -52,7 +52,6 @@ public class Equipa implements Serializable {
 
     /**
      * Função que permite obter o jogador a partir do número de camisola
-     *
      * @param numero número da camisola
      * @return o jogador
      */
@@ -66,7 +65,6 @@ public class Equipa implements Serializable {
 
     /**
      * Função que permite calcular o overall da equipa
-     *
      * @return o overall da equipa
      */
     public float calculaOverall(){
@@ -159,6 +157,10 @@ public class Equipa implements Serializable {
         this.jogadores = newArray;
     }
 
+    /**
+     * Função que imprime numa String a equipa e os seus jogadores
+     * @return String com as informações
+     */
     public String printFile(){
         StringBuilder sb=new StringBuilder();
         sb.append("Equipa:" + getNome() + "\n");
@@ -169,6 +171,12 @@ public class Equipa implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Função que imprime numa String as habilidades conforme a posição do jogador
+     * @param habs Mapa de habilidades
+     * @param pos Posição do jogador
+     * @return String com as habilidades e posição de um jogador
+     */
     private String printHabilities(Map<Jogador.Habilidades,Integer> habs, Jogador.Posicao pos){
         StringBuilder sb=new StringBuilder();
         sb.append(habs.get(Jogador.Habilidades.VELOCIDADE) + ",");
@@ -190,6 +198,11 @@ public class Equipa implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Função que imprime numa String a posição do jogador
+     * @param pos Posição do jogador
+     * @return String com a sua posição
+     */
     private String printPos(Jogador.Posicao pos){
         if(pos.equals(Jogador.Posicao.AVANCADO)){
             return "Avancado:";
