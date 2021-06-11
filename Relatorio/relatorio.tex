@@ -62,6 +62,7 @@
 
 \section{Introdução}
 
+
 \section{Jogador}
     Na Classe Jogador desenvolvemos as seguintes variáveis:
     \begin{itemize}
@@ -77,8 +78,8 @@ jogador jogou
 
     Elaboramos os seus respetivos construtores bem como os seus \emph{getters} e \emph{setters} devido ao encapsulamento.
 Nesta classe, desenvolvemos um método que permite calcular o overall do jogador consoante a sua posição. Construimos
-ainda um método \emph{ Jogador parse} ...\par
-
+ainda um método \emph{ Jogador parse} que recebe como argumneto uma linha jogador do ficheiro logs e faz a conversão para
+o objeto.\par
     Por fim, estão definidos as funções \emph{toString}, \emph{equals} e \emph{clone}. \par
 
 \section{Equipa}
@@ -86,9 +87,16 @@ ainda um método \emph{ Jogador parse} ...\par
     \begin{itemize}
         \item nome - que se refere ao nome da equipa
         \item fundacaoEquipa - utilizamos um \emph{LocalDate} para se referir a data de fundaçao da equipa
-        \item jogadores - que se refere a lista de jogadores que cada equipa tem
+        \item jogadores - que se refere a lista de jogadores que cada equipa tem, utilizamos uma \emph{List} de Jogador
     \end{itemize}
 
+    Elaboramos os seus respetivos construtores bem como os seus \emph{getters} e \emph{setters} devido ao encapsulamento.
+Nesta classe, desenvolvemos um método que nos permite obter o jogador atraves do seu numero da camisola,
+\emph{obterJogadorPeloNumero}, um método para calcular o \emph{overall} da equipa. Para conseguirmos fazer a
+transferência de jogador de uma equipa para outra, tivemos de implementar dois métodos tais como \emph{insereJogador} e
+\emph{removeJogador}. Elaboramos métodos que permitem coverter para \emph{string} a informação no ficheiro tais como o
+conteudo da equipa, habilidades e posição. \par
+    Por fim, estão definidos as funções \emph{toString}, \emph{equals} e \emph{clone}. \par
 
 
 \section{Jogo}
@@ -118,16 +126,30 @@ ainda um método \emph{ Jogador parse} ...\par
 
 
 \section{Parser}
+    Elaboração desta classe permitiu a conversão da informação a partir da leitura do ficheiro
 
 \section{Controller}
+    Esta classe foi construida com o objetivo de estabalecer ligação entre a classe \emph{View} com a as restantes
+classes.
 
 \section{View}
-    Esta classe é encarregue de imprimir toda a informação para o utilizador
+    Esta classe é encarregue de apresentar as informações de forma visual para o utilizador.
+%deescrever o print do jogo, as suas etapas, prints
+%mendes faz isto
 
 \section{FM}
-    Este objeto tem como objetivo compilar e correr o programa
+Este objeto tem como objetivo compilar e correr o programa.\par
+\subsection{Diagrama}
+        \begin{center}
+        \vspace*{2cm}
+        \includegraphics[width=5cm]{}
+        \end{center}
     %meter o diagrama para apresentarmos as ligaçoes
-\section{Conclusão}
 
+
+\section{Conclusão}
+    A realização deste projeto teve como objetivo por em pratica a materia lecionada nas aulas teoricas, bem como nas
+aulas praticas. Tivemos diiculdade na implementação de certos métodos para a realização da simulação do jogo, devido às
+várias abordagens que poderiamos ter. fds.....
 
 \end{document}

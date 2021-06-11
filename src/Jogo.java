@@ -156,7 +156,7 @@ public class Jogo implements Serializable {
 
 
     /**
-     * Craição do construtor cópia
+     * Criação do construtor cópia
      *
      * @param jogo Objeto Jogo
      */

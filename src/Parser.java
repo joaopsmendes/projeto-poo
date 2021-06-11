@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class Parser {
     /**
-     * Função principal do parser que imprime as informações
+     * Função principal do parser que converte o conteúdo do ficheiro
      * @return Retorna as informaçoes
      * @throws LinhaIncorretaException Linha incorreta
      */

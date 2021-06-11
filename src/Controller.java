@@ -85,6 +85,7 @@ public class Controller {
                                 jan.printEquipInval();
                             }
                         }
+
                         jan.printTatics();
                         Jogo.TaticaEquipa taticaEquipa2 = null;
                         while(taticaEquipa2 == null){
@@ -174,6 +175,7 @@ public class Controller {
                         informacoes.writeBin(filePrint);
                     }else if(selecao==9){
                         String fileRead=jan.printLe();
+                        System.out.println(fileRead);
                         informacoes=Parser.parse(fileRead);
                     }
                     else if(selecao == 0){
