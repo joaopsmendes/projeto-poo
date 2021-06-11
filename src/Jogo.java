@@ -666,6 +666,13 @@ public class Jogo implements Serializable {
         }
     }
 
+    public String printFile(){
+        StringBuilder sb=new StringBuilder();
+        sb.append("Jogo:" + getEquipa1().getNome() + "," + getEquipa2().getNome() + "," +"\n");
+
+        return sb.toString();
+    }
+
     /**
      * Função que indica o número de oportunidades da equipa
      * @param ratio Valor que compara as duas equipas

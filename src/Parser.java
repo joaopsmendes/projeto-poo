@@ -6,6 +6,8 @@
  * @author Ricardo Silva
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,8 +24,8 @@ public class Parser {
      * @return Retorna as informaçoes
      * @throws LinhaIncorretaException Linha incorreta
      */
-    public static Informacoes parse() throws LinhaIncorretaException {
-        List<String> linhas = lerFicheiro("src/logs.txt");
+    public static Informacoes parse(String filename) throws LinhaIncorretaException, FileNotFoundException {
+        List<String> linhas = lerFicheiro(filename);
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         List<Jogo> jogos = new ArrayList<>();

@@ -515,25 +515,22 @@ public class View {
         return new Equipa(nome,ld,new ArrayList<>());
     }
 
+    public void printErro(){
+        System.out.println("Erro");
+    }
+
     public String printGuarda(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do ficheiro onde pretende guardar os dados.");
-        File f=new File("");
-        String path=f.getPath();
-        System.out.println(path);
         String nomefp=sc.nextLine();
-        path.concat(nomefp);
-        return path;
+        return nomefp;
     }
 
     public String printLe(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do ficheiro que pretende ler.");
-        File f=new File("");
-        String path=f.getPath();
         String nomefp=sc.nextLine();
-        path.concat(nomefp);
-        return path;
+        return nomefp;
     }
 
     public void printFichNotFind(){

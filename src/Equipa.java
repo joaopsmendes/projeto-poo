@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -156,6 +157,39 @@ public class Equipa implements Serializable {
             newArray.add(jogador.clone());
         }
         this.jogadores = newArray;
+    }
+
+    public String printFile(){
+        StringBuilder sb=new StringBuilder();
+        sb.append("Equipa:" + getNome() + "\n");
+        for(Jogador jog:getJogadores()){
+            sb.append(printPos(jog.getPosicao()) + jog.getNome() + "," + jog.getnCamisola() + "," + "\n");
+            /*
+            for(Map.Entry<Jogador.Habilidades,Integer> hab:jog.getSkills().entrySet()){
+
+            }
+            */
+        }
+        return sb.toString();
+    }
+
+    private String printPos(Jogador.Posicao pos){
+        if(pos.equals(Jogador.Posicao.AVANCADO)){
+            return "Avancado:";
+        }
+        else if(pos.equals(Jogador.Posicao.DEFESA)){
+            return "Defesa:";
+        }
+        else if(pos.equals(Jogador.Posicao.MEDIO)){
+            return "Medio:";
+        }
+        else if(pos.equals(Jogador.Posicao.LATERAL)){
+            return "Lateral:";
+        }
+        else if(pos.equals(Jogador.Posicao.GUARDA_REDES)){
+            return "Guarda-Redes:";
+        }
+        return "Null:";
     }
 
     /**

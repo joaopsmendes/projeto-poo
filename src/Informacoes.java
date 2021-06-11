@@ -220,12 +220,29 @@ public class Informacoes implements Serializable{
         return info;
     }
 
+    public String printFile(){
+        StringBuilder sb=new StringBuilder();
+        for(Equipa e:getEquipas().values()){
+            sb.append(e.printFile());
+        }
+        for(Jogo jog:getJogos()){
+            sb.append(jog.printFile());
+        }
+        return sb.toString();
+    }
+
     public void writeBin(String filename) throws IOException {
+        PrintWriter pw=new PrintWriter(filename);
+        pw.print(this.printFile());
+
+
+        /*
         FileOutputStream fos=new FileOutputStream(filename);
         System.out.println("Ainda nao deu erro");
         ObjectOutputStream oos=new ObjectOutputStream(fos);
         oos.writeObject(this);
         oos.close();
+        */
         /*
         for(Equipa e:getEquipas().values()){
             oos.writeObject(e);

@@ -20,7 +20,7 @@ public class Controller {
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         try {
-            Informacoes informacoes = Parser.parse();
+            Informacoes informacoes = Parser.parse("src/logs.txt");
             View jan=new View();
             Jogo jogo;
             while(!quit){
@@ -171,11 +171,12 @@ public class Controller {
                         informacoes.writeBin(filePrint);
                     }else if(selecao==9){
                         String fileRead=jan.printLe();
-                        //informacoes=Parser.parse(fileRead);
-                        Informacoes inf=informacoes.readFile(fileRead);
+                        informacoes=Parser.parse(fileRead);
+                        /*Informacoes inf=informacoes.readFile(fileRead);
                         informacoes.setJogadores(inf.getJogadores());
                         informacoes.setEquipas(inf.getEquipas());
                         informacoes.setJogos(inf.getJogos());
+                        */
                     }
                     else if(selecao == 0){
                         quit = true;
@@ -186,12 +187,11 @@ public class Controller {
                     jan.printIntroNum();
                 }catch (IOException e) {
                     jan.printFichNotFind();
-                } catch (ClassNotFoundException e) {
-                    jan.printClassNotFound();
                 }
             }
-        } catch (LinhaIncorretaException e) {
-            e.printStackTrace();
+        } catch (LinhaIncorretaException | FileNotFoundException e) {
+            View jan=new View();
+            jan.printErro();
         }
         scanner.close();
     }
