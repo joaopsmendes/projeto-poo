@@ -36,17 +36,39 @@ public class Controller {
                         Equipa equipa1=null;
                         List<Jogador> onzeJoga1=null;
                         String dummy = scanner.nextLine();
+                        Jogo.TaticaEquipa taticaEquipa1 = null;
                         while(equipa1==null){
                             String equipa1Nome =scanner.nextLine();
                             if(informacoes.getEquipas().containsKey(equipa1Nome)){
                                 equipa1 = informacoes.getEquipas().get(equipa1Nome);
-                                List<Integer> onze1= jan.printJogadoresEquipa(equipa1,1);
+                                jan.printTatics();
+                                while(taticaEquipa1 == null){
+                                    try{
+                                        int tatica = scanner.nextInt();
+                                        if (tatica == 1){
+                                            taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
+                                        }else if(tatica == 2){
+                                            taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
+                                        }else if(tatica == 3){
+                                            taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
+                                        }else if(tatica == 4){
+                                            taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
+                                        }else{
+                                            jan.printTaticInv();
+                                        }
+                                    }catch (InputMismatchException e){
+                                        jan.printIntroNum();
+                                        scanner.next();
+                                    }
+                                }
+                                List<Integer> onze1= jan.printJogadoresEquipa(equipa1,1,taticaEquipa1);
                                 onzeJoga1=informacoes.get11Jogadores(onze1,equipa1);
                             }
                             else{
                                 jan.printEquipInval();
                             }
                         }
+                        /*
                         jan.printTatics();
                         Jogo.TaticaEquipa taticaEquipa1 = null;
                         while(taticaEquipa1 == null){
@@ -68,24 +90,46 @@ public class Controller {
                                 scanner.next();
                             }
                         }
+                        */
 
                         jan.printIndiquEquip();
                         Equipa equipa2=null;
                         List<Jogador> onzeJoga2=null;
                         String dummy1 = scanner.nextLine();
+                        Jogo.TaticaEquipa taticaEquipa2 = null;
                         while(equipa2==null){
                             String equipa2Nome =scanner.nextLine();
                             if(!equipa2Nome.equalsIgnoreCase(equipa1.getNome())
                                     && informacoes.getEquipas().containsKey(equipa2Nome)){
+                                jan.printTatics();
+                                while(taticaEquipa2 == null){
+                                    try{
+                                        int tatica = scanner.nextInt();
+                                        if (tatica == 1){
+                                            taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
+                                        }else if(tatica == 2){
+                                            taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
+                                        }else if(tatica == 3){
+                                            taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
+                                        }else if(tatica == 4){
+                                            taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
+                                        }else{
+                                            jan.printTaticInv();
+                                        }
+                                    }catch (InputMismatchException e){
+                                        jan.printIntroNum();
+                                        scanner.next();
+                                    }
+                                }
                                 equipa2 = informacoes.getEquipas().get(equipa2Nome);
-                                List<Integer> onze2= jan.printJogadoresEquipa(equipa2,2);
+                                List<Integer> onze2= jan.printJogadoresEquipa(equipa2,2,taticaEquipa2);
                                 onzeJoga2=informacoes.get11Jogadores(onze2,equipa2);
                             }
                             else{
                                 jan.printEquipInval();
                             }
                         }
-
+                        /*
                         jan.printTatics();
                         Jogo.TaticaEquipa taticaEquipa2 = null;
                         while(taticaEquipa2 == null){
@@ -107,7 +151,7 @@ public class Controller {
                                 scanner.next();
                             }
                         }
-
+                        */
                         jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2,onzeJoga1,onzeJoga2);
                         jogo.simulacao_part1();
                         Map<Integer,Integer> subs1=jan.printJogoInter(jogo,1);
@@ -172,11 +216,22 @@ public class Controller {
                         informacoes.addEquipa(novaEq);
                     }else if(selecao==8){
                         String filePrint=jan.printGuarda();
-                        informacoes.writeBin(filePrint);
+                        if(filePrint.endsWith(".txt")) {
+                            informacoes.writeTxt(filePrint);
+                        }
+                        else if(filePrint.endsWith(".bin") | filePrint.endsWith(".DEFAULT")){
+                            String ret=informacoes.writeFileBin(filePrint);
+                            jan.printString(ret);
+                        }
                     }else if(selecao==9){
                         String fileRead=jan.printLe();
                         System.out.println(fileRead);
-                        informacoes=Parser.parse(fileRead);
+                        if(fileRead.endsWith(".txt")){
+                            informacoes=Parser.parse(fileRead);
+                        }
+                        else if(fileRead.endsWith(".bin") | fileRead.endsWith(".DEFAULT")){
+                            informacoes=informacoes.readFileBin(fileRead);
+                        }
                     }
                     else if(selecao == 0){
                         quit = true;
@@ -187,6 +242,8 @@ public class Controller {
                     jan.printIntroNum();
                 }catch (IOException e) {
                     jan.printFichNotFind();
+                } catch (ClassNotFoundException e) {
+                    jan.printClassNotFound();
                 }
             }
         } catch (LinhaIncorretaException | FileNotFoundException e) {

@@ -216,13 +216,14 @@ public class Informacoes implements Serializable{
      * @throws IOException Exceção
      * @throws ClassNotFoundException Classe não encontrada
      */
-    public Informacoes readFile(String filename) throws IOException, ClassNotFoundException {
+    public Informacoes readFileBin(String filename) throws IOException, ClassNotFoundException {
 
         // lines = Files.readAllLines(Paths.get(nomeFicheiro), StandardCharsets.UTF_8);
 
         FileInputStream fis=new FileInputStream(filename);
         ObjectInputStream ois=new ObjectInputStream(fis);
         Informacoes info= (Informacoes) ois.readObject();
+
         ois.close();
         return info;
     }
@@ -231,10 +232,19 @@ public class Informacoes implements Serializable{
      * Função para adicionar a uma String todas as equipas
      * @return String com todas as equipas
      */
-    public String printFileEqui(){
+    public String writeFileBin(String filename) throws IOException {
+        FileOutputStream fos=new FileOutputStream(filename);
+        ObjectOutputStream oos=new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.flush();
+        oos.close();
+        return "Writing Completo";
+    }
+
+    public String printFileTxtEqui(){
         StringBuilder sb=new StringBuilder();
         for(Equipa e:getEquipas().values()){
-            sb.append(e.printFile());
+            sb.append(e.printTxtFile());
         }
         return sb.toString();
     }
@@ -243,10 +253,10 @@ public class Informacoes implements Serializable{
      * Função para adicionar todos os jogos a uma String
      * @return String com todos os jogos
      */
-    public String printFileJogo(){
+    public String printFileTxtJogo(){
         StringBuilder sb=new StringBuilder();
         for(Jogo jog:getJogos()){
-            sb.append(jog.printFile());
+            sb.append(jog.printTxtFile());
         }
         return sb.toString();
     }
@@ -256,10 +266,10 @@ public class Informacoes implements Serializable{
      * @param filename Nome do ficheiro
      * @throws IOException Exceção
      */
-    public void writeBin(String filename) throws IOException {
+    public void writeTxt(String filename) throws IOException {
         PrintWriter pw=new PrintWriter(filename);
-        pw.print(this.printFileEqui());
-        pw.print(this.printFileJogo());
+        pw.print(this.printFileTxtEqui());
+        pw.print(this.printFileTxtJogo());
         pw.flush();
         /*
         FileOutputStream fos=new FileOutputStream(filename);
