@@ -190,7 +190,7 @@ public class View {
      * @param numEQ
      * @return
      */
-    public List<Integer> printJogadoresEquipa(Equipa e1,int numEQ){
+    public List<Integer> printJogadoresEquipa(Equipa e1, int numEQ, Jogo.TaticaEquipa tatic){
         System.out.println("Plantel da Equipa " + numEQ);
         for(Jogador jog:e1.getJogadores()){
             System.out.println(jog.getnCamisola() + " - " + jog.getNome() + " - " + jog.getPosicao());
@@ -201,8 +201,14 @@ public class View {
         Scanner sc=new Scanner(System.in);
         while(true){
             int numJog=sc.nextInt();
-            while(!equipContemNumJog(e1,numJog) | onzeLista.contains(numJog)){
-                this.printNumJogadorInv();
+            while(!equipContemNumJog(e1,numJog) | onzeLista.contains(numJog) | veriTaticIn(tatic,onzeLista,e1,numJog)){
+                if(veriTaticIn(tatic,onzeLista,e1,numJog)){
+                    printErroEscolha(numJog,e1);
+                    //print
+                }
+                else{
+                    this.printNumJogadorInv();
+                }
                 numJog=sc.nextInt();
             }
             onzeLista.add(numJog);
@@ -210,6 +216,82 @@ public class View {
             if(onze==0 && onzeLista.size()==11) break;
         }
         return onzeLista;
+    }
+
+    private Jogador getJogad_fromNumE(Equipa e1,int num){
+        for(Jogador jog:e1.getJogadores()){
+            if(jog.getnCamisola()==num){
+                return jog;
+            }
+        }
+        return null;
+    }
+
+    private boolean veriTaticIn(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
+        //se for invalida retorna true
+        Map<Jogador.Posicao,Integer> mapa_pos=getNEEDSTatic(tatic);
+        for(int i:listaNum){
+            Jogador jog=getJogad_fromNumE(e1,i);
+            int j=mapa_pos.get(jog.getPosicao());
+            if(j<=0) return true;
+            mapa_pos.replace(jog.getPosicao(),j-1);
+        }
+        Jogador jog=getJogad_fromNumE(e1,numJog);
+        int j=mapa_pos.get(jog.getPosicao());
+        if(j<=0) return true;
+        return false;
+        //int =;
+    }
+
+    private void printNEEDTatic(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
+        Map<Jogador.Posicao,Integer> mapa_pos=getNEEDSTatic(tatic);
+        for(int i:listaNum){
+            Jogador jog=getJogad_fromNumE(e1,i);
+            int j=mapa_pos.get(jog.getPosicao());
+            if(j==0) return;
+            mapa_pos.replace(jog.getPosicao(),j-1);
+        }
+        for(Map.Entry<Jogador.Posicao,Integer> entry:mapa_pos.entrySet()){
+            if(entry.getValue()>0){
+                System.out.println("Precisa de " + entry.getValue() + " jogadores para a posição de " + printPosicao(entry.getKey()));
+            }
+            else return;
+        }
+    }
+
+    private Map<Jogador.Posicao,Integer> getNEEDSTatic(Jogo.TaticaEquipa tatic){
+        Map<Jogador.Posicao,Integer> mapa=new HashMap<>();
+        mapa.put(Jogador.Posicao.GUARDA_REDES,1);
+        if(tatic== Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO){
+            mapa.put(Jogador.Posicao.DEFESA,2);
+            mapa.put(Jogador.Posicao.LATERAL,2);
+            mapa.put(Jogador.Posicao.MEDIO,2);
+            mapa.put(Jogador.Posicao.AVANCADO,4);
+        }
+        else if(tatic== Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM){
+            mapa.put(Jogador.Posicao.DEFESA,2);
+            mapa.put(Jogador.Posicao.LATERAL,4);
+            mapa.put(Jogador.Posicao.MEDIO,3);
+            mapa.put(Jogador.Posicao.AVANCADO,1);
+        }
+        else if(tatic== Jogo.TaticaEquipa.QUATRO_TRES_TRES){
+            mapa.put(Jogador.Posicao.DEFESA,2);
+            mapa.put(Jogador.Posicao.LATERAL,2);
+            mapa.put(Jogador.Posicao.MEDIO,3);
+            mapa.put(Jogador.Posicao.AVANCADO,3);
+        }
+        else if(tatic== Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS){
+            mapa.put(Jogador.Posicao.DEFESA,2);
+            mapa.put(Jogador.Posicao.LATERAL,4);
+            mapa.put(Jogador.Posicao.MEDIO,2);
+            mapa.put(Jogador.Posicao.AVANCADO,2);
+        }
+        return mapa;
+    }
+
+    private void printErroEscolha(int num,Equipa e1){
+        String printEsc=printPosicao(getJogad_fromNumE(e1,num).getPosicao());
+        System.out.println("Já existem demasiados jogadores para a posição de " + printEsc);
     }
 
     /**
@@ -551,5 +633,9 @@ public class View {
      */
     public void printClassNotFound(){
         System.out.println("Classe não encontrada.");
+    }
+
+    public void printString(String msg){
+        System.out.println(msg);
     }
 }

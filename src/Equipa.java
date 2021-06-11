@@ -161,7 +161,7 @@ public class Equipa implements Serializable {
      * Função que imprime numa String a equipa e os seus jogadores
      * @return String com as informações
      */
-    public String printFile(){
+    public String printTxtFile(){
         StringBuilder sb=new StringBuilder();
         sb.append("Equipa:" + getNome() + "\n");
         for(Jogador jog:getJogadores()){

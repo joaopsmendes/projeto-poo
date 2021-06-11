@@ -678,7 +678,7 @@ public class Jogo implements Serializable {
      * Função que converte em String toda a informação de um jogo
      * @return String com a informação sobre o jogo
      */
-    public String printFile(){
+    public String printTxtFile(){
         StringBuilder sb=new StringBuilder();
         sb.append("Jogo:" + getEquipa1().getNome() + "," + getEquipa2().getNome() + "," + getGolosVisitada() + ","
         + getGolosVisitante() + "," + LocalDate.now().toString());
