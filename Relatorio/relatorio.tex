@@ -115,6 +115,12 @@ conteudo da equipa, habilidades e posição. \par
         \item substituicoesEquipa1 - que se refere às substituições da equipa visitada
         \item substituicoesEquipa2 - que se refere às substituições da equipa visitante
     \end{itemize}
+    Elaboramos os seus respetivos construtores bem como os seus \emph{getters} e \emph{setters} com o devido encapsulamento.
+Nesta classe é onde é calculado o resultado de um jogo, sendo este processo dividido em dois metodos (\emph{simulacao_part1} e \emph{simulacao_part2}).
+O resultado de um jogo é obtido atraves do overall de uma equipa e por um determinado numero de iteraçoes que tem como objetivo obter valores mais simpaticos.
+Alem disso estes metodos tambem tratam de fazer as substituiçoes dos jogadores em campo, algo que é realizado no intrevalo.
+Para alem disso tambem e possivel obter outras informaçoes como a formaçao de determinada equipa bem como o resultado final ou as substituçoes que foram feitas.
+
 
 \section{Informacoes}
     Na Classe Informacoes desenvolvemos as seguintes variáveis:
@@ -123,6 +129,9 @@ conteudo da equipa, habilidades e posição. \par
         \item jogadores - que se refere a todos os jogadores
         \item jogos - que se refere a todos os jogos
     \end{itemize}
+    O objeto Informaçoes tem como objetivo agrupar as diferentes informaçoes num unico objeto, assim conseguimos ter todos os jogadores,
+equipas e jogos num unico objeto.
+    Para alem disso tambem contem alguns metodos que sao varias vezes usado ao longo do codigo para obter informaçoes relativas a um jogador/equipa/jogo.
 
 
 \section{Parser}
@@ -134,17 +143,20 @@ classes.
 
 \section{View}
     Esta classe é encarregue de apresentar as informações de forma visual para o utilizador.
-%deescrever o print do jogo, as suas etapas, prints
-%mendes faz isto
+    Aparecendo assim:
+    \begin{center}
+        \vspace*{1cm}
+        \includegraphics[width=8cm]{Screenshot from 2021-06-11 19-31-18}
+    \end{center}
 
 \section{FM}
 Este objeto tem como objetivo compilar e correr o programa.\par
+
 \subsection{Diagrama}
-        \begin{center}
-        \vspace*{2cm}
-        \includegraphics[width=5cm]{}
-        \end{center}
-    %meter o diagrama para apresentarmos as ligaçoes
+    \begin{center}
+        \vspace*{1cm}
+        \includegraphics[width=8cm]{Equipa}
+    \end{center}
 
 
 \section{Conclusão}
