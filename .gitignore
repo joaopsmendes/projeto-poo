@@ -12,6 +12,15 @@ local.properties
 .loadpath
 .recommenders
 
+#Relatorio
+.aux
+.fdb_latexmk
+.fls
+.idx
+.ilg
+.log
+.synctex.gz
+
 # External tool builders
 .externalToolBuilders/
 
