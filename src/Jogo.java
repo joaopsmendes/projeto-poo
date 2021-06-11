@@ -7,6 +7,7 @@
  */
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -204,22 +205,27 @@ public class Jogo implements Serializable {
      * @throws NumberFormatException
      */
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
-//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47,35,2,36,39,14,43,5,32,50,14->0,
-//        4->30,36->21,43,30,1,22,33,11,38,31,39,6,12,43->3,31->34,12->20
-        String[] campos = input.split(",");
+//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47, 35,2, 36,39,14,43, 5 ,32,50,14->0,4->30,36->21, 43,30, 1, 22,33,11,38,31,39,6, 12,43->3,31->34,12->20
+//           1                  2               3 4      5     6  7  8  9  10 11 12 13 14  15 16   17   18    19     20 21 22  23 24 25 26 27 28 29 30   31    32     33
+        String[] campos = input.split(",",33);
         Equipa equipa1 = equipas.get(campos[0]);
         Equipa equipa2 = equipas.get(campos[1]);
         if(equipa1 == null || equipa2 == null) return new Jogo();
         List<Jogador> jogadoresEquipa1 = new ArrayList<>();
         List<Jogador> jogadoresEquipa2 = new ArrayList<>();
         for(int i = 5; i < 16; i++){
-            if(equipa1.obterJogadorPeloNumero(i)!=null)
-            jogadoresEquipa1.add(equipa1.obterJogadorPeloNumero(i));
+            //if(equipa1.obterJogadorPeloNumero(i)!=null) jogadoresEquipa1.add(equipa1.obterJogadorPeloNumero(i));
+            if(equipa1.obterJogadorPeloNumero(Integer.parseInt(campos[i]))!=null){
+                jogadoresEquipa1.add(equipa1.obterJogadorPeloNumero(Integer.parseInt(campos[i])));
+            }
         }
         for(int i = 19; i < 30; i++){
-            if(equipa2.obterJogadorPeloNumero(i)!=null)
-            jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(i));
+            //if(equipa2.obterJogadorPeloNumero(i)!=null) jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(i));
+            if(equipa2.obterJogadorPeloNumero(Integer.parseInt(campos[i]))!=null){
+                jogadoresEquipa2.add(equipa2.obterJogadorPeloNumero(Integer.parseInt(campos[i])));
+            }
         }
+
         Map<Integer,Integer> substituicoesEquipa1 = new HashMap<>();
         substituicoesEquipa1.put(Integer.parseInt(campos[16].split("->")[0]),
                 Integer.parseInt(campos[16].split("->")[1]));
@@ -232,8 +238,10 @@ public class Jogo implements Serializable {
                 Integer.parseInt(campos[30].split("->")[1]));
         substituicoesEquipa2.put(Integer.parseInt(campos[31].split("->")[0]),
                 Integer.parseInt(campos[31].split("->")[1]));
-        substituicoesEquipa2.put(Integer.parseInt(campos[32].split("->")[0]),
-                Integer.parseInt(campos[32].split("->")[1]));
+        if(campos.length>=33){
+            substituicoesEquipa2.put(Integer.parseInt(campos[32].split("->")[0]),
+                    Integer.parseInt(campos[32].split("->")[1]));
+        }
 
         return new Jogo(
                 90,
@@ -668,8 +676,51 @@ public class Jogo implements Serializable {
 
     public String printFile(){
         StringBuilder sb=new StringBuilder();
-        sb.append("Jogo:" + getEquipa1().getNome() + "," + getEquipa2().getNome() + "," +"\n");
-
+        sb.append("Jogo:" + getEquipa1().getNome() + "," + getEquipa2().getNome() + "," + getGolosVisitada() + ","
+        + getGolosVisitante() + "," + LocalDate.now().toString());
+        for(Jogador jog:getJogadoresEquipa1()){
+            sb.append("," + jog.getnCamisola());
+        }
+        if(getSubstituicoesEquipa1().isEmpty()){
+            for(int i=0;i<3;i++){
+                sb.append("," + -1 + "->" + -1);
+            }
+        }
+        else{
+            for(Map.Entry<Integer,Integer> entry:getSubstituicoesEquipa1().entrySet()){
+                sb.append("," + entry.getKey() + "->" + entry.getValue());
+            }
+            if(getSubstituicoesEquipa1().size()==1){
+                for(int i=0;i<2;i++){
+                    sb.append("," + -1 + "->" + -1);
+                }
+            }
+            else if(getSubstituicoesEquipa1().size()==2){
+                sb.append("," + -1 + "->" + -1);
+            }
+        }
+        for(Jogador jog:getJogadoresEquipa2()){
+            sb.append("," + jog.getnCamisola() );
+        }
+        if(getSubstituicoesEquipa2().isEmpty()){
+            for(int i=0;i<3;i++){
+                sb.append("," + -1 + "->" + -1);
+            }
+        }
+        else {
+            for(Map.Entry<Integer,Integer> entry:getSubstituicoesEquipa2().entrySet()){
+                sb.append("," + entry.getKey() + "->" + entry.getValue());
+            }
+            if(getSubstituicoesEquipa2().size()==1){
+                for(int i=0;i<2;i++){
+                    sb.append("," + -1 + "->" + -1);
+                }
+            }
+            else if(getSubstituicoesEquipa2().size()==2){
+                sb.append("," + -1 + "->" + -1);
+            }
+        }
+        sb.append("\n");
         return sb.toString();
     }
 

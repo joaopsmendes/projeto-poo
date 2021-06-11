@@ -112,6 +112,9 @@ public class Controller {
                         Map<Integer,Integer> subs1=jan.printJogoInter(jogo,1);
                         Map<Integer,Integer> subs2=jan.printJogoInter(jogo,2);
                         jogo.simulacao_part2(subs1,subs2);
+                        List<Jogo> jogos=informacoes.getJogos();
+                        jogos.add(jogo);
+                        informacoes.setJogos(jogos);
                         jan.printJogo(jogo);
                     }else if(selecao == 2) {
                         jan.printEquipas(informacoes.getEquipas());
@@ -172,11 +175,6 @@ public class Controller {
                     }else if(selecao==9){
                         String fileRead=jan.printLe();
                         informacoes=Parser.parse(fileRead);
-                        /*Informacoes inf=informacoes.readFile(fileRead);
-                        informacoes.setJogadores(inf.getJogadores());
-                        informacoes.setEquipas(inf.getEquipas());
-                        informacoes.setJogos(inf.getJogos());
-                        */
                     }
                     else if(selecao == 0){
                         quit = true;

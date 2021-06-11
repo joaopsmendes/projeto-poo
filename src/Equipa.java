@@ -163,12 +163,29 @@ public class Equipa implements Serializable {
         StringBuilder sb=new StringBuilder();
         sb.append("Equipa:" + getNome() + "\n");
         for(Jogador jog:getJogadores()){
-            sb.append(printPos(jog.getPosicao()) + jog.getNome() + "," + jog.getnCamisola() + "," + "\n");
-            /*
-            for(Map.Entry<Jogador.Habilidades,Integer> hab:jog.getSkills().entrySet()){
+            sb.append(printPos(jog.getPosicao()) + jog.getNome() + "," + jog.getnCamisola() + "," +
+                    printHabilities(jog.getSkills(),jog.getPosicao()) + "\n");
+        }
+        return sb.toString();
+    }
 
-            }
-            */
+    private String printHabilities(Map<Jogador.Habilidades,Integer> habs, Jogador.Posicao pos){
+        StringBuilder sb=new StringBuilder();
+        sb.append(habs.get(Jogador.Habilidades.VELOCIDADE) + ",");
+        sb.append(habs.get(Jogador.Habilidades.RESISTENCIA) + ",");
+        sb.append(habs.get(Jogador.Habilidades.DESTREZA) + ",");
+        sb.append(habs.get(Jogador.Habilidades.IMPULSAO) + ",");
+        sb.append(habs.get(Jogador.Habilidades.CABECEAMENTO) + ",");
+        sb.append(habs.get(Jogador.Habilidades.REMATE) + ",");
+        sb.append(habs.get(Jogador.Habilidades.PASSE));
+        if(pos.equals(Jogador.Posicao.GUARDA_REDES)){
+            sb.append("," + habs.get(Jogador.Habilidades.FLEXIBILIDADE));
+        }
+        else if(pos.equals(Jogador.Posicao.LATERAL)){
+            sb.append("," + habs.get(Jogador.Habilidades.CRUZAMENTO));
+        }
+        else if(pos.equals(Jogador.Posicao.MEDIO)){
+            sb.append("," + habs.get(Jogador.Habilidades.RECUPERACAO));
         }
         return sb.toString();
     }

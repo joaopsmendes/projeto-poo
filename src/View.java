@@ -201,7 +201,7 @@ public class View {
         Scanner sc=new Scanner(System.in);
         while(true){
             int numJog=sc.nextInt();
-            while(!equipContemNumJog(e1,numJog)){
+            while(!equipContemNumJog(e1,numJog) | onzeLista.contains(numJog)){
                 this.printNumJogadorInv();
                 numJog=sc.nextInt();
             }
@@ -397,13 +397,8 @@ public class View {
         Map<Jogador.Habilidades,Integer> hab=getHabilidades(pos);
         List<String> histo=new ArrayList<>();
         System.out.println("Introduza a Equipa do Jogador:");
-        String equipa=sc.next();
-        String[] arrE= equipa.split(",");
-        equipa=arrE[0];
-        for(int i=1;i< arrE.length;i++){
-            String ya=equipa + " " + arrE[i];
-            equipa=ya;
-        }
+        String dummy=sc.nextLine();
+        String equipa=sc.nextLine();
         histo.add(equipa);
         return new Jogador(nome,numero,pos,hab,histo);
     }

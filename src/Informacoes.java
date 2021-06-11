@@ -220,11 +220,16 @@ public class Informacoes implements Serializable{
         return info;
     }
 
-    public String printFile(){
+    public String printFileEqui(){
         StringBuilder sb=new StringBuilder();
         for(Equipa e:getEquipas().values()){
             sb.append(e.printFile());
         }
+        return sb.toString();
+    }
+
+    public String printFileJogo(){
+        StringBuilder sb=new StringBuilder();
         for(Jogo jog:getJogos()){
             sb.append(jog.printFile());
         }
@@ -233,9 +238,9 @@ public class Informacoes implements Serializable{
 
     public void writeBin(String filename) throws IOException {
         PrintWriter pw=new PrintWriter(filename);
-        pw.print(this.printFile());
-
-
+        pw.print(this.printFileEqui());
+        pw.print(this.printFileJogo());
+        pw.flush();
         /*
         FileOutputStream fos=new FileOutputStream(filename);
         System.out.println("Ainda nao deu erro");
@@ -258,8 +263,6 @@ public class Informacoes implements Serializable{
             //oos.writeUTF("\n");
         }
         */
-
-
     }
 
     /**
