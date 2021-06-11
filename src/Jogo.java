@@ -18,6 +18,7 @@ public class Jogo implements Serializable {
     private Equipa equipa2;
     private int golosVisitada;
     private int golosVisitante;
+    private LocalDate ld;
     private List<Jogador> jogadoresEquipa1;
     private List<Jogador> jogadoresEquipa2;
     private TaticaEquipa taticaEquipa1;
@@ -35,6 +36,7 @@ public class Jogo implements Serializable {
         this.equipa2 = new Equipa();
         this.golosVisitada = 0;
         this.golosVisitante = 0;
+        this.ld=LocalDate.now();
         this.jogadoresEquipa1 = new ArrayList<>();
         this.jogadoresEquipa2 = new ArrayList<>();
         this.taticaEquipa1 = TaticaEquipa.QUATRO_TRES_TRES;
@@ -57,6 +59,7 @@ public class Jogo implements Serializable {
         setEquipa2(equipa2);
         this.golosVisitada = 0;
         this.golosVisitante = 0;
+        this.ld=LocalDate.now();
         this.jogadoresEquipa1 = this.equipa1.getJogadores().stream().limit(11).collect(Collectors.toList());
         this.jogadoresEquipa2 = this.equipa2.getJogadores().stream().limit(11).collect(Collectors.toList());
         this.taticaEquipa1 = taticaEquipa1;
@@ -88,6 +91,25 @@ public class Jogo implements Serializable {
         setEquipa2(equipa2);
         this.golosVisitada = golosVisitada;
         this.golosVisitante = golosVisitante;
+        this.ld=LocalDate.now();
+        setJogadoresEquipa1(jogadoresEquipa1);
+        setJogadoresEquipa2(jogadoresEquipa2);
+        this.taticaEquipa1 = TaticaEquipa.QUATRO_TRES_TRES;
+        this.taticaEquipa2 = TaticaEquipa.QUATRO_TRES_TRES;
+        setSubstituicoesEquipa1(substituicoesEquipa1);
+        setSubstituicoesEquipa2(substituicoesEquipa2);
+    }
+
+    public Jogo(int tempo, Estado estado, Equipa equipa1, Equipa equipa2, int golosVisitada,
+                int golosVisitante,LocalDate xld, List<Jogador> jogadoresEquipa1, List<Jogador> jogadoresEquipa2,
+                Map<Integer, Integer> substituicoesEquipa1, Map<Integer, Integer> substituicoesEquipa2) {
+        this.tempo = tempo;
+        this.estado = estado;
+        setEquipa1(equipa1);
+        setEquipa2(equipa2);
+        this.golosVisitada = golosVisitada;
+        this.golosVisitante = golosVisitante;
+        this.ld=xld;
         setJogadoresEquipa1(jogadoresEquipa1);
         setJogadoresEquipa2(jogadoresEquipa2);
         this.taticaEquipa1 = TaticaEquipa.QUATRO_TRES_TRES;
@@ -121,6 +143,7 @@ public class Jogo implements Serializable {
         setEquipa2(equipa2);
         this.golosVisitada = golosVisitada;
         this.golosVisitante = golosVisitante;
+        this.ld=LocalDate.now();
         setJogadoresEquipa1(jogadoresEquipa1);
         setJogadoresEquipa2(jogadoresEquipa2);
         this.taticaEquipa1 = taticaEquipa1;
@@ -146,6 +169,7 @@ public class Jogo implements Serializable {
         setEquipa2(equipa2);
         this.golosVisitada = 0;
         this.golosVisitante = 0;
+        this.ld=LocalDate.now();
         setJogadoresEquipa1(onze1);
         setJogadoresEquipa2(onze2);
         this.taticaEquipa1 = taticaEquipa1;
@@ -167,6 +191,7 @@ public class Jogo implements Serializable {
         setEquipa2(jogo.getEquipa2());
         this.golosVisitada = jogo.getGolosVisitada();
         this.golosVisitante = jogo.getGolosVisitante();
+        this.ld=jogo.getLd();
         setJogadoresEquipa1(jogo.getJogadoresEquipa1());
         setJogadoresEquipa2(jogo.getJogadoresEquipa2());
         this.taticaEquipa1 = jogo.getTaticaEquipa1();
@@ -250,6 +275,7 @@ public class Jogo implements Serializable {
                 equipa2,
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
+                LocalDate.parse(campos[4]),
                 jogadoresEquipa1,
                 jogadoresEquipa2,
                 substituicoesEquipa1,
@@ -350,6 +376,14 @@ public class Jogo implements Serializable {
      */
     public void setGolosVisitante(int golosVisitante) {
         this.golosVisitante = golosVisitante;
+    }
+
+    public LocalDate getLd(){
+        return ld;
+    }
+
+    public void setLd(LocalDate xld){
+        this.ld=xld;
     }
 
     /**
@@ -567,11 +601,11 @@ public class Jogo implements Serializable {
         if(!subs1.isEmpty()) {
             Map<Integer, Integer> newSubs1 = new HashMap<>();
             List<Jogador> newJogadores1 = new ArrayList<>();
-            System.out.println("Substituições da Equipa 1:");
+            //System.out.println("Substituições da Equipa 1:");
             for (Map.Entry<Integer, Integer> entry : subs1.entrySet()) {
                 if (entry.getKey() != 0) {
                     newSubs1.put(entry.getKey(), entry.getValue());
-                    System.out.println("\tO jogador->" + entry.getValue() + " substituiu " + entry.getKey());
+                    //System.out.println("\tO jogador->" + entry.getValue() + " substituiu " + entry.getKey());
                 } else {
                     continue;
                 }
@@ -592,11 +626,11 @@ public class Jogo implements Serializable {
         if(!subs2.isEmpty()) {
             Map<Integer,Integer> newSubs=new HashMap<>();
             List<Jogador> newJogadores=new ArrayList<>();
-            System.out.println("Substituições da Equipa 2:");
+            //System.out.println("Substituições da Equipa 2:");
             for(Map.Entry<Integer,Integer> entry: subs2.entrySet()){
                 if(entry.getKey()!=0){
                     newSubs.put(entry.getKey(),entry.getValue());
-                    System.out.println("\tO jogador->" + entry.getValue() + " substituiu " + entry.getKey());
+                    //System.out.println("\tO jogador->" + entry.getValue() + " substituiu " + entry.getKey());
                 }
                 else{
                     continue;
@@ -681,7 +715,7 @@ public class Jogo implements Serializable {
     public String printTxtFile(){
         StringBuilder sb=new StringBuilder();
         sb.append("Jogo:" + getEquipa1().getNome() + "," + getEquipa2().getNome() + "," + getGolosVisitada() + ","
-        + getGolosVisitante() + "," + LocalDate.now().toString());
+        + getGolosVisitante() + "," + getLd().toString());
         for(Jogador jog:getJogadoresEquipa1()){
             sb.append("," + jog.getnCamisola());
         }
