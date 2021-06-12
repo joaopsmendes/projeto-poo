@@ -71,13 +71,12 @@ public class Jogo implements Serializable {
     /**
      * Criação do construtor parametrizado sem táticas
      *
-     * @param tempo Data do Jogo
+     * @param tempo Minutos do Jogo
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
      * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
-     * @param ld
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
      * @param substituicoesEquipa1 Substituições da primeira equipa
@@ -121,13 +120,12 @@ public class Jogo implements Serializable {
 
     /**
      * Construtor parametrizado mas com as táticas
-     * @param tempo Data do jogo
+     * @param tempo Minutos do jogo
      * @param estado Estado do jogo
      * @param equipa1 Primeira equipa
      * @param equipa2 Segunda equipa
      * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
-     * @param ld
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
      * @param taticaEquipa1 Tática da primeira equipa
@@ -286,16 +284,16 @@ public class Jogo implements Serializable {
     }
 
     /**
-     * Getter da data do jogo
-     * @return Data do jogo
+     * Getter do tempo do jogo
+     * @return Tempo do jogo
      */
     public int getTempo() {
         return tempo;
     }
 
     /**
-     * Setter da data do jogo
-     * @param tempo Data do jogo
+     * Setter do tempo do jogo
+     * @param tempo Tempo do jogo
      */
     public void setTempo(int tempo) {
         this.tempo = tempo;
@@ -381,7 +379,7 @@ public class Jogo implements Serializable {
     }
 
     /**
-     *
+     *getter da data que ocorreu o jogo
      * @return
      */
     public LocalDate getLd(){
@@ -389,8 +387,8 @@ public class Jogo implements Serializable {
     }
 
     /**
-     *
-     * @param xld
+     *Setter da data do jogo
+     * @param xld data do jogo
      */
     public void setLd(LocalDate xld){
         this.ld=xld;
