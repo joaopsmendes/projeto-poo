@@ -151,6 +151,16 @@ public class View {
     public void printNumJogadorInv(){
         System.out.println("Número de Jogador inválido");
     }
+
+    /**
+     * Permite informar o jogador que o número introduzido já se encontra ocupado por outro jogador da equipa
+     * @return novo número que o jogador der input
+     */
+    public int printNumJogadorInv_getint(){
+        System.out.println("Número de jogador Inválido. Por favor digite outro número que ainda não esteja ocupado");
+        Scanner sc=new Scanner(System.in);
+        return sc.nextInt();
+    }
     /**
      * Função que indica ao utilizador que o id é inválido
      */
@@ -185,10 +195,10 @@ public class View {
     }
 
     /**
-     * Função que
-     * @param e1
-     * @param numEQ
-     * @return
+     * Função que imprime o plantel de uma dada equipa e scaneia o 11 inicial
+     * @param e1 equipa que possui o plantel a ser imprimido para o utilizador
+     * @param numEQ saber se é a equipa 1 ou a equipa 2
+     * @return devolve o 11 inicial da equipa
      */
     public List<Integer> printJogadoresEquipa(Equipa e1, int numEQ, Jogo.TaticaEquipa tatic){
         System.out.println("Plantel da Equipa " + numEQ);
@@ -204,7 +214,7 @@ public class View {
             while(!equipContemNumJog(e1,numJog) | onzeLista.contains(numJog) | veriTaticIn(tatic,onzeLista,e1,numJog)){
                 if(veriTaticIn(tatic,onzeLista,e1,numJog)){
                     printErroEscolha(numJog,e1);
-                    //print
+                    printNEEDTatic(tatic,onzeLista,e1,numJog);
                 }
                 else{
                     this.printNumJogadorInv();
@@ -218,6 +228,12 @@ public class View {
         return onzeLista;
     }
 
+    /**
+     * Funçao que obtem o jogador através da equipa onde ele se encontra e do número de camisola
+     * @param e1 equipa onde se encontra o jogador
+     * @param num número de camisola do jogador
+     * @return devolve o jogador
+     */
     private Jogador getJogad_fromNumE(Equipa e1,int num){
         for(Jogador jog:e1.getJogadores()){
             if(jog.getnCamisola()==num){
@@ -227,6 +243,14 @@ public class View {
         return null;
     }
 
+    /**
+     * Função que veirifica se os jogadores no 11 incial são capazes de jogar nas posições da tática
+     * @param tatic tática que a equipa usa
+     * @param listaNum 11 inicial
+     * @param e1 equipa
+     * @param numJog número de camisola do jogaor que irá entrar no 11 inicial se corresponder o esquema tático
+     * @return
+     */
     private boolean veriTaticIn(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
         //se for invalida retorna true
         Map<Jogador.Posicao,Integer> mapa_pos=getNEEDSTatic(tatic);
@@ -243,12 +267,19 @@ public class View {
         //int =;
     }
 
+    /**
+     *
+     * @param tatic
+     * @param listaNum
+     * @param e1
+     * @param numJog
+     */
     private void printNEEDTatic(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
         Map<Jogador.Posicao,Integer> mapa_pos=getNEEDSTatic(tatic);
         for(int i:listaNum){
             Jogador jog=getJogad_fromNumE(e1,i);
             int j=mapa_pos.get(jog.getPosicao());
-            if(j==0) return;
+            if(j==0) continue;
             mapa_pos.replace(jog.getPosicao(),j-1);
         }
         for(Map.Entry<Jogador.Posicao,Integer> entry:mapa_pos.entrySet()){
@@ -259,6 +290,11 @@ public class View {
         }
     }
 
+    /**
+     *
+     * @param tatic
+     * @return
+     */
     private Map<Jogador.Posicao,Integer> getNEEDSTatic(Jogo.TaticaEquipa tatic){
         Map<Jogador.Posicao,Integer> mapa=new HashMap<>();
         mapa.put(Jogador.Posicao.GUARDA_REDES,1);
@@ -289,6 +325,11 @@ public class View {
         return mapa;
     }
 
+    /**
+     *
+     * @param num
+     * @param e1
+     */
     private void printErroEscolha(int num,Equipa e1){
         String printEsc=printPosicao(getJogad_fromNumE(e1,num).getPosicao());
         System.out.println("Já existem demasiados jogadores para a posição de " + printEsc);
@@ -470,8 +511,6 @@ public class View {
         Scanner sc=new Scanner(System.in);
         System.out.println("Introduza o nome do jogador:");
         String nome=sc.nextLine();
-        System.out.println("Introduza o número de camisola do jogador:");
-        int numero=sc.nextInt();
         System.out.println("Introduza a posição que o jogador joga:");
         String stPos=sc.next();
         Jogador.Posicao pos= getPos_fromString(stPos);
@@ -482,6 +521,8 @@ public class View {
         String dummy=sc.nextLine();
         String equipa=sc.nextLine();
         histo.add(equipa);
+        System.out.println("Introduza o número de camisola do jogador:");
+        int numero=sc.nextInt();
         return new Jogador(nome,numero,pos,hab,histo);
     }
 
@@ -519,64 +560,81 @@ public class View {
         Scanner sc=new Scanner(System.in);
         System.out.println("\tIntroduza a nota de Cabeceamento:");
         int cabeca=sc.nextInt();
+        while(cabeca<=0 | cabeca>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Cabeceamento:");
+            cabeca=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Remate:");
         int remate=sc.nextInt();
+        while(remate<=0 | remate>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Remate:");
+            remate=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Velocidade:");
         int velocidade=sc.nextInt();
+        while(velocidade<=0 | velocidade>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Velocidade:");
+            velocidade=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Passe:");
         int passe=sc.nextInt();
+        while(passe<=0 | passe>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Passe:");
+            passe=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Impulsao:");
         int impulsao=sc.nextInt();
+        while(impulsao<=0 | impulsao>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Impulsão:");
+            impulsao=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Resistencia:");
         int resis=sc.nextInt();
+        while(resis<=0 | resis>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Resistência:");
+            resis=sc.nextInt();
+        }
         System.out.println("\tIntroduza a nota de Destreza:");
         int destr=sc.nextInt();
-        Map<Jogador.Habilidades,Integer> habilidades=new HashMap<>();
-        if(pos.equals(Jogador.Posicao.AVANCADO) | pos.equals(Jogador.Posicao.DEFESA)){
-            habilidades.put(Jogador.Habilidades.VELOCIDADE, velocidade);
-            habilidades.put(Jogador.Habilidades.RESISTENCIA, resis);
-            habilidades.put(Jogador.Habilidades.DESTREZA, destr);
-            habilidades.put(Jogador.Habilidades.IMPULSAO, impulsao);
-            habilidades.put(Jogador.Habilidades.CABECEAMENTO, cabeca);
-            habilidades.put(Jogador.Habilidades.REMATE, remate);
-            habilidades.put(Jogador.Habilidades.PASSE, passe);
+        while(destr<=0 | destr>100){
+            System.out.println("\tNúmero Inválido. Introduza a nota de Destreza:");
+            destr=sc.nextInt();
         }
-        else if(pos.equals(Jogador.Posicao.GUARDA_REDES)){
+        Map<Jogador.Habilidades,Integer> habilidades=new HashMap<>();
+        if(pos.equals(Jogador.Posicao.GUARDA_REDES)){
             System.out.println("\tIntroduza a nota de Flexibilidade:");
             int flex=sc.nextInt();
+            while(flex<=0 | flex>100){
+                System.out.println("\tNúmero Inválido. Introduza a nota de Flexibilidade:");
+                flex=sc.nextInt();
+            }
             habilidades.put(Jogador.Habilidades.FLEXIBILIDADE, flex);
-            habilidades.put(Jogador.Habilidades.VELOCIDADE, velocidade);
-            habilidades.put(Jogador.Habilidades.RESISTENCIA, resis);
-            habilidades.put(Jogador.Habilidades.DESTREZA, destr);
-            habilidades.put(Jogador.Habilidades.IMPULSAO, impulsao);
-            habilidades.put(Jogador.Habilidades.CABECEAMENTO, cabeca);
-            habilidades.put(Jogador.Habilidades.REMATE, remate);
-            habilidades.put(Jogador.Habilidades.PASSE, passe);
         }
         else if (pos.equals(Jogador.Posicao.LATERAL)){
             System.out.println("\tIntroduza a nota de Cruzamento:");
             int cruz=sc.nextInt();
+            while(cruz<=0 | cruz>100){
+                System.out.println("\tNúmero Inválido. Introduza a nota de Cruzamento:");
+                cruz=sc.nextInt();
+            }
             habilidades.put(Jogador.Habilidades.CRUZAMENTO, cruz);
-            habilidades.put(Jogador.Habilidades.VELOCIDADE, velocidade);
-            habilidades.put(Jogador.Habilidades.RESISTENCIA, resis);
-            habilidades.put(Jogador.Habilidades.DESTREZA, destr);
-            habilidades.put(Jogador.Habilidades.IMPULSAO, impulsao);
-            habilidades.put(Jogador.Habilidades.CABECEAMENTO, cabeca);
-            habilidades.put(Jogador.Habilidades.REMATE, remate);
-            habilidades.put(Jogador.Habilidades.PASSE, passe);
         }
         else if (pos.equals(Jogador.Posicao.MEDIO)){
             System.out.println("\tIntroduza a nota de Recuperação:");
             int recup=sc.nextInt();
+            while(recup<=0 | recup>100){
+                System.out.println("\tNúmero Inválido. Introduza a nota de Recuperação:");
+                recup=sc.nextInt();
+            }
             habilidades.put(Jogador.Habilidades.RECUPERACAO, recup);
-            habilidades.put(Jogador.Habilidades.VELOCIDADE, velocidade);
-            habilidades.put(Jogador.Habilidades.RESISTENCIA, resis);
-            habilidades.put(Jogador.Habilidades.DESTREZA, destr);
-            habilidades.put(Jogador.Habilidades.IMPULSAO, impulsao);
-            habilidades.put(Jogador.Habilidades.CABECEAMENTO, cabeca);
-            habilidades.put(Jogador.Habilidades.REMATE, remate);
-            habilidades.put(Jogador.Habilidades.PASSE, passe);
         }
+        habilidades.put(Jogador.Habilidades.VELOCIDADE, velocidade);
+        habilidades.put(Jogador.Habilidades.RESISTENCIA, resis);
+        habilidades.put(Jogador.Habilidades.DESTREZA, destr);
+        habilidades.put(Jogador.Habilidades.IMPULSAO, impulsao);
+        habilidades.put(Jogador.Habilidades.CABECEAMENTO, cabeca);
+        habilidades.put(Jogador.Habilidades.REMATE, remate);
+        habilidades.put(Jogador.Habilidades.PASSE, passe);
         return habilidades;
     }
 

@@ -84,6 +84,19 @@ public class Informacoes implements Serializable{
     }
 
     /**
+     * Verifica se um dado número de camisola ainda se encontra disponível na equipa
+     * @param e1 equipa onde verifica os números
+     * @param num número do jogador que se pretende introduzir
+     * @return true se o número dado já estiver ocupado e false se estiver disponível
+     */
+    public boolean verificaNumJog(Equipa e1,int num){
+        for(Jogador jog: e1.getJogadores()){
+            if(jog.getnCamisola()==num | num<0 | num>100) return true;
+        }
+        return false;
+    }
+
+    /**
      * Função que através do nome da equipa retorna a Equipa
      * @param nomeEqu nome da equipa
      * @return Objeto equipa
@@ -217,9 +230,6 @@ public class Informacoes implements Serializable{
      * @throws ClassNotFoundException Classe não encontrada
      */
     public Informacoes readFileBin(String filename) throws IOException, ClassNotFoundException {
-
-        // lines = Files.readAllLines(Paths.get(nomeFicheiro), StandardCharsets.UTF_8);
-
         FileInputStream fis=new FileInputStream(filename);
         ObjectInputStream ois=new ObjectInputStream(fis);
         Informacoes info= (Informacoes) ois.readObject();
@@ -271,28 +281,6 @@ public class Informacoes implements Serializable{
         pw.print(this.printFileTxtEqui());
         pw.print(this.printFileTxtJogo());
         pw.flush();
-        /*
-        FileOutputStream fos=new FileOutputStream(filename);
-        System.out.println("Ainda nao deu erro");
-        ObjectOutputStream oos=new ObjectOutputStream(fos);
-        oos.writeObject(this);
-        oos.close();
-        */
-        /*
-        for(Equipa e:getEquipas().values()){
-            oos.writeObject(e);
-        }
-        for(Jogador jog:getJogadores().values()){
-            //oos.writeUTF();
-        }
-        for(Jogo jogo:getJogos()){
-            oos.writeUTF(jogo.getEquipa1().getNome());
-            oos.writeUTF(jogo.getEquipa2().getNome());
-            oos.write(jogo.getGolosVisitante());
-            oos.write(jogo.getGolosVisitada());
-            //oos.writeUTF("\n");
-        }
-        */
     }
 
     /**

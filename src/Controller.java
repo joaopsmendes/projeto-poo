@@ -68,29 +68,6 @@ public class Controller {
                                 jan.printEquipInval();
                             }
                         }
-                        /*
-                        jan.printTatics();
-                        Jogo.TaticaEquipa taticaEquipa1 = null;
-                        while(taticaEquipa1 == null){
-                            try{
-                                int tatica = scanner.nextInt();
-                                if (tatica == 1){
-                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
-                                }else if(tatica == 2){
-                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
-                                }else if(tatica == 3){
-                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
-                                }else if(tatica == 4){
-                                    taticaEquipa1 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
-                                }else{
-                                    jan.printTaticInv();
-                                }
-                            }catch (InputMismatchException e){
-                                jan.printIntroNum();
-                                scanner.next();
-                            }
-                        }
-                        */
 
                         jan.printIndiquEquip();
                         Equipa equipa2=null;
@@ -129,29 +106,7 @@ public class Controller {
                                 jan.printEquipInval();
                             }
                         }
-                        /*
-                        jan.printTatics();
-                        Jogo.TaticaEquipa taticaEquipa2 = null;
-                        while(taticaEquipa2 == null){
-                            try{
-                                int tatica = scanner.nextInt();
-                                if (tatica == 1){
-                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_TRES_TRES;
-                                }else if(tatica == 2){
-                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_QUATRO_DOIS;
-                                }else if(tatica == 3){
-                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_QUATRO;
-                                }else if(tatica == 4){
-                                    taticaEquipa2 = Jogo.TaticaEquipa.QUATRO_DOIS_TRES_UM;
-                                }else{
-                                    jan.printTaticInv();
-                                }
-                            }catch (InputMismatchException e){
-                                jan.printIntroNum();
-                                scanner.next();
-                            }
-                        }
-                        */
+
                         jogo = new Jogo(equipa1, equipa2, taticaEquipa1, taticaEquipa2,onzeJoga1,onzeJoga2);
                         jogo.simulacao_part1();
                         Map<Integer,Integer> subs1=jan.printJogoInter(jogo,1);
@@ -191,6 +146,11 @@ public class Controller {
                         Jogador jogador=jan.printJogador();
                         List<String> histo=jogador.getHistorial();
                         String ult_equi=histo.get(histo.size()-1);
+                        Equipa e1=informacoes.getEquipa_fromNome(ult_equi);
+                        while(informacoes.verificaNumJog(e1,jogador.getnCamisola())){
+                            int numJog=jan.printNumJogadorInv_getint();
+                            jogador.setnCamisola(numJog);
+                        }
                         Map<Integer,Jogador> lista_jogadores=informacoes.getJogadores();
                         lista_jogadores.put(lista_jogadores.size(),jogador);
                         informacoes.setJogadores(lista_jogadores);
