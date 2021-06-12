@@ -28,10 +28,6 @@ public class Controller {
                 try{
                     int selecao = scanner.nextInt();
                     if(selecao == 1) {
-                        // TODO
-                        // fazer numero random que atribui o resultado
-                        // escolher a equipa e o seu respetivo esquema tatico
-
                         jan.printIndiquEquip();
                         Equipa equipa1=null;
                         List<Jogador> onzeJoga1=null;
@@ -212,11 +208,4 @@ public class Controller {
         }
         scanner.close();
     }
-
-
-
-    //4-2-4 MARCA MAIS GOLOS
-    //4-3-3 melhor defesa
-
-    //TODO : ver o algoritmo dos golos, ver o algoritmo das taticas, ver o algortimo do overall e influenciar no golos
 }

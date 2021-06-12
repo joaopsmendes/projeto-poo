@@ -100,7 +100,6 @@ public class Jogador implements Serializable {
         return (power / n) < sorte;
     }
 
-    //verificar isto
     /**
      * Função que verifica se o guarda redes defende
      * @return Retorna um boleano que indica se o guarda-redes defendeu
@@ -122,7 +121,6 @@ public class Jogador implements Serializable {
         return false;
     }
 
-    //verificar isto
     /**
      * função que verifica se é golo comparando o boleano defende e o boleano remata
      * @return Retorna um boleano que indica se foi golo

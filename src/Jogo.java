@@ -230,8 +230,6 @@ public class Jogo implements Serializable {
      * @throws NumberFormatException
      */
     public static Jogo parser(String input, Map<String, Equipa> equipas) throws NumberFormatException{
-//        Bach F. C.,Sporting Club Shostakovich,1,3,2021-02-02,4,47, 35,2, 36,39,14,43, 5 ,32,50,14->0,4->30,36->21, 43,30, 1, 22,33,11,38,31,39,6, 12,43->3,31->34,12->20
-//           1                  2               3 4      5     6  7  8  9  10 11 12 13 14  15 16   17   18    19     20 21 22  23 24 25 26 27 28 29 30   31    32     33
         String[] campos = input.split(",",33);
         Equipa equipa1 = equipas.get(campos[0]);
         Equipa equipa2 = equipas.get(campos[1]);
