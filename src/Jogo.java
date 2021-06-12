@@ -77,6 +77,7 @@ public class Jogo implements Serializable {
      * @param equipa2 Segunda equipa
      * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
+     * @param ld
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
      * @param substituicoesEquipa1 Substituições da primeira equipa
@@ -126,6 +127,7 @@ public class Jogo implements Serializable {
      * @param equipa2 Segunda equipa
      * @param golosVisitada Golos da equipa da casa
      * @param golosVisitante Golos da equipa visitante
+     * @param ld
      * @param jogadoresEquipa1 Jogadores da equipa da casa
      * @param jogadoresEquipa2 Jogadores da equipa visitante
      * @param taticaEquipa1 Tática da primeira equipa
@@ -378,10 +380,18 @@ public class Jogo implements Serializable {
         this.golosVisitante = golosVisitante;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDate getLd(){
         return ld;
     }
 
+    /**
+     *
+     * @param xld
+     */
     public void setLd(LocalDate xld){
         this.ld=xld;
     }
