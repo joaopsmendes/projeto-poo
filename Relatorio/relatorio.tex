@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage[portuguese]{babel}
 \usepackage{indentfirst}
+\usepackage{multicol}
 
 
 \makeindex
@@ -22,34 +23,21 @@
 \begin{document}
     \maketitle
 
-    \begin{center}
-    \centering
-     %\subfloat [paiva]% para centralizarmos a figura
-     \vspace*{1cm}
-     \includegraphics[width=2cm]{Photo.aspx2.jpeg}
-     \caption{a93311}
-     %\label{figura}
-     }
-     \quad
-     \centering
-    % \subfloat[mendes]
-     \vspace*{1cm}
-     \includegraphics[width=2cm]{Photo.aspx1}
-     \caption{a93256}
-    % \label{figura}
-     }
-     \quad
-     \centering
-     %\subfloat[rickz]
-     \vspace*{1cm}
-     \includegraphics[width=2cm]{Photo.aspx}
-     \caption{a93195}
-     %\label{figura}
-     \end{center}
+    \begin{multicols}{3}
+        \includegraphics[width=3cm]{Photo.aspx2.jpeg}
+        \textbf{Fig1: a93311}
+
+        \includegraphics[width=3cm]{Photo.aspx1}
+        \textbf{Fig2: a93256}
+
+        \includegraphics[width=3cm]{Photo.aspx}
+        \textbf{Fig3: a93195}
+
+    \end{multicols}
 
 \begin{center}
     \vspace*{2cm}
-    \includegraphics[width=5cm]{EEUMLOGO.png}
+    \includegraphics[width=6cm]{EEUMLOGO.png}
 \end{center}
 
 \newpage
