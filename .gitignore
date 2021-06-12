@@ -21,6 +21,9 @@ local.properties
 .log
 .synctex.gz
 
+#ideia
+./ideia
+
 # External tool builders
 .externalToolBuilders/
 
