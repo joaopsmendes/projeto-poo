@@ -244,12 +244,12 @@ public class View {
     }
 
     /**
-     * Função que veirifica se os jogadores no 11 incial são capazes de jogar nas posições da tática
+     * Função que verifica se os jogadores no 11 incial são capazes de jogar nas posições da tática
      * @param tatic tática que a equipa usa
      * @param listaNum 11 inicial
      * @param e1 equipa
-     * @param numJog número de camisola do jogaor que irá entrar no 11 inicial se corresponder o esquema tático
-     * @return
+     * @param numJog número de camisola do jogador que irá entrar no 11 inicial se corresponder o esquema tático
+     * @return Boleano que indica se são capazes
      */
     private boolean veriTaticIn(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
         //se for invalida retorna true
@@ -268,11 +268,11 @@ public class View {
     }
 
     /**
-     *
-     * @param tatic
-     * @param listaNum
-     * @param e1
-     * @param numJog
+     * Função que imprime no terminal as posições que faltam para completar a tática
+     * @param tatic Tática usada
+     * @param listaNum Lista com o 11 inicial
+     * @param e1 Equipa
+     * @param numJog número da camisola do jogador
      */
     private void printNEEDTatic(Jogo.TaticaEquipa tatic,List<Integer> listaNum,Equipa e1,int numJog){
         Map<Jogador.Posicao,Integer> mapa_pos=getNEEDSTatic(tatic);
@@ -291,9 +291,9 @@ public class View {
     }
 
     /**
-     *
-     * @param tatic
-     * @return
+     * Função para definir quantos jogadores de cada posição são precisos para uma certa tática
+     * @param tatic Tática usada
+     * @return Mapa com as posições e o número respetivo de jogadores que são precisos para essa posiçã́o
      */
     private Map<Jogador.Posicao,Integer> getNEEDSTatic(Jogo.TaticaEquipa tatic){
         Map<Jogador.Posicao,Integer> mapa=new HashMap<>();
@@ -326,9 +326,9 @@ public class View {
     }
 
     /**
-     *
-     * @param num
-     * @param e1
+     * Função que indica ao utilizador que existem demasiados jogadores para uma certa posição
+     * @param num número da camisola do jogador
+     * @param e1 equipa onde vai ser adicionado
      */
     private void printErroEscolha(int num,Equipa e1){
         String printEsc=printPosicao(getJogad_fromNumE(e1,num).getPosicao());
@@ -338,8 +338,8 @@ public class View {
     /**
      * Função que verifica a existência de um jogador numa equipa
      * @param e1 Equipa
-     * @param numJog
-     * @return
+     * @param numJog Número do jogador
+     * @return True se existir o jogador, false se não existir
      */
     public boolean equipContemNumJog(Equipa e1,int numJog){
         for(Jogador jog:e1.getJogadores()){
